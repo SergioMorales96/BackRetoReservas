@@ -37,7 +37,7 @@ public class EmpresaService implements IEmpresaService{
 		if(empresaEntity.isPresent()) {
 			return new ResponseDTO(empresaMapper.entityToDto(empresaEntity.get()), true, "OK", HttpStatus.OK);
 		}else {
-			return new ResponseDTO(null, false, "No hay resultados", HttpStatus.OK);
+			return new ResponseDTO(null, false, "Empresa no disponible", HttpStatus.OK);
 		}
 		
 	}
