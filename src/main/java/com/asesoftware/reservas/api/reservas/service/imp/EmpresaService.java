@@ -1,5 +1,6 @@
 package com.asesoftware.reservas.api.reservas.service.imp;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.slf4j.Logger;
@@ -38,6 +39,14 @@ public class EmpresaService implements IEmpresaService{
 			return new ResponseDTO(null, false, "No hay resultados", HttpStatus.OK);
 		}
 		
+	}
+
+	@Override
+	public ResponseDTO consultarTodas() {
+		logger.info("consultarTodas()");
+		List<EmpresaEntity> lisEmpresa = empresaRepositorio.findAll();
+		
+		return new ResponseDTO(empresaMapper.entitysToDtos(lisEmpresa), true, "Ok", HttpStatus.OK);
 	}
 
 }

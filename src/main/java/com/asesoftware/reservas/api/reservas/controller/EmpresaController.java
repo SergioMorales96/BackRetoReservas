@@ -27,5 +27,12 @@ public class EmpresaController {
 		
 		return empresaService.empresaPorId(nit);
 	}
+	
+	
+	@GetMapping(path = "/todas")
+	public ResponseDTO consultarTodas() {
+		logger.info("consultarTodas()");
+		return empresaService.consultarTodas();
+	}
 
 }
