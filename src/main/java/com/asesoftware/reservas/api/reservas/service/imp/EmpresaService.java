@@ -46,7 +46,7 @@ public class EmpresaService implements IEmpresaService{
 	public ResponseDTO consultarTodas() {
 		logger.info("consultarTodas()");
 		List<EmpresaEntity> lisEmpresa = empresaRepositorio.findAll();
-		
+		logger.info("consultarTodas() {}",lisEmpresa);
 		return new ResponseDTO(empresaMapper.entitysToDtos(lisEmpresa), true, "Ok", HttpStatus.OK);
 	}
 
