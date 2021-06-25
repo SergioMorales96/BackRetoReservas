@@ -61,7 +61,7 @@ public class EmpresaService implements IEmpresaService{
 			return new ResponseDTO(empresaDTO, true, "OK", HttpStatus.OK);
 			
 		}catch (Exception e) {
-			
+			logger.error(e.getMessage());
 			return new ResponseDTO(null, false, "Error al actualizar", HttpStatus.INTERNAL_SERVER_ERROR);
 		
 		}
