@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
+import com.asesoftware.reservas.api.reservas.dto.EmpresaDTO;
 import com.asesoftware.reservas.api.reservas.dto.ResponseDTO;
 import com.asesoftware.reservas.api.reservas.entity.EmpresaEntity;
 import com.asesoftware.reservas.api.reservas.mapper.IEmpresaMapper;
@@ -47,6 +48,24 @@ public class EmpresaService implements IEmpresaService{
 		List<EmpresaEntity> lisEmpresa = empresaRepositorio.findAll();
 		
 		return new ResponseDTO(empresaMapper.entitysToDtos(lisEmpresa), true, "Ok", HttpStatus.OK);
+	}
+
+	@Override
+	public ResponseDTO actualizarEmpresa(EmpresaDTO empresaDTO) {
+		
+		logger.info("actualizarEmpresa {}",empresaDTO);
+		
+		try {
+			
+			empresaRepositorio.save(empresaMapper.dtoToEntity(empresaDTO));
+			return new ResponseDTO(empresaDTO, true, "OK", HttpStatus.OK);
+			
+		}catch (Exception e) {
+			
+			return new ResponseDTO(null, false, "Error al actualizar", HttpStatus.INTERNAL_SERVER_ERROR);
+		
+		}
+			
 	}
 
 }
