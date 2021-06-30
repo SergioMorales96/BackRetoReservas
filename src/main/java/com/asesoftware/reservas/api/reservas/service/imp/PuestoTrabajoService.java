@@ -48,14 +48,36 @@ public class PuestoTrabajoService implements IPuestoTrabajoService{
 
 	@Override
 	public ResponseDTO crearPuestoTrabajo(PuestoTrabajoDTO puestoTrabajoDTO) {
-
-		return null;
+		
+		logger.info("ingreso al metodo crearPuestoTrabajo {} ",puestoTrabajoDTO );
+		
+		try {
+			puestoTrabajoRepositorio.save(puestoTrabajoMapper.dtoToEntity(puestoTrabajoDTO));
+			logger.info("se creo PuestoTrabajo {} ",puestoTrabajoDTO );
+			return new ResponseDTO(puestoTrabajoDTO,true, "OK", HttpStatus.OK);
+		}catch (Exception e) {
+			logger.error("Error {}",e.getMessage());
+			return new ResponseDTO(null, false, "Error", HttpStatus.INTERNAL_SERVER_ERROR);
+			
+		}
 	}
 
 	@Override
 	public ResponseDTO actualizarPuestoTrabajo(PuestoTrabajoDTO puestoTrabajoDTO) {
+		
+		logger.info("ingreso al metodo actualizarPuestoTrabajo  ");
+		
+		try {
+			puestoTrabajoRepositorio.save(puestoTrabajoMapper.dtoToEntity(puestoTrabajoDTO));
+			logger.info("se actualiza PuestoTrabajo {} ",puestoTrabajoDTO );
+			return new ResponseDTO(puestoTrabajoDTO,true, "OK", HttpStatus.OK);
+		}catch (Exception e) {
+			logger.error("Error {}",e.getMessage());
+			return new ResponseDTO(null, false, "Error", HttpStatus.INTERNAL_SERVER_ERROR);
+			
+		}
 
-		return null;
+		
 	}
 
 	@Override
