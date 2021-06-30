@@ -2,6 +2,8 @@ package com.asesoftware.reservas.api.reservas.mapper;
 
 import java.util.List;
 
+import org.mapstruct.Mapper;
+
 import com.asesoftware.reservas.api.reservas.dto.HorarioPuestoTrabajoDTO;
 import com.asesoftware.reservas.api.reservas.entity.HorarioPuestoTrabajoEntity;
 
@@ -13,6 +15,8 @@ import com.asesoftware.reservas.api.reservas.entity.HorarioPuestoTrabajoEntity;
  * @author jrondon
  *
  */
+
+@Mapper(componentModel = "spring")
 public interface IHorarioPuestoTrabajoMapper {
 
 	public HorarioPuestoTrabajoEntity dtoToEntity(HorarioPuestoTrabajoDTO dto);
