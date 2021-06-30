@@ -1,0 +1,11 @@
+package com.asesoftware.reservas.api.reservas.repository;
+
+import org.springframework.data.jpa.repository.JpaRepository;
+
+import com.asesoftware.reservas.api.reservas.entity.UsuarioBloqueadoEntity;
+
+
+
+public interface IUsuarioBloqueadoRepository extends JpaRepository<UsuarioBloqueadoEntity, Integer> {
+
+}
