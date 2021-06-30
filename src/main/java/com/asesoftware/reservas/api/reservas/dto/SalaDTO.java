@@ -1,6 +1,8 @@
 package com.asesoftware.reservas.api.reservas.dto;
 
+import lombok.Data;
 
+@Data
 public class SalaDTO {
 	
 	private Integer idSala;
