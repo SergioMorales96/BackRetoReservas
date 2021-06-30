@@ -7,7 +7,7 @@ public interface IPuestoTrabajoService {
 	
 	public ResponseDTO consultarTodas();
 	
-	public ResponseDTO PuestoTrabajoById(Integer idPuestoTrabajo);
+	public ResponseDTO PuestoTrabajoPorId(Integer idPuestoTrabajo);
 	
 	public ResponseDTO crearPuestoTrabajo(PuestoTrabajoDTO puestoTrabajoDTO);
 	
