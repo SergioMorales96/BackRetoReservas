@@ -4,6 +4,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -26,5 +27,12 @@ public class UsuarioBloqueadoController {
 	public ResponseDTO consultarTodosLosUsuariosBloqueados() {
 		logger.info("consultarTodosLosUsuariosBloqueados()");
 		return this.usuarioBloqueadoService.consultarTodosLosUsuariosBloqueados();
+	}
+	
+	
+	@GetMapping(path = "/usuarioBloqueadoPorId/{correo}")
+	public ResponseDTO consultarUsuarioBloqueadoPorId(@PathVariable String correo) {
+		logger.info("consultarUsuarioBloqueadoPorId()");
+		return this.usuarioBloqueadoService.consultarUsuarioBloqueadoPorId(correo);
 	}
 }

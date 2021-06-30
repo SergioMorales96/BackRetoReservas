@@ -8,7 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
-import com.asesoftware.reservas.api.reservas.controller.UsuarioBloqueadoController;
+
 import com.asesoftware.reservas.api.reservas.dto.ResponseDTO;
 import com.asesoftware.reservas.api.reservas.entity.UsuarioBloqueadoEntity;
 import com.asesoftware.reservas.api.reservas.mapper.IUsuarioBloqueadoMapper;
@@ -42,6 +42,19 @@ public class UsuarioBloqueadoService implements IUsuarioBloqueadoService{
 		
 		
 		
+	}
+
+	@Override
+	public ResponseDTO consultarUsuarioBloqueadoPorId(String correo) {
+		
+		logger.info("consultarUsuarioBloqueadoPorId()");
+		List<UsuarioBloqueadoEntity> answ = this.usuarioBloqueadoRepository.findByEmail(correo);
+		
+		if(!answ.isEmpty()) {
+			return new ResponseDTO(this.usuarioBloqueadoMapper.entitysToDtos(answ), true, "Ok", HttpStatus.OK);
+		}else {
+			return new ResponseDTO(null, false, "No Ok", HttpStatus.OK);
+		}
 	}
 
 }
