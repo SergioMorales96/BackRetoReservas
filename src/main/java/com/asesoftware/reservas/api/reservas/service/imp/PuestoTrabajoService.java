@@ -2,7 +2,6 @@ package com.asesoftware.reservas.api.reservas.service.imp;
 
 import java.util.List;
 import java.util.Optional;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -43,7 +42,7 @@ public class PuestoTrabajoService implements IPuestoTrabajoService{
 		if(puestoTrabajoEntity.isPresent()) {
 			return new ResponseDTO(puestoTrabajoMapper.entityToDto(puestoTrabajoEntity.get()), true, "OK", HttpStatus.OK);
 		}else {
-			return new ResponseDTO(null, false, "Empresa no disponible", HttpStatus.OK);
+			return new ResponseDTO(null, false, "Puesto de trabajo no disponible", HttpStatus.OK);
 		}
 	}
 
@@ -62,19 +61,19 @@ public class PuestoTrabajoService implements IPuestoTrabajoService{
 	@Override
 	public ResponseDTO borrarPuestoTrabajo(Integer idPuestoTrabajo) {
 
-		logger.info("ingreso al metodo deleteUser");
+		logger.info("ingreso al metodo borrarPuestoTrabajo ");
 		
 		try {
 			puestoTrabajoRepositorio.deleteById(idPuestoTrabajo);
 			
-			logger.info("el usuario {} se elimino",idPuestoTrabajo);
+			logger.info("El puesto de trabajo {} se elimino",idPuestoTrabajo);
 			
-			return  new ResponseDTO(null, true, "usuario eliminado", HttpStatus.OK); 
+			return  new ResponseDTO(null, true, "Puesto de trabajo eliminado", HttpStatus.OK); 
 		}catch (Exception e) {
 			
 			logger.error("Error {}",e.getMessage());
 			
-			return  new ResponseDTO(null, false, "el usuario no se puede eliminar", HttpStatus.OK); 
+			return  new ResponseDTO(null, false, "El puesto de trabajo no se puede eliminar", HttpStatus.OK); 
 		}
 	}
 

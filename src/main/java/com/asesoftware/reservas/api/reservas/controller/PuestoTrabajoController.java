@@ -30,7 +30,7 @@ public class PuestoTrabajoController {
 	@GetMapping(path = "/{idPuestoTrabajo}")
 	public ResponseDTO PuestoTrabajoPorId(Integer idPuestoTrabajo) {
 		
-		logger.info("empresaPorId: {}", idPuestoTrabajo);
+		logger.info("puestoTrabajoPorId: {}", idPuestoTrabajo);
 		
 		return puestoTrabajoService.PuestoTrabajoPorId(idPuestoTrabajo);
 		
@@ -48,9 +48,9 @@ public class PuestoTrabajoController {
 	@GetMapping(path = "/borrar")
 	public ResponseDTO borrarPuestoTrabajo(Integer idPuestoTrabajo) {
 		
-		logger.info("ingreso al metodo eliminarUsuario ");
+		logger.info("ingreso al metodo borrarPuestoTrabaj ");
 
-		logger.info("usuario a eliminar {}",idPuestoTrabajo);
+		logger.info("Puesto de trabajo a eliminar {}",idPuestoTrabajo);
 		
 		return puestoTrabajoService.borrarPuestoTrabajo(idPuestoTrabajo);
 	}
