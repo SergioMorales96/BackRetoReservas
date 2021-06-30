@@ -17,7 +17,7 @@ public class PisoController {
 	private IPisoService pisoService;
 	
 	@GetMapping(path = "sucursal/{id}")
-	public ResponseDTO buscarPorId(@PathVariable Integer id){
+	public ResponseDTO pisoporIdSucursal(@PathVariable Integer id){
 		
 		return pisoService.pisoPorIdSucursal(id);
 	}

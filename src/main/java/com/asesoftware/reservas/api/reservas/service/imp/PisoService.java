@@ -15,7 +15,7 @@ import com.asesoftware.reservas.api.reservas.service.IPisoService;
 public class PisoService implements IPisoService {
 
 	@Autowired
-	private IPisoRepository pisoRepositorio;
+	private IPisoRepository pisoRepository;
 	
 	@Autowired
 	private IPisoMapper pisoMapper;
@@ -23,7 +23,7 @@ public class PisoService implements IPisoService {
 	@Override
 	public ResponseDTO pisoPorIdSucursal(Integer idSucursal) {
 		
-		List<PisoDTO> listPisoSucursal = pisoMapper.entitysToDtos(pisoRepositorio.queryPisoPorSucursal(idSucursal));
+		List<PisoDTO> listPisoSucursal = pisoMapper.entitysToDtos(pisoRepository.queryPisoPorSucursal(idSucursal));
 
 		return new ResponseDTO(listPisoSucursal, true, "ok", HttpStatus.OK);
 	}
