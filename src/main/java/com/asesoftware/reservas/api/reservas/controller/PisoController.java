@@ -1,5 +1,7 @@
 package com.asesoftware.reservas.api.reservas.controller;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -16,22 +18,31 @@ import com.asesoftware.reservas.api.reservas.service.IPisoService;
 @RequestMapping(path = "/api/v1/piso")
 public class PisoController {
 	
+	private static final Logger logger = LoggerFactory.getLogger(EmpresaController.class);
+	
 	@Autowired
 	private IPisoService pisoService;
 	
 	@GetMapping(path = "/todos")
 	public ResponseDTO consultarTodos() {
+		logger.info("consultar Todos()");
 		return pisoService.consultarTodos();
 	}
 	@PostMapping(path = "/crear", consumes = "application/json",produces = "application/json")
 	public ResponseDTO crearPiso(@RequestBody PisoDTO dto) {
+		logger.info("crear piso {}", dto);
 		return pisoService.crearPiso(dto);
 		
 	}
-	
-	@GetMapping(path = "/{idPiso}")
-	public ResponseDTO pisoPorId(@PathVariable Integer idPiso) {
-		return null;
+	@GetMapping(path = "/eliminar/{idPiso}")
+	public ResponseDTO eliminarPiso(@PathVariable Integer idPiso) {
+		logger.info("piso a eliminat {}", idPiso);
+		return pisoService.eliminarPiso(idPiso);
+	}
+	@GetMapping(path = "/consultar/{idPiso}")
+	public PisoDTO consultarpisoPorId(@PathVariable Integer idPiso) {
+		logger.info("consultar piso {}", idPiso);
+		return pisoService.consultarpisoPorId(idPiso);
 	}
 
 }
