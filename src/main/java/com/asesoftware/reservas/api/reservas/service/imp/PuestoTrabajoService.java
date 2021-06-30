@@ -4,12 +4,12 @@ import java.util.List;
 import java.util.Optional;
 
 import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import com.asesoftware.reservas.api.reservas.dto.PuestoTrabajoDTO;
 import com.asesoftware.reservas.api.reservas.dto.ResponseDTO;
-import com.asesoftware.reservas.api.reservas.entity.EmpresaEntity;
 import com.asesoftware.reservas.api.reservas.entity.PuestoTrabajoEntity;
 import com.asesoftware.reservas.api.reservas.mapper.IPuestoTrabajoMapper;
 import com.asesoftware.reservas.api.reservas.repository.IPuestoTrabajoRepository;
@@ -23,13 +23,15 @@ public class PuestoTrabajoService implements IPuestoTrabajoService{
 	
 	@Autowired
 	private IPuestoTrabajoMapper puestoTrabajoMapper;
+	
+	private static final Logger logger = LoggerFactory.getLogger(PuestoTrabajoService.class);
 
 	@Override
 	public ResponseDTO consultarTodas() {
 		
-	//	logger.info("consultarTodas()");
+		logger.info("consultarTodas()");
 		List<PuestoTrabajoEntity> lisPuestoTrabajo = puestoTrabajoRepositorio.findAll();
-	//	Logger.info("consultarTodas() {}",lisPuestoTrabajo);
+		logger.info("consultarTodas() {}", lisPuestoTrabajo);
 		return new ResponseDTO(puestoTrabajoMapper.entitysToDtos(lisPuestoTrabajo), true, "Ok", HttpStatus.OK);
 	}
 
@@ -60,7 +62,20 @@ public class PuestoTrabajoService implements IPuestoTrabajoService{
 	@Override
 	public ResponseDTO borrarPuestoTrabajo(Integer idPuestoTrabajo) {
 
-		return null;
+		logger.info("ingreso al metodo deleteUser");
+		
+		try {
+			puestoTrabajoRepositorio.deleteById(idPuestoTrabajo);
+			
+			logger.info("el usuario {} se elimino",idPuestoTrabajo);
+			
+			return  new ResponseDTO(null, true, "usuario eliminado", HttpStatus.OK); 
+		}catch (Exception e) {
+			
+			logger.error("Error {}",e.getMessage());
+			
+			return  new ResponseDTO(null, false, "el usuario no se puede eliminar", HttpStatus.OK); 
+		}
 	}
 
 }
