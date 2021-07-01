@@ -22,4 +22,30 @@ import com.asesoftware.reservas.api.reservas.service.ISalaService;
 @RequestMapping(path = "/api/v1/sala")
 public class SalaController {
 	
+	private static final Logger logger = LoggerFactory.getLogger(SalaController.class);
+	
+	@Autowired
+	private ISalaService salaService;
+
+	
+	public ResponseDTO listarTodosSalas() {
+		return null;
+	}
+	
+	public ResponseDTO obtenerSalaPorId() {
+		return null;
+	}
+	
+	public ResponseDTO crearSala() {
+		return null;
+	}
+	
+	public ResponseDTO actualizarSala(){
+		return null;
+	}
+	
+	public ResponseDTO eliminarSala() {
+		return null;
+	}
+	
 }

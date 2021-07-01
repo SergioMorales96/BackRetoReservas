@@ -6,5 +6,15 @@ import com.asesoftware.reservas.api.reservas.dto.SalaDTO;
 
 
 public interface ISalaService {
+	
+	public ResponseDTO listarTodosSalas();
+	
+	public ResponseDTO obtenerSalaPorId();
+	
+	public ResponseDTO crearSala();
+	
+	public ResponseDTO actualizarSala();
+	
+	public ResponseDTO eliminarSala();
 
 }

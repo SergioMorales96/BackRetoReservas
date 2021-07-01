@@ -24,5 +24,43 @@ import com.asesoftware.reservas.api.reservas.service.ISalaService;
 
 @Service
 public class SalaService implements ISalaService{
+	
+	private static final Logger logger = LoggerFactory.getLogger(SalaService.class);
+	
+	@Autowired
+	private ISalaRepository salaRepository;
+	
+	@Autowired
+	private ISalaMapper salaMapper;
+
+	@Override
+	public ResponseDTO listarTodosSalas() {
+		
+		return null;
+	}
+
+	@Override
+	public ResponseDTO obtenerSalaPorId() {
+		
+		return null;
+	}
+
+	@Override
+	public ResponseDTO crearSala() {
+		
+		return null;
+	}
+
+	@Override
+	public ResponseDTO actualizarSala() {
+		
+		return null;
+	}
+
+	@Override
+	public ResponseDTO eliminarSala() {
+		
+		return null;
+	}
 
 }
