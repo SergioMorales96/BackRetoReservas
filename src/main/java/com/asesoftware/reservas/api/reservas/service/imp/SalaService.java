@@ -73,15 +73,47 @@ public class SalaService implements ISalaService{
 	
 
 	@Override
-	public ResponseDTO actualizarSala() {
+	public ResponseDTO actualizarSala(SalaDTO salaDTO) {
 		
-		return null;
+		logger.info("actualizarSala: {}", salaDTO);
+		
+		try {
+			
+			SalaEntity salaEntity = salaMapper.dtoToEntity(salaDTO);
+			
+			salaRepository.save(salaEntity);
+			
+			return new ResponseDTO(salaMapper.entityToDto(salaEntity), true, "Sala actualizada", HttpStatus.OK);
+			
+		}catch(Exception e) {
+			
+			e.printStackTrace();
+			
+			return new ResponseDTO(null, false, "Sala no se pudo actualizar", HttpStatus.OK);
+			
+		}
+
 	}
 
 	@Override
-	public ResponseDTO eliminarSala() {
+	public ResponseDTO eliminarSala(Integer idSala) {
+		logger.info("eliminarSala: {} ", idSala);
 		
-		return null;
+		try {
+			
+			salaRepository.deleteById(idSala);
+			
+			logger.info("La sala {} se elimino", idSala);
+			
+			return new ResponseDTO(null,true,"Sala Eliminada", HttpStatus.OK);
+			
+		}catch(Exception e){
+			
+			logger.info("Error {}", e.getMessage());
+			
+			return new ResponseDTO(null,false,"Sala no se pudo eliminar", HttpStatus.OK);
+		}
+
 	}
 
 }

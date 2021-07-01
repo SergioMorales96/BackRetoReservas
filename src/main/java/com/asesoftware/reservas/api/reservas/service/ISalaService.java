@@ -13,8 +13,8 @@ public interface ISalaService {
 	
 	public ResponseDTO crearSala(SalaDTO salaDTO);
 	
-	public ResponseDTO actualizarSala();
+	public ResponseDTO actualizarSala(SalaDTO salaDTO);
 	
-	public ResponseDTO eliminarSala();
+	public ResponseDTO eliminarSala(Integer idSala);
 
 }

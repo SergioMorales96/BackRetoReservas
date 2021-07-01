@@ -42,12 +42,18 @@ public class SalaController {
 		return salaService.crearSala(entity); 
 	}
 	
-	public ResponseDTO actualizarSala(){
-		return null;
+	@PostMapping(path = "/actualizar", consumes = "application/json", produces = "application/json")
+	public ResponseDTO actualizarSala(@RequestBody SalaDTO salaDTO){
+		logger.info("Sala para actualizar: {}", salaDTO);
+		return salaService.actualizarSala(salaDTO);
+
 	}
 	
-	public ResponseDTO eliminarSala() {
-		return null;
+	@GetMapping(path = "/eliminar/{idSala}")
+	public ResponseDTO eliminarSala(@PathVariable Integer idSala) {
+		logger.info("Sala a eliminar: {}", idSala);
+		return salaService.eliminarSala(idSala);
+
 	}
 	
 }
