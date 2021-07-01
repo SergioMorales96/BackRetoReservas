@@ -5,10 +5,13 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.asesoftware.reservas.api.reservas.dto.ResponseDTO;
+import com.asesoftware.reservas.api.reservas.entity.UsuarioAdministradorEntity;
 import com.asesoftware.reservas.api.reservas.service.IUsuarioAdministradorService;
 import com.asesoftware.reservas.api.reservas.service.imp.EmpresaService;
 import com.asesoftware.reservas.api.reservas.service.imp.UsuarioAdministradorService;
@@ -38,5 +41,22 @@ public class UsuarioAdministradorController {
 		return usuarioAdminService.consultarTodos();
 		
 	}
+	
+	@PostMapping(path ="/crear",consumes = "application/json", produces = "application/json")
+	public ResponseDTO crearAdministrador(@RequestBody UsuarioAdministradorEntity admin) {
+		logger.info("crear nuevo usuario");
+		return usuarioAdminService.crearUsuario(admin);
+	}
+	
+	@PostMapping(path ="/editar",consumes = "application/json", produces = "application/json")
+	public ResponseDTO editarAdministrador(@RequestBody UsuarioAdministradorEntity admin) {
+		logger.info("editar usuario");
+		return usuarioAdminService.editarUsuario(admin);
+	}
 
+	@GetMapping(path = "/eliminar/{idAdministrador}")
+	public void borrarAdministrador(@RequestBody Integer idAdministrador) {
+		logger.info("eliminar usuarioPorId:{}",idAdministrador);
+		usuarioAdminService.eliminarUsuario(idAdministrador);
+	}
 }

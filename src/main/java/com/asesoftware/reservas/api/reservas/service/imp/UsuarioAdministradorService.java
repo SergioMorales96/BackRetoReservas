@@ -56,4 +56,27 @@ public class UsuarioAdministradorService implements IUsuarioAdministradorService
 		return new ResponseDTO(usuarioAdminMapper.entitysToDtos(listUsuarioAdministrador), true, "OK", HttpStatus.OK);
 	}
 
+	@Override
+	public ResponseDTO crearUsuario(UsuarioAdministradorEntity userAdmin) {
+		logger.info("crear usuario");
+		UsuarioAdministradorEntity usuarioAdministardor = administradorRepository.save(userAdmin);
+		logger.info("crear usuario: {}", usuarioAdministardor);
+		return new ResponseDTO(usuarioAdministardor, true, "Usuario creado", HttpStatus.OK);
+	}
+
+	@Override
+	public ResponseDTO editarUsuario(UsuarioAdministradorEntity userAdmin) {
+		logger.info("editar usuario");
+		UsuarioAdministradorEntity usuarioAdministardor = administradorRepository.save(userAdmin);
+		logger.info("editar usuario: {}", usuarioAdministardor);
+		return new ResponseDTO(usuarioAdministardor, true, "Usuario modificado", HttpStatus.OK);
+	}
+
+	@Override
+	public void eliminarUsuario(Integer idAdministrador) {
+		logger.info("eliminar usuario");
+		administradorRepository.deleteById(idAdministrador);
+		logger.info("eliminado usuario con id: {}",idAdministrador);
+	}
+
 }
