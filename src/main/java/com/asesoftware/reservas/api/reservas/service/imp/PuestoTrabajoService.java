@@ -37,6 +37,7 @@ public class PuestoTrabajoService implements IPuestoTrabajoService{
 	@Override
 	public ResponseDTO puestoTrabajoPorId(Integer idPuestoTrabajo) {
 		
+		logger.info("ingreso al metodo puestoTrabajoPorId {} ",idPuestoTrabajo );
 		Optional <PuestoTrabajoEntity> puestoTrabajoEntity = puestoTrabajoRepositorio.findById(idPuestoTrabajo);
 		
 		if(puestoTrabajoEntity.isPresent()) {
