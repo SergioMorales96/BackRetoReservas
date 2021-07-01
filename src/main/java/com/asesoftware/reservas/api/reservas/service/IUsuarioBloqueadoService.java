@@ -9,6 +9,7 @@ public interface IUsuarioBloqueadoService {
 	
 	public ResponseDTO consultarTodosLosUsuariosBloqueados();
 	public ResponseDTO consultarUsuarioBloqueadoPorId(String correo);
+	public ResponseDTO crearUsuarioBloqueado(UsuarioBloqueadoDTO dto);
 	public ResponseDTO actualizarUsuarioBloqueado(UsuarioBloqueadoDTO usuarioBloqueadoDTO);
 	public ResponseDTO eliminarUsuarioBloqueado(Integer id);
 }

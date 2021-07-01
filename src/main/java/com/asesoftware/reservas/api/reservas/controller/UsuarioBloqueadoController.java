@@ -40,6 +40,14 @@ public class UsuarioBloqueadoController {
 		return this.usuarioBloqueadoService.consultarUsuarioBloqueadoPorId(correo);
 	}
 	
+	@PostMapping(path = "/crear", consumes = "application/json", produces = "application/json")
+	public ResponseDTO crearUsuarioBloqueado(@RequestBody UsuarioBloqueadoDTO dto) {
+		logger.info("crearUsuarioBloqueado()");
+		logger.info("Usuario recibido {}", dto);
+		return this.usuarioBloqueadoService.crearUsuarioBloqueado(dto);
+	}
+	
+	
 	@PostMapping(path = "/actualizar", consumes = "application/json", produces = "application/json")
 	public ResponseDTO actualizarUsuarioBloqueado(@RequestBody UsuarioBloqueadoDTO entity) {
 		logger.info("actualizarusuarioBloqueado");

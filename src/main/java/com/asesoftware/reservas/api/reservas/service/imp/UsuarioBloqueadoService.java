@@ -57,6 +57,20 @@ public class UsuarioBloqueadoService implements IUsuarioBloqueadoService{
 			return new ResponseDTO(null, false, "No Ok", HttpStatus.OK);
 		}
 	}
+	
+	
+	@Override
+	public ResponseDTO crearUsuarioBloqueado(UsuarioBloqueadoDTO dto) {
+		logger.info("crearUsuarioBloqueado()");
+		try {
+			UsuarioBloqueadoEntity answ = this.usuarioBloqueadoRepository.save(this.usuarioBloqueadoMapper.dtoToEntity(dto));
+			logger.info("Usuario Creado");
+			return new ResponseDTO(this.usuarioBloqueadoMapper.entityToDto(answ), true, "Ok", HttpStatus.OK);
+		} catch (Exception e) {
+			logger.info("Usuario no creado");
+			return new ResponseDTO(null, false, "Usuario no creado", HttpStatus.OK);
+		}
+	}
 
 	@Override
 	public ResponseDTO actualizarUsuarioBloqueado(UsuarioBloqueadoDTO usuarioBloqueadoDTO) {
@@ -83,5 +97,7 @@ public class UsuarioBloqueadoService implements IUsuarioBloqueadoService{
 			 return new ResponseDTO(null, false, "usuario bloqueado no existe", HttpStatus.OK);
 		 }
 	}
+
+	
 
 }
