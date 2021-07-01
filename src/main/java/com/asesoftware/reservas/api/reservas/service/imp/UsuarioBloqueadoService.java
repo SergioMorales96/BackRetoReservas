@@ -72,4 +72,16 @@ public class UsuarioBloqueadoService implements IUsuarioBloqueadoService{
 		return new ResponseDTO(usuarioBloqueadoMapper.entityToDto(usuarioBloqueadoEntity), true, "usuario bloqueado actualizado correctamente", HttpStatus.OK);
 	}
 
+	@Override
+	public ResponseDTO eliminarUsuarioBloqueado(Integer id) {
+		logger.info("eliminarUsuarioBloqueado");
+		 try {
+			 usuarioBloqueadoRepository.deleteById(id);
+			 return new ResponseDTO(null, true, "usuario bloqueado eliminado", HttpStatus.OK);
+		 }catch(Exception e){
+			 logger.error("Error {}",e.getMessage());
+			 return new ResponseDTO(null, false, "usuario bloqueado no existe", HttpStatus.OK);
+		 }
+	}
+
 }

@@ -46,4 +46,12 @@ public class UsuarioBloqueadoController {
 		logger.info("usuario bloqueado actualizado con los datos {}", entity);
 		return usuarioBloqueadoService.actualizarUsuarioBloqueado(entity);
 	}
+	
+	@GetMapping(path = "/eliminar/{id}")
+	public ResponseDTO eliminarUsuarioBloqueado(@PathVariable Integer id) {
+		
+		logger.info("eliminarUsuarioBloqueado");
+		logger.info("usuario bloqueado a eliminar con id {}",id);
+		return usuarioBloqueadoService.eliminarUsuarioBloqueado(id);
+	}
 }
