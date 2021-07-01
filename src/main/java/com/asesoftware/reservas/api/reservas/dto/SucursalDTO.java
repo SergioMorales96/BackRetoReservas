@@ -3,7 +3,7 @@ package com.asesoftware.reservas.api.reservas.dto;
 import lombok.Data;
 
 @Data
-public class SucursalesDTO {
+public class SucursalDTO {
 	
 	private Integer idSucursal;
 	
@@ -14,5 +14,6 @@ public class SucursalesDTO {
 	private String nit;
 	
 	private String nombre;
+
 
 }
