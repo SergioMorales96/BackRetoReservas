@@ -35,7 +35,7 @@ public class PuestoTrabajoService implements IPuestoTrabajoService{
 	}
 
 	@Override
-	public ResponseDTO PuestoTrabajoPorId(Integer idPuestoTrabajo) {
+	public ResponseDTO puestoTrabajoPorId(Integer idPuestoTrabajo) {
 		
 		Optional <PuestoTrabajoEntity> puestoTrabajoEntity = puestoTrabajoRepositorio.findById(idPuestoTrabajo);
 		
@@ -56,7 +56,7 @@ public class PuestoTrabajoService implements IPuestoTrabajoService{
 			logger.info("se creo PuestoTrabajo {} ",puestoTrabajoDTO );
 			return new ResponseDTO(puestoTrabajoDTO,true, "OK", HttpStatus.OK);
 		}catch (Exception e) {
-			logger.error("Error {}",e.getMessage());
+			logger.error("Error crear {}",e.getMessage());
 			return new ResponseDTO(null, false, "Error", HttpStatus.INTERNAL_SERVER_ERROR);
 			
 		}

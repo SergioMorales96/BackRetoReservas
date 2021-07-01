@@ -18,7 +18,7 @@ import com.asesoftware.reservas.api.reservas.service.IPuestoTrabajoService;
 @RequestMapping(path="/api/v1/puestoTrabajo")
 public class PuestoTrabajoController {
 	
-	private static final Logger logger = LoggerFactory.getLogger(EmpresaController.class);
+	private static final Logger logger = LoggerFactory.getLogger(PuestoTrabajoController.class);
 	
 	@Autowired
 	private IPuestoTrabajoService puestoTrabajoService;
@@ -29,12 +29,12 @@ public class PuestoTrabajoController {
 		return puestoTrabajoService.consultarTodas();
 	}
 	
-	@GetMapping(path = "/{idPuestoTrabajo}")
-	public ResponseDTO PuestoTrabajoPorId(Integer idPuestoTrabajo) {
+	@GetMapping(path = "/buscarPorId")
+	public ResponseDTO puestoTrabajoPorId(Integer idPuestoTrabajo) {
 		
 		logger.info("puestoTrabajoPorId: {}", idPuestoTrabajo);
 		
-		return puestoTrabajoService.PuestoTrabajoPorId(idPuestoTrabajo);
+		return puestoTrabajoService.puestoTrabajoPorId(idPuestoTrabajo);
 		
 	}
 	@PostMapping(path = "/crear",consumes = "application/json",produces = "application/json")
