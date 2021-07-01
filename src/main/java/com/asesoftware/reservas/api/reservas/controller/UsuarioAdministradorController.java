@@ -39,7 +39,7 @@ public class UsuarioAdministradorController {
 
 	}
 		
-	@GetMapping(path = "sucursal/{id}")
+	@GetMapping(path = "/sucursal/{id}")
 	public ResponseDTO adminPorSucursal(@PathVariable Integer id) {
 		
 		logger.info("adminPorSucursal {}", id);

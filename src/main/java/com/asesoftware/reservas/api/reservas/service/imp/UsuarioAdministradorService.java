@@ -10,6 +10,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
 import com.asesoftware.reservas.api.reservas.dto.ResponseDTO;
+import com.asesoftware.reservas.api.reservas.dto.UsuarioAdministradorDTO;
 import com.asesoftware.reservas.api.reservas.entity.UsuarioAdministradorEntity;
 import com.asesoftware.reservas.api.reservas.mapper.IUsuarioAdministradorMapper;
 import com.asesoftware.reservas.api.reservas.repository.IAdministradorRepository;
@@ -54,6 +55,16 @@ public class UsuarioAdministradorService implements IUsuarioAdministradorService
 		logger.info("consultarTodas() {}", listUsuarioAdministrador);
 		
 		return new ResponseDTO(usuarioAdminMapper.entitysToDtos(listUsuarioAdministrador), true, "OK", HttpStatus.OK);
+	}
+	
+	@Override
+	public ResponseDTO adminPorSucursal(Integer idSucursal) {
+		
+		logger.info("adminPorSucursal {}", idSucursal);
+		List<UsuarioAdministradorDTO> listUsuarioAdministradorSucursal = usuarioAdminMapper.entitysToDtos(administradorRepository.queryAdminPorSucursal(idSucursal));
+			
+		return new ResponseDTO(listUsuarioAdministradorSucursal, true, "Ok", HttpStatus.OK);
+			
 	}
 
 }
