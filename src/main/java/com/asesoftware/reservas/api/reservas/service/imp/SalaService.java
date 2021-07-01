@@ -35,18 +35,31 @@ public class SalaService implements ISalaService{
 
 	@Override
 	public ResponseDTO listarTodosSalas() {
-		
-		return null;
+		try {
+			logger.info("listarTodoSalas");
+			List<SalaEntity> salaEntity = salaRepository.findAll();
+			logger.info("listarTodoSalas: {}",salaEntity);
+			return new ResponseDTO(salaMapper.entitysToDtos(salaEntity),true,"consulta completada",HttpStatus.OK);
+		} catch (Exception e) {
+			return new ResponseDTO(null,false,"consulta no realizada", HttpStatus.OK);
+		}
 	}
 
 	@Override
-	public ResponseDTO obtenerSalaPorId() {
+	public ResponseDTO obtenerSalaPorId(Integer id) {
+		logger.info("obtenerSalaPorId: {}",id);
 		
-		return null;
+		Optional<SalaEntity> salaEntity = salaRepository.findById(id);
+		
+		if (salaEntity.isPresent()) {
+			return new ResponseDTO(salaMapper.entityToDto(salaEntity.get()),true,"sala encontrada",HttpStatus.OK);
+		} else {
+			return new ResponseDTO(null,false,"sala no encontrada",HttpStatus.OK);
+		}
 	}
 
 	@Override
-	public ResponseDTO crearSala() {
+	public ResponseDTO crearSala(SalaDTO salaDTO) {
 		
 		return null;
 	}
