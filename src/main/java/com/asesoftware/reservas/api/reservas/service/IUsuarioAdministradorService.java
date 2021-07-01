@@ -11,5 +11,6 @@ public interface IUsuarioAdministradorService {
 	public ResponseDTO crearUsuario(UsuarioAdministradorEntity userAdmin);
 	public ResponseDTO editarUsuario(UsuarioAdministradorEntity userAdmin);
 	public void eliminarUsuario(Integer idAdministrador);
+	public ResponseDTO usuarioAdministradorPorEmail(String email);
 
 }

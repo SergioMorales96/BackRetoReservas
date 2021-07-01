@@ -59,4 +59,10 @@ public class UsuarioAdministradorController {
 		logger.info("eliminar usuarioPorId:{}",idAdministrador);
 		usuarioAdminService.eliminarUsuario(idAdministrador);
 	}
+	
+	@GetMapping(path = "/email/{email}")
+	public ResponseDTO usuarioAdministradorPorEmail(@PathVariable String email) {
+		
+		return usuarioAdminService.usuarioAdministradorPorEmail(email);
+	}
 }

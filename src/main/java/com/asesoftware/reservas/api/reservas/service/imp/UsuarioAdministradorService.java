@@ -10,6 +10,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
 import com.asesoftware.reservas.api.reservas.dto.ResponseDTO;
+import com.asesoftware.reservas.api.reservas.dto.UsuarioAdministradorDTO;
 import com.asesoftware.reservas.api.reservas.entity.UsuarioAdministradorEntity;
 import com.asesoftware.reservas.api.reservas.mapper.IUsuarioAdministradorMapper;
 import com.asesoftware.reservas.api.reservas.repository.IAdministradorRepository;
@@ -77,6 +78,16 @@ public class UsuarioAdministradorService implements IUsuarioAdministradorService
 		logger.info("eliminar usuario");
 		administradorRepository.deleteById(idAdministrador);
 		logger.info("eliminado usuario con id: {}",idAdministrador);
+	}
+
+	@Override
+	public ResponseDTO usuarioAdministradorPorEmail(String email) {
+		
+		//List<UsuarioAdministradorEntity> listUsuarioAdmin = administradorRepository.queryUsuarioAdminPorEmail(email);
+		List<UsuarioAdministradorDTO> listUsuarioAdminDtos = usuarioAdminMapper.entitysToDtos(administradorRepository.queryUsuarioAdminPorEmail(email));
+		
+		
+		return new ResponseDTO(listUsuarioAdminDtos, true, "OK", HttpStatus.OK);
 	}
 
 }
