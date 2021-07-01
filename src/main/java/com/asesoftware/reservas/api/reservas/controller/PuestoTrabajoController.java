@@ -41,19 +41,20 @@ public class PuestoTrabajoController {
 	}
 	@PostMapping(path = "/crear",consumes = "application/json",produces = "application/json")
 	public ResponseDTO crearPuestoTrabajo(@RequestBody PuestoTrabajoDTO puestoTrabajoDTO) {
+		logger.info("crearPuestoTrabajo: {}", puestoTrabajoDTO);
 		return puestoTrabajoService.crearPuestoTrabajo(puestoTrabajoDTO);
 		
 	}
 	@PostMapping(path = "/actualizar",consumes = "application/json",produces = "application/json")
 	public ResponseDTO actualizarPuestoTrabajo(@RequestBody PuestoTrabajoDTO puestoTrabajoDTO) {
+		logger.info("actualizarPuestoDeTrabajo: {}", puestoTrabajoDTO);
+		
 		return puestoTrabajoService.actualizarPuestoTrabajo(puestoTrabajoDTO);
 		
 	}
 	@GetMapping(path = "/borrar")
 	public ResponseDTO borrarPuestoTrabajo(Integer idPuestoTrabajo) {
 		
-		logger.info("ingreso al metodo borrarPuestoTrabaj ");
-
 		logger.info("Puesto de trabajo a eliminar {}",idPuestoTrabajo);
 		
 		return puestoTrabajoService.borrarPuestoTrabajo(idPuestoTrabajo);

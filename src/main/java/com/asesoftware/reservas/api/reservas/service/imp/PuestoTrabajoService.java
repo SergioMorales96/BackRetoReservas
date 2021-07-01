@@ -52,9 +52,11 @@ public class PuestoTrabajoService implements IPuestoTrabajoService{
 		logger.info("ingreso al metodo crearPuestoTrabajo {} ",puestoTrabajoDTO );
 		
 		try {
-			puestoTrabajoRepositorio.save(puestoTrabajoMapper.dtoToEntity(puestoTrabajoDTO));
+			PuestoTrabajoEntity puestoTrabajoEntity = puestoTrabajoMapper.dtoToEntity(puestoTrabajoDTO);
+			puestoTrabajoRepositorio.save(puestoTrabajoEntity);
 			logger.info("se creo PuestoTrabajo {} ",puestoTrabajoDTO );
-			return new ResponseDTO(puestoTrabajoDTO,true, "OK", HttpStatus.OK);
+			
+			return new ResponseDTO(puestoTrabajoMapper.entityToDto(puestoTrabajoEntity),true, "OK", HttpStatus.OK);
 		}catch (Exception e) {
 			logger.error("Error crear {}",e.getMessage());
 			return new ResponseDTO(null, false, "Error", HttpStatus.INTERNAL_SERVER_ERROR);
