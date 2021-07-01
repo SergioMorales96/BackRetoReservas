@@ -59,6 +59,7 @@ public class SalaService implements ISalaService{
 
 	@Override
 	public ResponseDTO crearSala(SalaDTO salaDTO) {
+		logger.info("crearSala: {}", salaDTO);
 		try {
 			SalaEntity salaEntity = salaMapper.dtoToEntity(salaDTO);
 
