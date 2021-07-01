@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 
 
 import com.asesoftware.reservas.api.reservas.dto.ResponseDTO;
+import com.asesoftware.reservas.api.reservas.dto.UsuarioBloqueadoDTO;
 import com.asesoftware.reservas.api.reservas.entity.UsuarioBloqueadoEntity;
 import com.asesoftware.reservas.api.reservas.mapper.IUsuarioBloqueadoMapper;
 import com.asesoftware.reservas.api.reservas.repository.IUsuarioBloqueadoRepository;
@@ -55,6 +56,20 @@ public class UsuarioBloqueadoService implements IUsuarioBloqueadoService{
 		}else {
 			return new ResponseDTO(null, false, "No Ok", HttpStatus.OK);
 		}
+	}
+
+	@Override
+	public ResponseDTO actualizarUsuarioBloqueado(UsuarioBloqueadoDTO usuarioBloqueadoDTO) {
+		
+		logger.info("actualizarUsuarioBloqueado");
+		
+		UsuarioBloqueadoEntity usuarioBloqueadoEntity = usuarioBloqueadoMapper.dtoToEntity(usuarioBloqueadoDTO);
+		
+		usuarioBloqueadoRepository.save(usuarioBloqueadoEntity);
+		
+		logger.info("usuario bloqueado actualizado");
+		
+		return new ResponseDTO(usuarioBloqueadoMapper.entityToDto(usuarioBloqueadoEntity), true, "usuario bloqueado actualizado correctamente", HttpStatus.OK);
 	}
 
 }
