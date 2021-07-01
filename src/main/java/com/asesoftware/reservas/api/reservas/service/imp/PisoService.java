@@ -9,7 +9,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
-import com.asesoftware.reservas.api.reservas.controller.EmpresaController;
 import com.asesoftware.reservas.api.reservas.dto.PisoDTO;
 import com.asesoftware.reservas.api.reservas.dto.ResponseDTO;
 import com.asesoftware.reservas.api.reservas.entity.PisoEntity;
@@ -20,7 +19,7 @@ import com.asesoftware.reservas.api.reservas.service.IPisoService;
 @Service
 public class PisoService implements IPisoService{
 	
-	private static final Logger logger = LoggerFactory.getLogger(EmpresaController.class);
+	private static final Logger logger = LoggerFactory.getLogger(PisoService.class);
 	
 	@Autowired
 	private IPisoRepository pisoRespository;
@@ -49,12 +48,29 @@ public class PisoService implements IPisoService{
 
 	@Override
 	public ResponseDTO pisoPorId(Integer idPiso) {
-		return null;
+		Optional<PisoEntity> pisoEntity = pisoRespository.findById(idPiso);
+		if(pisoEntity.isPresent()) {
+			logger.info("se encontro el piso por id");
+			return  new ResponseDTO(pisoEntity, true, "se encontro el piso por id", HttpStatus.OK);
+		}else{
+			logger.info("No se encontro el piso");
+			return  new ResponseDTO(null, false, "No se encontro el piso", HttpStatus.OK);
+		}
 	}
 
 	@Override
 	public ResponseDTO pisoPorNumeroPiso(Integer numeroPiso) {
-		return null;
+		List<PisoEntity> pisoEntity = pisoRespository.QueryPorPiso(numeroPiso);
+		if(pisoEntity.size() != 0) {
+			
+			logger.info("se encontro el piso");
+			return new ResponseDTO(pisoEntity, true,"se encontro el piso", HttpStatus.OK);
+		}else {
+			logger.error("El piso no existe");
+			return new ResponseDTO(null,false,"El piso no existe", HttpStatus.OK);
+		}
+		
+		
 	}
 
 	@Override
@@ -72,7 +88,17 @@ public class PisoService implements IPisoService{
 
 	@Override
 	public ResponseDTO actualizarPiso(PisoDTO pisoDTO) {
-		return null;
+		try {
+			logger.info("actualizando piso {}",pisoDTO.getNumeroPiso());
+			PisoEntity pisoEntity = pisoMapper.dtoToEntity(pisoDTO);
+			pisoRespository.save(pisoEntity);
+			return new ResponseDTO(pisoMapper.entityToDto(pisoEntity), true, "ok", HttpStatus.OK);
+		}catch (Exception e) {
+			logger.error(e.getMessage());
+			return new ResponseDTO(null,false,"No se puede actualizar piso",HttpStatus.OK);
+			
+		}
+		
 	}
 
 	@Override

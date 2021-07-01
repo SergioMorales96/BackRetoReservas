@@ -18,7 +18,7 @@ import com.asesoftware.reservas.api.reservas.service.IPisoService;
 @RequestMapping(path = "/api/v1/piso")
 public class PisoController {
 	
-	private static final Logger logger = LoggerFactory.getLogger(EmpresaController.class);
+	private static final Logger logger = LoggerFactory.getLogger(PisoController.class);
 	
 	@Autowired
 	private IPisoService pisoService;
@@ -34,6 +34,11 @@ public class PisoController {
 		return pisoService.crearPiso(dto);
 		
 	}
+	@PostMapping(path = "/actualizar" , consumes = "application/json" , produces = "application/json")
+	public ResponseDTO actualizarPiso(@RequestBody PisoDTO dto) {
+		logger.info("actualizar piso {}",dto.getNumeroPiso());
+		return pisoService.actualizarPiso(dto);
+	}
 	@GetMapping(path = "/eliminar/{idPiso}")
 	public ResponseDTO eliminarPiso(@PathVariable Integer idPiso) {
 		logger.info("piso a eliminat {}", idPiso);
@@ -43,6 +48,19 @@ public class PisoController {
 	public PisoDTO consultarpisoPorId(@PathVariable Integer idPiso) {
 		logger.info("consultar piso {}", idPiso);
 		return pisoService.consultarpisoPorId(idPiso);
+	}
+	
+	@GetMapping(path = "/consultar_dto/{idPiso}")
+	public ResponseDTO pisoPorId(@PathVariable Integer idPiso) {
+		logger.info("consultar piso {}", idPiso);
+		return pisoService.pisoPorId(idPiso);
+	}
+	
+	@GetMapping(path = "/numero/{numPiso}")
+	public ResponseDTO numeroDePiso(@PathVariable Integer numPiso) {
+		logger.info("consultar piso {}", numPiso);
+		return pisoService.pisoPorNumeroPiso(numPiso);
+		
 	}
 
 }
