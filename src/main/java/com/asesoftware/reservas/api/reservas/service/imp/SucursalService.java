@@ -5,9 +5,10 @@ import org.springframework.stereotype.Service;
 
 import com.asesoftware.reservas.api.reservas.mapper.ISucursalMapper;
 import com.asesoftware.reservas.api.reservas.repository.ISucursalRepository;
+import com.asesoftware.reservas.api.reservas.service.ISucursalService;
 
 @Service
-public class SucursalService {
+public class SucursalService implements ISucursalService{
 	
 	@Autowired
 	private ISucursalRepository sucursalRepository;
