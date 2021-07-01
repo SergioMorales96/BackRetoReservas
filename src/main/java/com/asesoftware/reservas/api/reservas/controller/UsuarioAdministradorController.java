@@ -55,7 +55,7 @@ public class UsuarioAdministradorController {
 	}
 
 	@GetMapping(path = "/eliminar/{idAdministrador}")
-	public void borrarAdministrador(@RequestBody Integer idAdministrador) {
+	public void borrarAdministrador(@PathVariable Integer idAdministrador) {
 		logger.info("eliminar usuarioPorId:{}",idAdministrador);
 		usuarioAdminService.eliminarUsuario(idAdministrador);
 	}
