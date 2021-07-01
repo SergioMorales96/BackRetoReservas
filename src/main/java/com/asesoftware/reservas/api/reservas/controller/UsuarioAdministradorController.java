@@ -1,5 +1,7 @@
 package com.asesoftware.reservas.api.reservas.controller;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -13,11 +15,15 @@ import com.asesoftware.reservas.api.reservas.service.IUsuarioAdministradorServic
 @RequestMapping(path = "api/v1/useradmin")
 public class UsuarioAdministradorController {
 	
+	private static final Logger logger = LoggerFactory.getLogger(UsuarioAdministradorController.class);
+	
 	@Autowired
 	private IUsuarioAdministradorService usuarioAdminService;
 	
 	@GetMapping(path = "sucursal/{id}")
 	public ResponseDTO adminPorSucursal(@PathVariable Integer id) {
+		
+		logger.info("adminPorSucursal {}", id);
 		
 		return usuarioAdminService.adminPorSucursal(id);
 	}

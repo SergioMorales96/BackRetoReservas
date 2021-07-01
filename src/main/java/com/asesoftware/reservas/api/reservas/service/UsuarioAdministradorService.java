@@ -27,13 +27,10 @@ public class UsuarioAdministradorService implements IUsuarioAdministradorService
 	@Override
 	public ResponseDTO adminPorSucursal(Integer idSucursal) {
 		
-		logger.info("ingreso al método adminPorSurcursal()");
-		
+		logger.info("adminPorSucursal {}", idSucursal);
 		List<UsuarioAdministradorDTO> listUsuarioAdministradorSucursal = usuarioAdminMapper.entitysToDtos(usuarioAdminRepository.queryAdminPorSucursal(idSucursal));
 			
-		logger.info("Se realizó busqueda de administradores de la sucursal {}", idSucursal);
-		
-		return new ResponseDTO(listUsuarioAdministradorSucursal, true, "Consulta con éxito", HttpStatus.OK);
+		return new ResponseDTO(listUsuarioAdministradorSucursal, true, "Ok", HttpStatus.OK);
 			
 	}
 
