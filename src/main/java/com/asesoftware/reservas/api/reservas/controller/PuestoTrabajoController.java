@@ -29,7 +29,11 @@ public class PuestoTrabajoController {
 		return puestoTrabajoService.consultarTodas();
 	}
 	
+<<<<<<< HEAD
 	@GetMapping(path = "/buscarPorId")
+=======
+	@GetMapping(path = "/{idPuestoTrabajo}")
+>>>>>>> c86e59d1a868fdd23c7ed7e5da368fad204fa223
 	public ResponseDTO puestoTrabajoPorId(Integer idPuestoTrabajo) {
 		
 		logger.info("puestoTrabajoPorId: {}", idPuestoTrabajo);
