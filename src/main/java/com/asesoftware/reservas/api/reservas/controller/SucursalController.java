@@ -6,9 +6,9 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping(path = "/api/v1/sucursales")
-public class SucursalesController {
+public class SucursalController {
 	
 	@Autowired
-	private ISucursalesService sucursalesService;
+	private ISucursalService sucursalesService;
 
 }
