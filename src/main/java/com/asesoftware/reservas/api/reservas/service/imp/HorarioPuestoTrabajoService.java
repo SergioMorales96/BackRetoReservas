@@ -16,6 +16,9 @@ import com.asesoftware.reservas.api.reservas.mapper.IHorarioPuestoTrabajoMapper;
 import com.asesoftware.reservas.api.reservas.repository.IHorarioPuestoTrabajoRepository;
 import com.asesoftware.reservas.api.reservas.service.IHorarioPuestoTrabajoService;
 
+import static com.asesoftware.reservas.api.reservas.utils.Constantes.ERROR_GENERICO;
+import static com.asesoftware.reservas.api.reservas.utils.Constantes.OK;
+
 @Service
 public class HorarioPuestoTrabajoService implements IHorarioPuestoTrabajoService {
 	private static final Logger logger = LoggerFactory.getLogger(HorarioPuestoTrabajoService.class);
@@ -44,17 +47,17 @@ public class HorarioPuestoTrabajoService implements IHorarioPuestoTrabajoService
 			if (opcional.isPresent()) {
 				// Se exponen los datos de la consulta
 				logger.info("consultarHorarioPorId: {}. contiene datos", idHorario);
-				return new ResponseDTO(horarioPuestoTrabajoMapper.entityToDto(opcional.get()), true, "ok",
+				return new ResponseDTO(horarioPuestoTrabajoMapper.entityToDto(opcional.get()), true, OK,
 						HttpStatus.OK);
 			} else {
 				// Se expone la informacion en caso de ser nula la consulta
 				logger.info("consultarHorarioPorId: {}. no contiene datos", idHorario);
-				return new ResponseDTO(null, false, "no contiene datos", HttpStatus.OK);
+				return new ResponseDTO(null, false, OK, HttpStatus.OK);
 			}
 		} catch (Exception e) {
 			// Se expone la informacion en caso de no poder realizar la consulta
 			logger.info("consultarHorarioPorId: {}. error de consulta. {}", idHorario, e.getMessage());
-			return new ResponseDTO(null, false, "error de consulta", HttpStatus.INTERNAL_SERVER_ERROR);
+			return new ResponseDTO(null, false, ERROR_GENERICO, HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 	}
 
@@ -68,24 +71,24 @@ public class HorarioPuestoTrabajoService implements IHorarioPuestoTrabajoService
 	 */
 	@Override
 	public ResponseDTO consultarTodos() {
-		// Se crea el Logger que indica que entró al método consultarTodos() y se
+		// Se crea el Logger que indica que entró al método consultarTodos() y se crean los Loggers correspondientes
 		try {
 			logger.info("consultarTodos()");
 			List<HorarioPuestoTrabajoEntity> listHorarioPuestoTrabajo = horarioPuestoTrabajoRepositorio.findAll();
 			logger.info("consultarTodos() {}", listHorarioPuestoTrabajo);
-			return new ResponseDTO(horarioPuestoTrabajoMapper.entitysToDtos(listHorarioPuestoTrabajo), true, "Ok",
+			return new ResponseDTO(horarioPuestoTrabajoMapper.entitysToDtos(listHorarioPuestoTrabajo), true, OK,
 					HttpStatus.OK);
 
 		} catch (Exception e) {
 			logger.info("consultarTodos(). error de consulta. ", e.getMessage());
-			return new ResponseDTO(null, false, "Error de Consulta", HttpStatus.INTERNAL_SERVER_ERROR);
+			return new ResponseDTO(null, false, ERROR_GENERICO, HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 
 	}
 
 	/**
 	 * Método que Crea un nuevo registro para la tabla HorarioPuestoTrabajo a través
-	 * del mapper.
+	 * del mapper .
 	 * 
 	 * @author jlucero
 	 * @param HorarioPuestoTrabajoDTO
@@ -94,7 +97,7 @@ public class HorarioPuestoTrabajoService implements IHorarioPuestoTrabajoService
 	@Override
 	public ResponseDTO crearHorario(HorarioPuestoTrabajoDTO horarioPuestoTrabajoDTO) {
 		// Se genera el Logger que indica que ingresó al método
-		// crearHorarioPuestoTrabajo y se
+		// crearHorarioPuestoTrabajo y se crean los Loggers correspondientes
 		logger.info("Ingresó al método crearHorarioPuestoTrabajo()");
 		try {
 			HorarioPuestoTrabajoEntity horarioPuestoTrabajoEntity = horarioPuestoTrabajoMapper
@@ -103,10 +106,10 @@ public class HorarioPuestoTrabajoService implements IHorarioPuestoTrabajoService
 
 			logger.info("Se creó el HorarioPuestoTrabajo {}", horarioPuestoTrabajoDTO.getIdHorario());
 			return new ResponseDTO(horarioPuestoTrabajoMapper.entityToDto(horarioPuestoTrabajoEntity), true,
-					"HorarioPuestoTrabajo Creado", HttpStatus.OK);
+					OK, HttpStatus.OK);
 		} catch (Exception e) {
 			logger.error("Error {}", e.getMessage());
-			return new ResponseDTO(null, false, "No se puede crear el HorarioPuestoTrabajo", HttpStatus.INTERNAL_SERVER_ERROR);
+			return new ResponseDTO(null, false, ERROR_GENERICO, HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 	}
 
@@ -125,10 +128,10 @@ public class HorarioPuestoTrabajoService implements IHorarioPuestoTrabajoService
 			return new ResponseDTO(
 					horarioPuestoTrabajoMapper.entityToDto(
 							horarioPuestoTrabajoRepositorio.save(horarioPuestoTrabajoMapper.dtoToEntity(dto))),
-					true, "ok", HttpStatus.OK);
+					true, OK, HttpStatus.OK);
 		} catch (Exception e) {
 			logger.info("error actualizacionHorarioPuestoTrabajo: {}. {}", dto, e.getMessage());
-			return new ResponseDTO(null, false, "error de actualizacion", HttpStatus.INTERNAL_SERVER_ERROR);
+			return new ResponseDTO(null, false, ERROR_GENERICO, HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 	}
 
@@ -148,10 +151,10 @@ public class HorarioPuestoTrabajoService implements IHorarioPuestoTrabajoService
 		try {
 			horarioPuestoTrabajoRepositorio.deleteById(idHorario);
 			logger.info("El HorarioPuestoTrabajo {} se eliminó", idHorario);
-			return new ResponseDTO(null, true, "HorarioPuestoTrabajo Eliminado", HttpStatus.OK);
+			return new ResponseDTO(null, true, OK, HttpStatus.OK);
 		} catch (Exception e) {
 			logger.error("Error {}", e.getMessage());
-			return new ResponseDTO(null, false, "No se puede eliminar el HorarioPuestoTrabajo", HttpStatus.INTERNAL_SERVER_ERROR);
+			return new ResponseDTO(null, false, ERROR_GENERICO, HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 	}
 }
