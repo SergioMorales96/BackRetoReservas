@@ -27,17 +27,19 @@ public class SalaController {
 	@Autowired
 	private ISalaService salaService;
 
-	
+	@GetMapping(path = "/todas")
 	public ResponseDTO listarTodosSalas() {
-		return null;
+		logger.info("ListarTodoSalas");
+		return salaService.listarTodosSalas();
 	}
-	
-	public ResponseDTO obtenerSalaPorId() {
-		return null;
+	@GetMapping(path = "{id}")
+	public ResponseDTO obtenerSalaPorId(@PathVariable Integer id) {
+		logger.info("obtenerSalaPorId: {}",id);
+		return salaService.obtenerSalaPorId(id);
 	}
-	
-	public ResponseDTO crearSala() {
-		return null;
+	@PostMapping(path = "/crear", consumes = "application/json",produces = "application/json")
+	public ResponseDTO crearSala(@RequestBody SalaDTO entity) {
+		return salaService.crearSala(entity); 
 	}
 	
 	@PostMapping(path = "/actualizar", consumes = "application/json", produces = "application/json")

@@ -9,9 +9,9 @@ public interface ISalaService {
 	
 	public ResponseDTO listarTodosSalas();
 	
-	public ResponseDTO obtenerSalaPorId();
+	public ResponseDTO obtenerSalaPorId(Integer id);
 	
-	public ResponseDTO crearSala();
+	public ResponseDTO crearSala(SalaDTO salaDTO);
 	
 	public ResponseDTO actualizarSala(SalaDTO salaDTO);
 	
