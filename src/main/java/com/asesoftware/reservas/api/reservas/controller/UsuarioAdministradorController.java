@@ -39,6 +39,11 @@ public class UsuarioAdministradorController {
 
 	}
 		
+	/**
+	* Método encargado de consultar los usuarios administradores por sucursal
+	* @author wsierra
+	* @version 0.1, 2021/07/01
+	*/
 	@GetMapping(path = "/sucursal/{id}")
 	public ResponseDTO adminPorSucursal(@PathVariable Integer id) {
 		

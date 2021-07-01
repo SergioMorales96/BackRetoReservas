@@ -15,6 +15,7 @@ import com.asesoftware.reservas.api.reservas.entity.UsuarioAdministradorEntity;
 import com.asesoftware.reservas.api.reservas.mapper.IUsuarioAdministradorMapper;
 import com.asesoftware.reservas.api.reservas.repository.IAdministradorRepository;
 import com.asesoftware.reservas.api.reservas.service.IUsuarioAdministradorService;
+import static com.asesoftware.reservas.api.reservas.utils.Constantes.OK;
 
 @Service
 public class UsuarioAdministradorService implements IUsuarioAdministradorService{
@@ -57,13 +58,18 @@ public class UsuarioAdministradorService implements IUsuarioAdministradorService
 		return new ResponseDTO(usuarioAdminMapper.entitysToDtos(listUsuarioAdministrador), true, "OK", HttpStatus.OK);
 	}
 	
+	/**
+	* Método encargado de consultar los usuarios administradores por sucursal
+	* @author wsierra
+	* @version 0.1, 2021/07/01
+	*/
 	@Override
 	public ResponseDTO adminPorSucursal(Integer idSucursal) {
 		
 		logger.info("adminPorSucursal {}", idSucursal);
 		List<UsuarioAdministradorDTO> listUsuarioAdministradorSucursal = usuarioAdminMapper.entitysToDtos(administradorRepository.queryAdminPorSucursal(idSucursal));
 			
-		return new ResponseDTO(listUsuarioAdministradorSucursal, true, "Ok", HttpStatus.OK);
+		return new ResponseDTO(listUsuarioAdministradorSucursal, true, OK, HttpStatus.OK);
 			
 	}
 
