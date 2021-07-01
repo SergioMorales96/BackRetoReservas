@@ -19,7 +19,8 @@ import com.asesoftware.reservas.api.reservas.entity.SalaEntity;
 import com.asesoftware.reservas.api.reservas.mapper.ISalaMapper;
 import com.asesoftware.reservas.api.reservas.repository.ISalaRepository;
 import com.asesoftware.reservas.api.reservas.service.ISalaService;
-
+import static com.asesoftware.reservas.api.reservas.utils.Constantes.ERROR_GENERICO;
+import static com.asesoftware.reservas.api.reservas.utils.Constantes.OK;
 
 @Service
 public class SalaService implements ISalaService{
@@ -38,9 +39,10 @@ public class SalaService implements ISalaService{
 			logger.info("listarTodoSalas");
 			List<SalaEntity> salaEntity = salaRepository.findAll();
 			logger.info("listarTodoSalas: {}",salaEntity);
-			return new ResponseDTO(salaMapper.entitysToDtos(salaEntity),true,"consulta completada",HttpStatus.OK);
+			return new ResponseDTO(salaMapper.entitysToDtos(salaEntity),true,OK,HttpStatus.OK);
 		} catch (Exception e) {
-			return new ResponseDTO(null,false,"consulta no realizada", HttpStatus.OK);
+			logger.error(e.getMessage());
+			return new ResponseDTO(null,false,ERROR_GENERICO, HttpStatus.OK);
 		}
 	}
 
@@ -51,9 +53,9 @@ public class SalaService implements ISalaService{
 		Optional<SalaEntity> salaEntity = salaRepository.findById(id);
 		
 		if (salaEntity.isPresent()) {
-			return new ResponseDTO(salaMapper.entityToDto(salaEntity.get()),true,"sala encontrada",HttpStatus.OK);
+			return new ResponseDTO(salaMapper.entityToDto(salaEntity.get()),true,OK,HttpStatus.OK);
 		} else {
-			return new ResponseDTO(null,false,"sala no encontrada",HttpStatus.OK);
+			return new ResponseDTO(null,false,ERROR_GENERICO,HttpStatus.OK);
 		}
 	}
 
@@ -65,9 +67,10 @@ public class SalaService implements ISalaService{
 
 			salaRepository.save(salaEntity);
 
-			return new ResponseDTO(salaMapper.entityToDto(salaEntity), true, "ok", HttpStatus.OK); 
+			return new ResponseDTO(salaMapper.entityToDto(salaEntity), true, OK, HttpStatus.OK); 
 		}catch (Exception e) {
-			return new ResponseDTO(null, false, "No se puede crear la sala", HttpStatus.INTERNAL_SERVER_ERROR); 
+			logger.error(e.getMessage());
+			return new ResponseDTO(null, false,ERROR_GENERICO, HttpStatus.INTERNAL_SERVER_ERROR); 
 		}
 	}
 	
@@ -83,13 +86,13 @@ public class SalaService implements ISalaService{
 			
 			salaRepository.save(salaEntity);
 			
-			return new ResponseDTO(salaMapper.entityToDto(salaEntity), true, "Sala actualizada", HttpStatus.OK);
+			return new ResponseDTO(salaMapper.entityToDto(salaEntity), true, OK, HttpStatus.OK);
 			
 		}catch(Exception e) {
 			
-			e.printStackTrace();
+			logger.error(e.getMessage());
 			
-			return new ResponseDTO(null, false, "Sala no se pudo actualizar", HttpStatus.INTERNAL_SERVER_ERROR);
+			return new ResponseDTO(null, false, ERROR_GENERICO, HttpStatus.INTERNAL_SERVER_ERROR);
 			
 		}
 
@@ -105,13 +108,13 @@ public class SalaService implements ISalaService{
 			
 			logger.info("La sala {} se elimino", idSala);
 			
-			return new ResponseDTO(null,true,"Sala Eliminada", HttpStatus.OK);
+			return new ResponseDTO(null,true,OK, HttpStatus.OK);
 			
 		}catch(Exception e){
 			
-			logger.info("Error {}", e.getMessage());
+			logger.error(e.getMessage());
 			
-			return new ResponseDTO(null,false,"Sala no se pudo eliminar", HttpStatus.INTERNAL_SERVER_ERROR);
+			return new ResponseDTO(null,false,ERROR_GENERICO, HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 
 	}
