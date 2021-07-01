@@ -7,5 +7,6 @@ public interface IUsuarioAdministradorService {
 	
 	public ResponseDTO usuarioAdministradorPorId(Integer idAdministrador);
 	public ResponseDTO consultarTodos();
+	public ResponseDTO adminPorSucursal(Integer idSucursal);
 
 }

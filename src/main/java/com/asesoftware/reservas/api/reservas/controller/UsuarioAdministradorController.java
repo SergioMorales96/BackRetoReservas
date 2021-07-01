@@ -36,7 +36,15 @@ public class UsuarioAdministradorController {
 		logger.info("consultarTodos()");
 		
 		return usuarioAdminService.consultarTodos();
+
+	}
 		
+	@GetMapping(path = "sucursal/{id}")
+	public ResponseDTO adminPorSucursal(@PathVariable Integer id) {
+		
+		logger.info("adminPorSucursal {}", id);
+		
+		return usuarioAdminService.adminPorSucursal(id);
 	}
 
 }
