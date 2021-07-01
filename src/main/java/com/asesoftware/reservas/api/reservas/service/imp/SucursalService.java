@@ -20,7 +20,9 @@ public class SucursalService implements ISucursalService{
 	@Autowired
 	private ISucursalMapper mapperSucursal;
 
-
+	
+	// Crear Sucursal
+	
 	@Override
 	public ResponseDTO createSucursal(SucursalDTO sucursalDTO) {
 		try {
@@ -32,12 +34,19 @@ public class SucursalService implements ISucursalService{
 		}
 
 	}
-
+	
+	// Editar Sucursal
+	
 	@Override
 	public ResponseDTO updateSucursal(SucursalDTO sucursalDTO) {
-		SucursalEntity sucursalEntity = mapperSucursal.dtoToEntity(sucursalDTO);
-		sucursalRepository.save(sucursalEntity);
-		return new ResponseDTO(mapperSucursal.entityToDto(sucursalEntity), true, "ok", HttpStatus.OK);
+		try {
+			SucursalEntity sucursalEntity = mapperSucursal.dtoToEntity(sucursalDTO);
+			sucursalRepository.save(sucursalEntity);
+			return new ResponseDTO(mapperSucursal.entityToDto(sucursalEntity), true, "ok", HttpStatus.OK);
+		}catch(Exception e) {
+			return new ResponseDTO(null, false, "No se puede editar la sucursal", HttpStatus.OK);
+		}
+		
 	}
 
 

@@ -17,7 +17,7 @@ public class SucursalController {
 	private ISucursalService sucursalService;
 	
 	
-	// Crear 
+		// Crear Sucursal
 	
 		@PostMapping(path = "/crear", consumes = "application/json", produces = "application/json")
 		public ResponseDTO createSucursal(@RequestBody SucursalDTO entity) {
@@ -25,7 +25,7 @@ public class SucursalController {
 			return sucursalService.createSucursal(entity);
 		}
 		
-		// Editar
+		// Editar Sucursal
 		
 		@PostMapping(path = "/editar", consumes = "application/json", produces = "application/json")
 		public ResponseDTO editarSucursal(@RequestBody SucursalDTO entity) {
