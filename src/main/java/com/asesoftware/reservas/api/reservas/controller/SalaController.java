@@ -39,6 +39,7 @@ public class SalaController {
 	}
 	@PostMapping(path = "/crear", consumes = "application/json",produces = "application/json")
 	public ResponseDTO crearSala(@RequestBody SalaDTO entity) {
+		logger.info("Sala creada: {}",entity);
 		return salaService.crearSala(entity); 
 	}
 	
