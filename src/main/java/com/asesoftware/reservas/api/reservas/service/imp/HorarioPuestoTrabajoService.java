@@ -3,6 +3,8 @@ package com.asesoftware.reservas.api.reservas.service.imp;
 import java.util.List;
 import java.util.Optional;
 
+import javax.swing.JOptionPane;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -57,28 +59,64 @@ public class HorarioPuestoTrabajoService implements IHorarioPuestoTrabajoService
 			return new ResponseDTO(null, false, "fail", HttpStatus.OK);
 		}
 	}
-
+	/**
+	 * Método consultan todos los horarios de la tabla y retorna todos los elementos de la tabla através del mapper.
+	 * @author jlucero
+	 * @param 
+	 * @return ResponseDTO 
+	 */
 	@Override
 	public ResponseDTO consultarTodos() {
+		//Se crea el Logger que indica que entró al método consultarTodos() y se 
 		logger.info("consultarTodos()");
 		List<HorarioPuestoTrabajoEntity> listHorarioPuestoTrabajo = horarioPuestoTrabajoRepositorio.findAll();
 		logger.info("consultarTodos() {}", listHorarioPuestoTrabajo);
 		return new ResponseDTO(horarioPuestoTrabajoMapper.entitysToDtos(listHorarioPuestoTrabajo), true, "Ok",
 				HttpStatus.OK);
 	}
-
+	/**
+	 * Método que Crea un nuevo registro para la tabla HorarioPuestoTrabajo a través del mapper. 
+	 * @author jlucero
+	 * @param HorarioPuestoTrabajoDTO
+	 * @return ResponseDTO
+	 */
 	@Override
-	public ResponseDTO crearHorario() {
-		return null;
+	public ResponseDTO crearHorario(HorarioPuestoTrabajoDTO horarioPuestoTrabajoDTO) {
+		//Se genera el Logger que indica que ingresó al método crearHorarioPuestoTrabajo y se 
+		logger.info("Ingresó al método crearHorarioPuestoTrabajo()");
+		try {
+			HorarioPuestoTrabajoEntity horarioPuestoTrabajoEntity = horarioPuestoTrabajoMapper.dtoToEntity(horarioPuestoTrabajoDTO);
+			horarioPuestoTrabajoRepositorio.save(horarioPuestoTrabajoEntity);
+			
+		logger.info("Se creó el HorarioPuestoTrabajo {}",horarioPuestoTrabajoDTO.getIdHorario());
+			return new ResponseDTO(horarioPuestoTrabajoMapper.entityToDto(horarioPuestoTrabajoEntity), true, "HorarioPuestoTrabajo Creado", HttpStatus.OK);
+		} catch (Exception e) {
+			logger.error("Error {}",e.getMessage());
+			return new ResponseDTO(null, false, "No se puede crear el HorarioPuestoTrabajo", HttpStatus.OK);
+		}
 	}
 
 	@Override
 	public ResponseDTO actualizarHorarioPuestoTrabajo(HorarioPuestoTrabajoDTO dto) {
 		return null;
 	}
-
+	/**
+	 * Método que elimina el HorarioPuestoTrabajoDTO a partir del id através del mapper. 
+	 * @author jlucero
+	 * @param id
+	 * @return ResponseDTO
+	 */
 	@Override
 	public ResponseDTO borrarHorarioPorId(Integer idHorario) {
-		return null;
+		//Se genera el Logger que indica que ingresó al método consultarTodos() y se Elimina registro específico para la tabla HorarioPuestoTrabajo
+		logger.info("consultarTodos()");
+		try {
+			horarioPuestoTrabajoRepositorio.deleteById(idHorario);
+			logger.info("El HorarioPuestoTrabajo {} se eliminó");
+			return new ResponseDTO(null, true, "HorarioPuestoTrabajo Eliminado", HttpStatus.OK);
+		} catch (Exception e) {
+			logger.error("Error {}",e.getMessage());
+			return new ResponseDTO(null, false, "No se puede eliminar el HorarioPuestoTrabajo", HttpStatus.OK);
+		}
 	}
 }
