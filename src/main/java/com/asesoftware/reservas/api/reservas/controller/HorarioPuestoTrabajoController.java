@@ -33,7 +33,7 @@ public class HorarioPuestoTrabajoController {
 	 */
 	@GetMapping(path = "/todos")
 	public ResponseDTO consultarTodos() {
-		logger.info("consultarTodos()");
+		logger.info("Ingresó al metodo consultarTodos()");
 		return horarioPuestoTrabajoService.consultarTodos();
 	}
 
@@ -49,7 +49,7 @@ public class HorarioPuestoTrabajoController {
 	@PostMapping(path = "/crear", consumes = "application/json", produces = "application/json")
 	public ResponseDTO crearHorario(@RequestBody HorarioPuestoTrabajoDTO horarioPuestoTrabajoDTO) {
 		// Logger que informa que la aplicación entró al método crearHorario()
-		logger.info("crearHorario()");
+		logger.info(" Ingresó al metodo crearHorario()");
 
 		return horarioPuestoTrabajoService.crearHorario(horarioPuestoTrabajoDTO);
 	}
@@ -64,9 +64,9 @@ public class HorarioPuestoTrabajoController {
 	 */
 	@GetMapping(path = "eliminar/{id}")
 	public ResponseDTO eliminarPorId(@PathVariable Integer id) {
-		logger.info("Ingreso al metodo eliminarComercio ");
+		logger.info("Ingreso al metodo eliminarHorarioPuestoTrabajo ");
 
-		logger.info("Comercio a eliminar {}", id);
+		logger.info("HorarioPuestoTrabajo a eliminar {}", id);
 
 		return horarioPuestoTrabajoService.borrarHorarioPorId(id);
 	}
@@ -83,6 +83,9 @@ public class HorarioPuestoTrabajoController {
 	 */
 	@GetMapping(path = "/horario/{id}")
 	public ResponseDTO getHorarioPorId(@PathVariable Integer id) {
+		logger.info("Ingreso al metodo getHorarioPorId() ");
+
+		logger.info("HorarioPuestoTrabajo a consultar {}", id);
 		return horarioPuestoTrabajoService.consultarHorarioPorId(id);
 	}
 
@@ -96,7 +99,9 @@ public class HorarioPuestoTrabajoController {
 	 * @return ResponseDTO: datos actualizados provenientes del servicio
 	 */
 	@PostMapping(path = "/editar", consumes = "application/json", produces = "application/json")
-	public ResponseDTO editarUser(@RequestBody HorarioPuestoTrabajoDTO dto) {
+	public ResponseDTO editarHorario(@RequestBody HorarioPuestoTrabajoDTO dto) {
+		logger.info("Ingreso al metodo editarHorario() ");
+
 		return horarioPuestoTrabajoService.actualizarHorarioPuestoTrabajo(dto);
 	}
 
