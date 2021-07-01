@@ -13,14 +13,13 @@ import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
 
-import com.asesoftware.reservas.api.reservas.controller.SalaController;
 import com.asesoftware.reservas.api.reservas.dto.ResponseDTO;
 import com.asesoftware.reservas.api.reservas.dto.SalaDTO;
 import com.asesoftware.reservas.api.reservas.entity.SalaEntity;
 import com.asesoftware.reservas.api.reservas.mapper.ISalaMapper;
 import com.asesoftware.reservas.api.reservas.repository.ISalaRepository;
 import com.asesoftware.reservas.api.reservas.service.ISalaService;
-//import com.asesoftware.semilla.generador.entity.UsuarioEntity;
+
 
 @Service
 public class SalaService implements ISalaService{
@@ -67,7 +66,7 @@ public class SalaService implements ISalaService{
 
 			return new ResponseDTO(salaMapper.entityToDto(salaEntity), true, "ok", HttpStatus.OK); 
 		}catch (Exception e) {
-			return new ResponseDTO(null, false, "No se puede crear la sala", HttpStatus.OK); 
+			return new ResponseDTO(null, false, "No se puede crear la sala", HttpStatus.INTERNAL_SERVER_ERROR); 
 		}
 	}
 	
@@ -89,7 +88,7 @@ public class SalaService implements ISalaService{
 			
 			e.printStackTrace();
 			
-			return new ResponseDTO(null, false, "Sala no se pudo actualizar", HttpStatus.OK);
+			return new ResponseDTO(null, false, "Sala no se pudo actualizar", HttpStatus.INTERNAL_SERVER_ERROR);
 			
 		}
 
@@ -111,7 +110,7 @@ public class SalaService implements ISalaService{
 			
 			logger.info("Error {}", e.getMessage());
 			
-			return new ResponseDTO(null,false,"Sala no se pudo eliminar", HttpStatus.OK);
+			return new ResponseDTO(null,false,"Sala no se pudo eliminar", HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 
 	}

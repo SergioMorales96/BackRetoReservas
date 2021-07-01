@@ -8,7 +8,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 
 import org.springframework.web.bind.annotation.RestController;
 
@@ -32,15 +31,15 @@ public class SalaController {
 		logger.info("ListarTodoSalas");
 		return salaService.listarTodosSalas();
 	}
-	@GetMapping(path = "{id}")
+	@GetMapping(path = "/{id}")
 	public ResponseDTO obtenerSalaPorId(@PathVariable Integer id) {
 		logger.info("obtenerSalaPorId: {}",id);
 		return salaService.obtenerSalaPorId(id);
 	}
 	@PostMapping(path = "/crear", consumes = "application/json",produces = "application/json")
-	public ResponseDTO crearSala(@RequestBody SalaDTO entity) {
-		logger.info("Sala creada: {}",entity);
-		return salaService.crearSala(entity); 
+	public ResponseDTO crearSala(@RequestBody SalaDTO salaDTO) {
+		logger.info("Sala creada: {}",salaDTO);
+		return salaService.crearSala(salaDTO); 
 	}
 	
 	@PostMapping(path = "/actualizar", consumes = "application/json", produces = "application/json")
