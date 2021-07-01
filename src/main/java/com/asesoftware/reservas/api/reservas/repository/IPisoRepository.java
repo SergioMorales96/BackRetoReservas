@@ -12,5 +12,5 @@ import com.asesoftware.reservas.api.reservas.entity.PisoEntity;
 public interface IPisoRepository extends JpaRepository<PisoEntity, Integer>{
 	
 		@Query(nativeQuery = true , value = "Select * from PISO  WHERE numero_piso= :piso")
-		List<PisoEntity>     QueryPorPiso(@Param("piso") Integer piso);
+		List<PisoEntity>     queryPorPiso(@Param("piso") Integer piso);
 }

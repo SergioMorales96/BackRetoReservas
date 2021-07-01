@@ -41,7 +41,7 @@ public class PisoController {
 	}
 	@GetMapping(path = "/eliminar/{idPiso}")
 	public ResponseDTO eliminarPiso(@PathVariable Integer idPiso) {
-		logger.info("piso a eliminat {}", idPiso);
+		logger.info("piso a eliminar {}", idPiso);
 		return pisoService.eliminarPiso(idPiso);
 	}
 	@GetMapping(path = "/consultar/{idPiso}")
@@ -52,13 +52,13 @@ public class PisoController {
 	
 	@GetMapping(path = "/consultar_dto/{idPiso}")
 	public ResponseDTO pisoPorId(@PathVariable Integer idPiso) {
-		logger.info("consultar piso {}", idPiso);
+		logger.info("consultar piso dto{}", idPiso);
 		return pisoService.pisoPorId(idPiso);
 	}
 	
 	@GetMapping(path = "/numero/{numPiso}")
 	public ResponseDTO numeroDePiso(@PathVariable Integer numPiso) {
-		logger.info("consultar piso {}", numPiso);
+		logger.info("consultar piso por numero {}", numPiso);
 		return pisoService.pisoPorNumeroPiso(numPiso);
 		
 	}

@@ -53,21 +53,22 @@ public class PisoService implements IPisoService{
 			logger.info("se encontro el piso por id");
 			return  new ResponseDTO(pisoEntity, true, "se encontro el piso por id", HttpStatus.OK);
 		}else{
-			logger.info("No se encontro el piso");
+			logger.info("No se encontro el piso por id");
 			return  new ResponseDTO(null, false, "No se encontro el piso", HttpStatus.OK);
 		}
 	}
 
 	@Override
 	public ResponseDTO pisoPorNumeroPiso(Integer numeroPiso) {
-		List<PisoEntity> pisoEntity = pisoRespository.QueryPorPiso(numeroPiso);
-		if(pisoEntity.size() != 0) {
-			
-			logger.info("se encontro el piso");
-			return new ResponseDTO(pisoEntity, true,"se encontro el piso", HttpStatus.OK);
-		}else {
+		List<PisoEntity> pisoEntity = pisoRespository.queryPorPiso(numeroPiso);
+		if(pisoEntity.isEmpty()) {
 			logger.error("El piso no existe");
 			return new ResponseDTO(null,false,"El piso no existe", HttpStatus.OK);
+			
+		}else {
+			logger.info("se encontro el piso");
+			return new ResponseDTO(pisoEntity, true,"se encontro el piso", HttpStatus.OK);
+			
 		}
 		
 		
