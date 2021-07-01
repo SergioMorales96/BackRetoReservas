@@ -68,7 +68,7 @@ public class UsuarioBloqueadoService implements IUsuarioBloqueadoService{
 			return new ResponseDTO(this.usuarioBloqueadoMapper.entityToDto(answ), true, "Ok", HttpStatus.OK);
 		} catch (Exception e) {
 			logger.info("Usuario no creado");
-			return new ResponseDTO(null, false, "Usuario no creado", HttpStatus.OK);
+			return new ResponseDTO(null, false, "Usuario no creado", HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 	}
 
@@ -78,12 +78,17 @@ public class UsuarioBloqueadoService implements IUsuarioBloqueadoService{
 		logger.info("actualizarUsuarioBloqueado");
 		
 		UsuarioBloqueadoEntity usuarioBloqueadoEntity = usuarioBloqueadoMapper.dtoToEntity(usuarioBloqueadoDTO);
+		try {
+			usuarioBloqueadoRepository.save(usuarioBloqueadoEntity);
+			
+			logger.info("usuario bloqueado actualizado");
+			return new ResponseDTO(usuarioBloqueadoMapper.entityToDto(usuarioBloqueadoEntity), true, "usuario bloqueado actualizado correctamente", HttpStatus.OK);
+		}catch (Exception e) {
+			return new ResponseDTO(null, false, "usuario bloqueado no actualizado", HttpStatus.INTERNAL_SERVER_ERROR);
+		}
 		
-		usuarioBloqueadoRepository.save(usuarioBloqueadoEntity);
 		
-		logger.info("usuario bloqueado actualizado");
 		
-		return new ResponseDTO(usuarioBloqueadoMapper.entityToDto(usuarioBloqueadoEntity), true, "usuario bloqueado actualizado correctamente", HttpStatus.OK);
 	}
 
 	@Override
@@ -94,7 +99,7 @@ public class UsuarioBloqueadoService implements IUsuarioBloqueadoService{
 			 return new ResponseDTO(null, true, "usuario bloqueado eliminado", HttpStatus.OK);
 		 }catch(Exception e){
 			 logger.error("Error {}",e.getMessage());
-			 return new ResponseDTO(null, false, "usuario bloqueado no existe", HttpStatus.OK);
+			 return new ResponseDTO(null, false, "usuario bloqueado no existe", HttpStatus.INTERNAL_SERVER_ERROR);
 		 }
 	}
 

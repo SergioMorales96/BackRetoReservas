@@ -8,7 +8,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.asesoftware.reservas.api.reservas.dto.ResponseDTO;
@@ -36,13 +35,12 @@ public class UsuarioBloqueadoController {
 	
 	@GetMapping(path = "/usuarioBloqueadoPorId/{correo}")
 	public ResponseDTO consultarUsuarioBloqueadoPorId(@PathVariable String correo) {
-		logger.info("consultarUsuarioBloqueadoPorId()");
+		logger.info("consultarUsuarioBloqueadoPorId() {}", correo);
 		return this.usuarioBloqueadoService.consultarUsuarioBloqueadoPorId(correo);
 	}
 	
 	@PostMapping(path = "/crear", consumes = "application/json", produces = "application/json")
 	public ResponseDTO crearUsuarioBloqueado(@RequestBody UsuarioBloqueadoDTO dto) {
-		logger.info("crearUsuarioBloqueado()");
 		logger.info("Usuario recibido {}", dto);
 		return this.usuarioBloqueadoService.crearUsuarioBloqueado(dto);
 	}
@@ -50,15 +48,12 @@ public class UsuarioBloqueadoController {
 	
 	@PostMapping(path = "/actualizar", consumes = "application/json", produces = "application/json")
 	public ResponseDTO actualizarUsuarioBloqueado(@RequestBody UsuarioBloqueadoDTO entity) {
-		logger.info("actualizarusuarioBloqueado");
 		logger.info("usuario bloqueado actualizado con los datos {}", entity);
 		return usuarioBloqueadoService.actualizarUsuarioBloqueado(entity);
 	}
 	
 	@GetMapping(path = "/eliminar/{id}")
 	public ResponseDTO eliminarUsuarioBloqueado(@PathVariable Integer id) {
-		
-		logger.info("eliminarUsuarioBloqueado");
 		logger.info("usuario bloqueado a eliminar con id {}",id);
 		return usuarioBloqueadoService.eliminarUsuarioBloqueado(id);
 	}
