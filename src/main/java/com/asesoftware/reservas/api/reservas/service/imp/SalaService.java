@@ -15,12 +15,12 @@ import org.springframework.stereotype.Service;
 
 import com.asesoftware.reservas.api.reservas.controller.SalaController;
 import com.asesoftware.reservas.api.reservas.dto.ResponseDTO;
-import com.asesoftware.reservas.api.reservas.dto.ResponseDTO;
 import com.asesoftware.reservas.api.reservas.dto.SalaDTO;
 import com.asesoftware.reservas.api.reservas.entity.SalaEntity;
 import com.asesoftware.reservas.api.reservas.mapper.ISalaMapper;
 import com.asesoftware.reservas.api.reservas.repository.ISalaRepository;
 import com.asesoftware.reservas.api.reservas.service.ISalaService;
+//import com.asesoftware.semilla.generador.entity.UsuarioEntity;
 
 @Service
 public class SalaService implements ISalaService{
@@ -60,9 +60,17 @@ public class SalaService implements ISalaService{
 
 	@Override
 	public ResponseDTO crearSala(SalaDTO salaDTO) {
-		
-		return null;
+		try {
+			SalaEntity salaEntity = salaMapper.dtoToEntity(salaDTO);
+
+			salaRepository.save(salaEntity);
+
+			return new ResponseDTO(salaMapper.entityToDto(salaEntity), true, "ok", HttpStatus.OK); 
+		}catch (Exception e) {
+			return new ResponseDTO(null, false, "No se puede crear la sala", HttpStatus.OK); 
+		}
 	}
+	
 
 	@Override
 	public ResponseDTO actualizarSala() {
