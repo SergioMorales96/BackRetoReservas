@@ -40,6 +40,12 @@ public class EmpresaController {
 	
 	@PostMapping(path = "/actualizar" , consumes = "application/json",produces = "application/json" )
 	public ResponseDTO actualizarEmpresa(@RequestBody EmpresaDTO empresaDTO){
+		logger.info("actualizar {}",empresaDTO);
+		return empresaService.actualizarEmpresa(empresaDTO);
+	}
+	
+	@PostMapping(path = "/crear" , consumes = "application/json",produces = "application/json" )
+	public ResponseDTO crearEmpresa(@RequestBody EmpresaDTO empresaDTO){
 		logger.info("crearEmpresa {}",empresaDTO);
 		return empresaService.actualizarEmpresa(empresaDTO);
 	}
