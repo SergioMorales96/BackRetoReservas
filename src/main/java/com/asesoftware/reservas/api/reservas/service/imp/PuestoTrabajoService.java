@@ -35,7 +35,7 @@ public class PuestoTrabajoService implements IPuestoTrabajoService{
 	}
 
 	@Override
-	public ResponseDTO PuestoTrabajoPorId(Integer idPuestoTrabajo) {
+	public ResponseDTO puestoTrabajoPorId(Integer idPuestoTrabajo) {
 		
 		Optional <PuestoTrabajoEntity> puestoTrabajoEntity = puestoTrabajoRepositorio.findById(idPuestoTrabajo);
 		

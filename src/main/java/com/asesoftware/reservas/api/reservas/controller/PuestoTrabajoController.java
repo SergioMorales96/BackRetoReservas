@@ -30,11 +30,11 @@ public class PuestoTrabajoController {
 	}
 	
 	@GetMapping(path = "/{idPuestoTrabajo}")
-	public ResponseDTO PuestoTrabajoPorId(Integer idPuestoTrabajo) {
+	public ResponseDTO puestoTrabajoPorId(Integer idPuestoTrabajo) {
 		
 		logger.info("puestoTrabajoPorId: {}", idPuestoTrabajo);
 		
-		return puestoTrabajoService.PuestoTrabajoPorId(idPuestoTrabajo);
+		return puestoTrabajoService.puestoTrabajoPorId(idPuestoTrabajo);
 		
 	}
 	@PostMapping(path = "/crear",consumes = "application/json",produces = "application/json")
