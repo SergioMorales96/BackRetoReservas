@@ -42,8 +42,10 @@ public class SucursalService implements ISucursalService{
 		Optional<SucursalEntity> optional = sucursalRepository.findById(id);
 
 		if (optional.isPresent()) {
+			logger.info("La sucursal {} fue encontrada",id);
 			return new ResponseDTO(optional.get(), true, "ok", HttpStatus.OK);
 		}else {
+			logger.info("La sucursal {} no fue encontrada",id);
 			return  new ResponseDTO(null, false, "Sucursal no encontrada", HttpStatus.OK);
 		}
 	}
@@ -56,8 +58,10 @@ public class SucursalService implements ISucursalService{
 		try {
 			SucursalEntity sucursalEntity = mapperSucursal.dtoToEntity(sucursalDTO);
 			sucursalRepository.save(sucursalEntity);
+			logger.info("La sucursal {} se creo", sucursalDTO);
 			return new ResponseDTO(mapperSucursal.entityToDto(sucursalEntity), true, "ok", HttpStatus.OK);
 		}catch (Exception e) {
+			logger.error("Error {}",e.getMessage());
 			return new ResponseDTO(null, false, "No se puede crear la sucursal", HttpStatus.OK);
 		}
 
@@ -70,8 +74,10 @@ public class SucursalService implements ISucursalService{
 		try {
 			SucursalEntity sucursalEntity = mapperSucursal.dtoToEntity(sucursalDTO);
 			sucursalRepository.save(sucursalEntity);
+			logger.info("La sucursal {} se actualizo", sucursalDTO);
 			return new ResponseDTO(mapperSucursal.entityToDto(sucursalEntity), true, "ok", HttpStatus.OK);
 		}catch(Exception e) {
+			logger.error("Error {}",e.getMessage());
 			return new ResponseDTO(null, false, "No se puede editar la sucursal", HttpStatus.OK);
 		}
 
@@ -86,7 +92,6 @@ public class SucursalService implements ISucursalService{
 		try {
 			sucursalRepository.deleteById(id);
 			logger.info("La sucursal {} se elimino",id);
-
 			return  new ResponseDTO(null, true, "Sucursal eliminada", HttpStatus.OK); 
 		}catch (Exception e) {
 			logger.error("Error {}",e.getMessage());
