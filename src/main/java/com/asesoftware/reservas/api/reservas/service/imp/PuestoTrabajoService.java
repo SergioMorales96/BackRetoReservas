@@ -36,10 +36,15 @@ public class PuestoTrabajoService implements IPuestoTrabajoService{
 	@Override
 	public ResponseDTO consultarTodas() {
 
-		logger.info("consultarTodas()");
-		List<PuestoTrabajoEntity> lisPuestoTrabajo = puestoTrabajoRepositorio.findAll();
-		logger.info("consultarTodas() {}", lisPuestoTrabajo);
-		return new ResponseDTO(puestoTrabajoMapper.entitysToDtos(lisPuestoTrabajo), true, OK, HttpStatus.OK);
+		try {
+			logger.info("consultarTodas()");
+			List<PuestoTrabajoEntity> lisPuestoTrabajo = puestoTrabajoRepositorio.findAll();
+			logger.info("ConsultarTodosPuestos: {}",lisPuestoTrabajo );
+			return new ResponseDTO(puestoTrabajoMapper.entitysToDtos(lisPuestoTrabajo ),true,OK,HttpStatus.OK);
+		} catch (Exception e) {
+			logger.error(e.getMessage());
+			return new ResponseDTO(null,false,ERROR_GENERICO, HttpStatus.OK);
+		}
 	}
 	/**
 	 * Metodo encargado de buscar puestos de trabajo por ID
@@ -53,9 +58,9 @@ public class PuestoTrabajoService implements IPuestoTrabajoService{
 		Optional <PuestoTrabajoEntity> puestoTrabajoEntity = puestoTrabajoRepositorio.findById(idPuestoTrabajo);
 
 		if(puestoTrabajoEntity.isPresent()) {
-			return new ResponseDTO(puestoTrabajoMapper.entityToDto(puestoTrabajoEntity.get()), true, "OK", HttpStatus.OK);
+			return new ResponseDTO(puestoTrabajoMapper.entityToDto(puestoTrabajoEntity.get()), true, OK, HttpStatus.OK);
 		}else {
-			return new ResponseDTO(null, false, "Puesto de trabajo no disponible", HttpStatus.OK);
+			return new ResponseDTO(null, false, ERROR_GENERICO, HttpStatus.OK);
 		}
 	}
 	/**
@@ -73,10 +78,10 @@ public class PuestoTrabajoService implements IPuestoTrabajoService{
 			puestoTrabajoRepositorio.save(puestoTrabajoEntity);
 			logger.info("se creo PuestoTrabajo {} ",puestoTrabajoDTO );
 
-			return new ResponseDTO(puestoTrabajoMapper.entityToDto(puestoTrabajoEntity),true, "OK", HttpStatus.OK);
+			return new ResponseDTO(puestoTrabajoMapper.entityToDto(puestoTrabajoEntity),true, OK, HttpStatus.OK);
 		}catch (Exception e) {
 			logger.error("Error crear {}",e.getMessage());
-			return new ResponseDTO(null, false, "Error", HttpStatus.INTERNAL_SERVER_ERROR);
+			return new ResponseDTO(null, false, ERROR_GENERICO, HttpStatus.INTERNAL_SERVER_ERROR);
 
 		}
 	}
@@ -93,14 +98,12 @@ public class PuestoTrabajoService implements IPuestoTrabajoService{
 		try {
 			puestoTrabajoRepositorio.save(puestoTrabajoMapper.dtoToEntity(puestoTrabajoDTO));
 			logger.info("se actualiza PuestoTrabajo {} ",puestoTrabajoDTO );
-			return new ResponseDTO(puestoTrabajoDTO,true, "OK", HttpStatus.OK);
+			return new ResponseDTO(puestoTrabajoDTO,true, OK, HttpStatus.OK);
 		}catch (Exception e) {
 			logger.error("Error {}",e.getMessage());
-			return new ResponseDTO(null, false, "Error", HttpStatus.INTERNAL_SERVER_ERROR);
+			return new ResponseDTO(null, false, ERROR_GENERICO, HttpStatus.INTERNAL_SERVER_ERROR);
 
 		}
-
-
 	}
 
 	/**
@@ -118,12 +121,12 @@ public class PuestoTrabajoService implements IPuestoTrabajoService{
 
 			logger.info("El puesto de trabajo {} se elimino",idPuestoTrabajo);
 
-			return  new ResponseDTO(null, true, "Puesto de trabajo eliminado", HttpStatus.OK); 
+			return  new ResponseDTO(null, true, OK, HttpStatus.OK); 
 		}catch (Exception e) {
 
 			logger.error("Error {}",e.getMessage());
 
-			return  new ResponseDTO(null, false, "El puesto de trabajo no se puede eliminar", HttpStatus.OK); 
+			return  new ResponseDTO(null, false, ERROR_GENERICO, HttpStatus.OK); 
 		}
 	}
 
