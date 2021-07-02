@@ -55,11 +55,11 @@ public class DominioService implements IDominioService {
 	@Override
 	public ResponseDTO updateDominio(DominioDTO dominioDTO) {
 		
-		DominioEntity dominioEntity = mapperDominio.dtoToEntity(dominioDTO);
+		logger.info("updateDominio {} ", dominioDTO);
 		
-		dominioRepository.save(dominioEntity);
-		
-		return new ResponseDTO(mapperDominio.entityToDto(dominioEntity),true,"ok",HttpStatus.OK);
+		dominioRepository.queryDominioActualizar(dominioDTO.getValorDomino(),dominioDTO.getCodigoDominio(),dominioDTO.getDescripcion());
+				
+		return new ResponseDTO(null,true,"ok",HttpStatus.OK);
 	}
 
 	@Override
