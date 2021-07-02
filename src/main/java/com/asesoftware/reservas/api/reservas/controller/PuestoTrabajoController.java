@@ -18,47 +18,71 @@ import com.asesoftware.reservas.api.reservas.service.IPuestoTrabajoService;
 @RestController
 @RequestMapping(path="/api/v1/puestoTrabajo")
 public class PuestoTrabajoController {
-	
+
 	private static final Logger logger = LoggerFactory.getLogger(PuestoTrabajoController.class);
-	
+
 	@Autowired
 	private IPuestoTrabajoService puestoTrabajoService;
-	
+
+	/**
+	 * Metodo encargado de buscar todos los puestos de trabajo
+	 * @author: kpinilla
+	 * @version: 01/07/2021
+	 */
 	@GetMapping(path = "/todas")
 	public ResponseDTO consultarTodas() {
 		logger.info("consultarTodas()");
 		return puestoTrabajoService.consultarTodas();
 	}
-	
+	/**
+	 * Metodo encargado de buscar puestos de trabajo por ID
+	 * @author: kpinilla
+	 * @version: 01/07/2021
+	 */
 	@GetMapping(path = "/buscarPorId/{idPuestoTrabajo}")
 
 	public ResponseDTO puestoTrabajoPorId(@PathVariable Integer idPuestoTrabajo) {
-		
+
 		logger.info("puestoTrabajoPorId: {}", idPuestoTrabajo);
-		
+
 		return puestoTrabajoService.puestoTrabajoPorId(idPuestoTrabajo);
-		
+
 	}
+	/**
+	 * Metodo encargado de crear puesto de trabajo
+	 * @author: drlopez
+	 * @version: 01/07/2021
+	 */
 	@PostMapping(path = "/crear",consumes = "application/json",produces = "application/json")
 	public ResponseDTO crearPuestoTrabajo(@RequestBody PuestoTrabajoDTO puestoTrabajoDTO) {
 		logger.info("crearPuestoTrabajo: {}", puestoTrabajoDTO);
 		return puestoTrabajoService.crearPuestoTrabajo(puestoTrabajoDTO);
-		
+
 	}
+	/**
+	 * Metodo encargado de actualizar puesto de trabajo
+	 * @author: drlopez
+	 * @version: 01/07/2021
+	 */
 	@PostMapping(path = "/actualizar",consumes = "application/json",produces = "application/json")
 	public ResponseDTO actualizarPuestoTrabajo(@RequestBody PuestoTrabajoDTO puestoTrabajoDTO) {
 		logger.info("actualizarPuestoDeTrabajo: {}", puestoTrabajoDTO);
-		
+
 		return puestoTrabajoService.actualizarPuestoTrabajo(puestoTrabajoDTO);
-		
+
 	}
+	/**
+	 * Metodo encargado de eliminar puesto de trabajo
+	 * @author: kpinilla
+	 * @version: 01/07/2021
+	 */
 	@GetMapping(path = "/borrar")
 	public ResponseDTO borrarPuestoTrabajo(Integer idPuestoTrabajo) {
-		
+
 		logger.info("Puesto de trabajo a eliminar {}",idPuestoTrabajo);
-		
+
 		return puestoTrabajoService.borrarPuestoTrabajo(idPuestoTrabajo);
 	}
-	
-	
+
+
 }
