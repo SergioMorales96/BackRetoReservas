@@ -13,14 +13,9 @@ public interface IPisoRepository extends JpaRepository<PisoEntity, String>{
 	//@Query(nativeQuery = true , value = "Select * from piso where id_sucursal = :id")
 	//List<PisoEntity> queryPisoPorSucursal(@Param("id") Integer idSucursal);
 	
-	@Query("SELECT p FROM PISO p WHERE p.id_sucursal = ?1")
-	List<PisoEntity> queryPisoPorSucursal(Integer id_sucursal);
+	@Query("SELECT p FROM PisoEntity p WHERE p.idSucursal = ?1")
+	List<PisoEntity> queryPisoPorSucursal(Integer idSucursal);
 }
-
-
-
-
-
 
 
 

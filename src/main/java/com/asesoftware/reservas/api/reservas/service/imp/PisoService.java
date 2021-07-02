@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
+import static com.asesoftware.reservas.api.reservas.utils.Constantes.OK;
 import com.asesoftware.reservas.api.reservas.dto.PisoDTO;
 import com.asesoftware.reservas.api.reservas.dto.ResponseDTO;
 import com.asesoftware.reservas.api.reservas.mapper.IPisoMapper;
@@ -26,17 +27,22 @@ public class PisoService implements IPisoService {
 	@Autowired
 	private IPisoMapper pisoMapper;
 	
+	/**
+	 * Metodo para listar pisos por sucursal
+	 * @author jelopez
+	 * @version 0.2, 2021/07/02
+	 */
 	@Override
 	public ResponseDTO pisoPorIdSucursal(Integer idSucursal) {
 		
-		logger.info("ingreso al metodo pisoPorIdSucursal");
+		logger.info("pisoPorIdSucursal: {}", idSucursal);
 		
 		try {
 			List<PisoDTO> listPisoSucursal = pisoMapper.entitysToDtos(pisoRepository.queryPisoPorSucursal(idSucursal));
-	
+
 			return new ResponseDTO(listPisoSucursal, true, "ok", HttpStatus.OK);
 		}catch(Exception e) {
-			return new ResponseDTO(null, true, "ok", HttpStatus.OK);
+			return new ResponseDTO(null, true, OK, HttpStatus.OK);
 		}
 	}
 }
