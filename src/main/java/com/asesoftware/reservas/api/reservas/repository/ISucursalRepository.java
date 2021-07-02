@@ -5,6 +5,6 @@ import com.asesoftware.reservas.api.reservas.entity.SucursalEntity;
 
 public interface ISucursalRepository extends JpaRepository<SucursalEntity, Integer>{
 	
-	// HOLAAAAAAAAAA
+	
 
 }

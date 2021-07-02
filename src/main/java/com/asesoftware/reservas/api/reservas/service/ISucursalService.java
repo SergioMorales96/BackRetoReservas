@@ -7,6 +7,9 @@ public interface ISucursalService {
 	public ResponseDTO createSucursal(SucursalDTO sucursalDTO);
 
 	public ResponseDTO updateSucursal(SucursalDTO sucursalDTO);
-
+	
+	public ResponseDTO getAll();
+	
+	public ResponseDTO deleteSucursal(Integer idSucursal);
 
 }
