@@ -26,15 +26,23 @@ public class SucursalService implements ISucursalService{
 	@Autowired
 	private ISucursalMapper mapperSucursal;
 	
-	//Listar todas las Sucursales
+	/**
+	* Método Listar Sucursales
+	* @author acmoya
+	* @version 0.1, 2021/07/01
+	*/
 	
 	@Override
 	public ResponseDTO getAll() {
 
-		return new ResponseDTO( mapperSucursal.listEntityToDto( sucursalRepository.findAll()), true, "ok", HttpStatus.OK);
+		return new ResponseDTO( mapperSucursal.listEntityToDto( sucursalRepository.findAll()), true, OK, HttpStatus.OK);
 	}	
 
-	// Listar Sucursal por ID
+	/**
+	* Método Listar Sucursal por ID
+	* @author smmorales
+	* @version 0.1, 2021/07/01
+	*/
 	
 	@Override
 	public ResponseDTO getSucursalById(Integer id) {
@@ -46,54 +54,67 @@ public class SucursalService implements ISucursalService{
 			return new ResponseDTO(optional.get(), true, OK, HttpStatus.OK);
 		}else {
 			logger.info("La sucursal {} no fue encontrada",id);
-			return  new ResponseDTO(null, false, ERROR_GENERICO, HttpStatus.OK);
+			return  new ResponseDTO(null, false, ERROR_GENERICO, HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 	}
 
-	// Crear Sucursal
+	/**
+	* Método Crear Sucursal
+	* @author smmorales
+	* @version 0.1, 2021/07/01
+	*/
 
 	@Override
-	public ResponseDTO createSucursal(SucursalDTO sucursalDTO) {
+	public ResponseDTO crearSucursal(SucursalDTO sucursalDTO) {
 		try {
 			SucursalEntity sucursalEntity = mapperSucursal.dtoToEntity(sucursalDTO);
 			sucursalRepository.save(sucursalEntity);
 			logger.info("La sucursal {} se creo", sucursalDTO);
-			return new ResponseDTO(mapperSucursal.entityToDto(sucursalEntity), true, "ok", HttpStatus.OK);
+			return new ResponseDTO(mapperSucursal.entityToDto(sucursalEntity), true, OK, HttpStatus.OK);
 		}catch (Exception e) {
 			logger.error("Error en crear {}",e.getMessage());
-			return new ResponseDTO(null, false, "No se puede crear la sucursal", HttpStatus.INTERNAL_SERVER_ERROR);
+			return new ResponseDTO(null, false, ERROR_GENERICO, HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 
 	}
 
-	// Editar Sucursal
+	/**
+	* Método Editar Sucursal
+	* @author smmorales
+	* @version 0.1, 2021/07/01
+	*/
 
 	@Override
-	public ResponseDTO updateSucursal(SucursalDTO sucursalDTO) {
+	public ResponseDTO editarSucursal(SucursalDTO sucursalDTO) {
 		try {
 			SucursalEntity sucursalEntity = mapperSucursal.dtoToEntity(sucursalDTO);
 			sucursalRepository.save(sucursalEntity);
 			logger.info("La sucursal {} se actualizo", sucursalDTO);
-			return new ResponseDTO(mapperSucursal.entityToDto(sucursalEntity), true, "ok", HttpStatus.OK);
+			return new ResponseDTO(mapperSucursal.entityToDto(sucursalEntity), true, OK, HttpStatus.OK);
 		}catch(Exception e) {
 			logger.error("Error en editar {}",e.getMessage());
-			return new ResponseDTO(null, false, "No se puede editar la sucursal", HttpStatus.INTERNAL_SERVER_ERROR);
+			return new ResponseDTO(null, false, ERROR_GENERICO, HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 
 	}
 	
-	// Eliminar Sucursal
+	/**
+	* Método Eliminar Sucursal
+	* @author acmoya
+	* @version 0.1, 2021/07/01
+	*/
+	
 	@Override
-	public ResponseDTO deleteSucursal(Integer id) {
+	public ResponseDTO eliminarSucursal(Integer id) {
 
 		logger.info("ingreso al metodo deleteSucursal");
 		try {
 			sucursalRepository.deleteById(id);
 			logger.info("La sucursal {} se elimino",id);
-			return  new ResponseDTO(null, true, "Sucursal eliminada", HttpStatus.OK); 
+			return  new ResponseDTO(null, true, OK, HttpStatus.OK); 
 		}catch (Exception e) {
 			logger.error("Error  en eliminar{}",e.getMessage());
-			return  new ResponseDTO(null, false, "La sucursal no se puede eliminar", HttpStatus.INTERNAL_SERVER_ERROR); 
+			return  new ResponseDTO(null, false, ERROR_GENERICO, HttpStatus.INTERNAL_SERVER_ERROR); 
 		}
 
 	}

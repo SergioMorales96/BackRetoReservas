@@ -8,10 +8,10 @@ public interface ISucursalService {
 	
 	public ResponseDTO getSucursalById(Integer id);
 
-	public ResponseDTO createSucursal(SucursalDTO sucursalDTO);
+	public ResponseDTO crearSucursal(SucursalDTO sucursalDTO);
 
-	public ResponseDTO updateSucursal(SucursalDTO sucursalDTO);
+	public ResponseDTO editarSucursal(SucursalDTO sucursalDTO);
 	
-	public ResponseDTO deleteSucursal(Integer id);
+	public ResponseDTO eliminarSucursal(Integer id);
 
 }
