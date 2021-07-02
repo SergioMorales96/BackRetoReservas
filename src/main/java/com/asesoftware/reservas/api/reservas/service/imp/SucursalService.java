@@ -1,13 +1,11 @@
 package com.asesoftware.reservas.api.reservas.service.imp;
 
 import java.util.Optional;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
-
 import com.asesoftware.reservas.api.reservas.dto.ResponseDTO;
 import com.asesoftware.reservas.api.reservas.dto.SucursalDTO;
 import com.asesoftware.reservas.api.reservas.entity.SucursalEntity;
@@ -20,14 +18,14 @@ public class SucursalService implements ISucursalService{
 	
 	private static final Logger logger = LoggerFactory.getLogger(SucursalService.class);
 
-
 	@Autowired
 	private ISucursalRepository sucursalRepository;
 
 	@Autowired
 	private ISucursalMapper mapperSucursal;
 	
-	//Listar todas las sucursales
+	//Listar todas las Sucursales
+	
 	@Override
 	public ResponseDTO getAll() {
 
@@ -47,7 +45,6 @@ public class SucursalService implements ISucursalService{
 			return  new ResponseDTO(null, false, "Sucursal no encontrada", HttpStatus.OK);
 		}
 	}
-
 
 	// Crear Sucursal
 
@@ -77,7 +74,6 @@ public class SucursalService implements ISucursalService{
 
 	}
 	
-	
 	// Eliminar Sucursal
 	@Override
 	public ResponseDTO deleteSucursal(Integer id) {
@@ -93,11 +89,6 @@ public class SucursalService implements ISucursalService{
 			return  new ResponseDTO(null, false, "La sucursal no se puede eliminar", HttpStatus.OK); 
 		}
 
-
 	}
-	
-	
-	
-
 
 }

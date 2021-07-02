@@ -20,13 +20,13 @@ public class SucursalController {
 	private ISucursalService sucursalService;
 
 
-	//Listar sucursales
+	//Listar Sucursales
+	
 	@GetMapping(path = "/all")
 	public ResponseDTO getAll(){
 
 		return sucursalService.getAll();
 	}
-
 
 	// Listar Sucursal por ID
 
@@ -64,6 +64,5 @@ public class SucursalController {
 		
 		return sucursalService.deleteSucursal(id);
 	}
-	
 
 }
