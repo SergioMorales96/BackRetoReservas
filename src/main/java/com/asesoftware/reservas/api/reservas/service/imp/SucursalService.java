@@ -2,6 +2,8 @@ package com.asesoftware.reservas.api.reservas.service.imp;
 
 import java.util.Optional;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
@@ -15,17 +17,16 @@ import com.asesoftware.reservas.api.reservas.service.ISucursalService;
 
 @Service
 public class SucursalService implements ISucursalService{
+	
+	private static final Logger logger = LoggerFactory.getLogger(SucursalService.class);
+
 
 	@Autowired
 	private ISucursalRepository sucursalRepository;
 
 	@Autowired
 	private ISucursalMapper mapperSucursal;
-
-//	@Override
-//	public ResponseDTO getAll(){
-//		return new ResponseDTO( mapperSucursal.listEntityToDto( sucursalRepository.findAll()), true, "ok", HttpStatus.OK);
-//	}
+	
 
 	// Listar Sucursal por ID
 	
@@ -69,6 +70,34 @@ public class SucursalService implements ISucursalService{
 		}
 
 	}
+	
+	//Listar 
+	@Override
+	public ResponseDTO getAll() {
+
+		return new ResponseDTO( mapperSucursal.listEntityToDto( sucursalRepository.findAll()), true, "ok", HttpStatus.OK);
+	}
+	
+	// Eliminar Sucursal
+	@Override
+	public ResponseDTO deleteSucursal(Integer idSucursal) {
+
+		logger.info("ingreso al metodo deleteSucursal");
+		try {
+			sucursalRepository.deleteById(idSucursal);
+			logger.info("La sucursal {} se elimino",idSucursal);
+
+			return  new ResponseDTO(null, true, "Sucursal eliminada", HttpStatus.OK); 
+		}catch (Exception e) {
+			logger.error("Error {}",e.getMessage());
+			return  new ResponseDTO(null, false, "La sucursal no se puede eliminar", HttpStatus.OK); 
+		}
+
+
+	}
+	
+	
+	
 
 
 }
