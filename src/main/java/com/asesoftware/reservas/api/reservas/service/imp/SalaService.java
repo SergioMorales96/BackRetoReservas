@@ -32,7 +32,12 @@ public class SalaService implements ISalaService{
 	
 	@Autowired
 	private ISalaMapper salaMapper;
-
+	
+	/**
+	* Metodo response para listar todas las salas
+	* @author jortizg
+	* @version 0.1, 2021/07/02
+	*/
 	@Override
 	public ResponseDTO listarTodosSalas() {
 		try {
@@ -45,7 +50,12 @@ public class SalaService implements ISalaService{
 			return new ResponseDTO(null,false,ERROR_GENERICO, HttpStatus.OK);
 		}
 	}
-
+	
+	/**
+	* Metodo response para obtener sala por id
+	* @author jortiz
+	* @version 0.1, 2021/07/02
+	*/
 	@Override
 	public ResponseDTO obtenerSalaPorId(Integer id) {
 		logger.info("obtenerSalaPorId: {}",id);
@@ -58,7 +68,12 @@ public class SalaService implements ISalaService{
 			return new ResponseDTO(null,false,ERROR_GENERICO,HttpStatus.OK);
 		}
 	}
-
+	
+	/**
+	* Metodo para crear una sala
+	* @author jortizg
+	* @version 0.1, 2021/07/02
+	*/
 	@Override
 	public ResponseDTO crearSala(SalaDTO salaDTO) {
 		logger.info("crearSala: {}", salaDTO);
@@ -74,7 +89,11 @@ public class SalaService implements ISalaService{
 		}
 	}
 	
-
+	/**
+	* Metodo para editar una sala
+	* @author fpena
+	* @version 0.1, 2021/07/02
+	*/
 	@Override
 	public ResponseDTO actualizarSala(SalaDTO salaDTO) {
 		
@@ -98,6 +117,12 @@ public class SalaService implements ISalaService{
 
 	}
 
+	
+	/**
+	* Metodo para eliminar una sala
+	* @author fpena
+	* @version 0.1, 2021/07/02
+	*/
 	@Override
 	public ResponseDTO eliminarSala(Integer idSala) {
 		logger.info("eliminarSala: {} ", idSala);
