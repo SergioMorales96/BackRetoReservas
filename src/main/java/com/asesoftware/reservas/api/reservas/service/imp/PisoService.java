@@ -83,20 +83,20 @@ public class PisoService implements IPisoService{
 			return new ResponseDTO(pisoMapper.entityToDto(pisoEntity), true,"OK",HttpStatus.OK);
 		} catch (Exception e) {
 			logger.error(e.getMessage());
-			return new ResponseDTO(null,false,"No se puede crear piso",HttpStatus.OK);
+			return new ResponseDTO(null,false,"No se puede crear piso",HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 	}
-
+    
 	@Override
 	public ResponseDTO actualizarPiso(PisoDTO pisoDTO) {
 		try {
-			logger.info("actualizando piso {}",pisoDTO.getNumeroPiso());
+			logger.info("actualizando piso {}",pisoDTO);
 			PisoEntity pisoEntity = pisoMapper.dtoToEntity(pisoDTO);
 			pisoRespository.save(pisoEntity);
 			return new ResponseDTO(pisoMapper.entityToDto(pisoEntity), true, "ok", HttpStatus.OK);
 		}catch (Exception e) {
 			logger.error(e.getMessage());
-			return new ResponseDTO(null,false,"No se puede actualizar piso",HttpStatus.OK);
+			return new ResponseDTO(null,false,"No se puede actualizar piso",HttpStatus.INTERNAL_SERVER_ERROR);
 			
 		}
 		
@@ -110,7 +110,7 @@ public class PisoService implements IPisoService{
 			return new ResponseDTO(null,true,"Piso eliminado",HttpStatus.OK);
 		} catch (Exception e) {
 			logger.error(e.getMessage());
-			return new ResponseDTO(null,false,"El piso no se puede eliminar",HttpStatus.OK);
+			return new ResponseDTO(null,false,"El piso no se puede eliminar",HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 	}
 }

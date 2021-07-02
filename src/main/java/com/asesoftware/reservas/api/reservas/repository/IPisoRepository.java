@@ -4,13 +4,14 @@ import java.util.List;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
-import org.springframework.data.repository.query.Param;
 
 import com.asesoftware.reservas.api.reservas.entity.PisoEntity;
 
 
 public interface IPisoRepository extends JpaRepository<PisoEntity, Integer>{
 	
-		@Query(nativeQuery = true , value = "Select * from PISO  WHERE numero_piso= :piso")
-		List<PisoEntity>     queryPorPiso(@Param("piso") Integer piso);
+	
+		@Query("SELECT t FROM PisoEntity t WHERE t.numeroPiso = ?1  ")
+		 public List<PisoEntity> queryPorPiso(Integer piso);
+		
 }

@@ -3,6 +3,7 @@ package com.asesoftware.reservas.api.reservas.controller;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -16,6 +17,7 @@ import com.asesoftware.reservas.api.reservas.service.IPisoService;
 
 @RestController
 @RequestMapping(path = "/api/v1/piso")
+@CrossOrigin(origins = "*")
 public class PisoController {
 	
 	private static final Logger logger = LoggerFactory.getLogger(PisoController.class);
@@ -36,7 +38,7 @@ public class PisoController {
 	}
 	@PostMapping(path = "/actualizar" , consumes = "application/json" , produces = "application/json")
 	public ResponseDTO actualizarPiso(@RequestBody PisoDTO dto) {
-		logger.info("actualizar piso {}",dto.getNumeroPiso());
+		logger.info("actualizar piso {}",dto);
 		return pisoService.actualizarPiso(dto);
 	}
 	@GetMapping(path = "/eliminar/{idPiso}")
@@ -44,13 +46,8 @@ public class PisoController {
 		logger.info("piso a eliminar {}", idPiso);
 		return pisoService.eliminarPiso(idPiso);
 	}
-	@GetMapping(path = "/consultar/{idPiso}")
-	public PisoDTO consultarpisoPorId(@PathVariable Integer idPiso) {
-		logger.info("consultar piso {}", idPiso);
-		return pisoService.consultarpisoPorId(idPiso);
-	}
 	
-	@GetMapping(path = "/consultar_dto/{idPiso}")
+	@GetMapping(path = "/consultar/{idPiso}")
 	public ResponseDTO pisoPorId(@PathVariable Integer idPiso) {
 		logger.info("consultar piso dto{}", idPiso);
 		return pisoService.pisoPorId(idPiso);
