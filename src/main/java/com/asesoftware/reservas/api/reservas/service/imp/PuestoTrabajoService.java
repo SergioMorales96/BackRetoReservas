@@ -28,8 +28,11 @@ public class PuestoTrabajoService implements IPuestoTrabajoService{
 
 	private static final Logger logger = LoggerFactory.getLogger(PuestoTrabajoService.class);
 
-
-
+	/**
+	 * Metodo encargado de buscar todos los puestos de trabajo
+	 * @author: kpinilla
+	 * @version: 01/07/2021
+	 */
 	@Override
 	public ResponseDTO consultarTodas() {
 
@@ -38,7 +41,11 @@ public class PuestoTrabajoService implements IPuestoTrabajoService{
 		logger.info("consultarTodas() {}", lisPuestoTrabajo);
 		return new ResponseDTO(puestoTrabajoMapper.entitysToDtos(lisPuestoTrabajo), true, OK, HttpStatus.OK);
 	}
-
+	/**
+	 * Metodo encargado de buscar puestos de trabajo por ID
+	 * @author: kpinilla
+	 * @version: 01/07/2021
+	 */
 	@Override
 	public ResponseDTO puestoTrabajoPorId(Integer idPuestoTrabajo) {
 
@@ -51,11 +58,10 @@ public class PuestoTrabajoService implements IPuestoTrabajoService{
 			return new ResponseDTO(null, false, "Puesto de trabajo no disponible", HttpStatus.OK);
 		}
 	}
-
 	/**
-	 * metodo encargado de crear puesto de trabajo
-	 * @author: Mario R. Rancel
-	 * @version: 22/09/2016/A
+	 * Metodo encargado de crear puesto de trabajo
+	 * @author: drlopez
+	 * @version: 01/07/2021
 	 */
 	@Override
 	public ResponseDTO crearPuestoTrabajo(PuestoTrabajoDTO puestoTrabajoDTO) {
@@ -74,7 +80,11 @@ public class PuestoTrabajoService implements IPuestoTrabajoService{
 
 		}
 	}
-
+	/**
+	 * Metodo encargado de actualizar puesto de trabajo
+	 * @author: drlopez
+	 * @version: 01/07/2021
+	 */
 	@Override
 	public ResponseDTO actualizarPuestoTrabajo(PuestoTrabajoDTO puestoTrabajoDTO) {
 
@@ -93,6 +103,11 @@ public class PuestoTrabajoService implements IPuestoTrabajoService{
 
 	}
 
+	/**
+	 * Metodo encargado de eliminar puesto de trabajo
+	 * @author: kpinilla
+	 * @version: 01/07/2021
+	 */
 	@Override
 	public ResponseDTO borrarPuestoTrabajo(Integer idPuestoTrabajo) {
 
