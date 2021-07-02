@@ -12,4 +12,5 @@ public interface IUsuarioBloqueadoService {
 	public ResponseDTO crearUsuarioBloqueado(UsuarioBloqueadoDTO dto);
 	public ResponseDTO actualizarUsuarioBloqueado(UsuarioBloqueadoDTO usuarioBloqueadoDTO);
 	public ResponseDTO eliminarUsuarioBloqueado(Integer id);
+	public ResponseDTO consultarUsuariosBloqueadosPorSucursal(Integer id);
 }
