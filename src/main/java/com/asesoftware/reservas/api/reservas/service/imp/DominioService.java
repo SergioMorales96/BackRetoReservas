@@ -57,7 +57,7 @@ public class DominioService implements IDominioService {
 		
 		logger.info("updateDominio {} ", dominioDTO);
 		
-		dominioRepository.queryDominioActualizar(dominioDTO.getValorDomino(),dominioDTO.getCodigoDominio(),dominioDTO.getDescripcion());
+		dominioRepository.queryDominioActualizar(dominioDTO.getValorDominio(),dominioDTO.getCodigoDominio(),dominioDTO.getDescripcion());
 				
 		return new ResponseDTO(null,true,"ok",HttpStatus.OK);
 	}

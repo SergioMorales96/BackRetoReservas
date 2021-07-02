@@ -14,14 +14,14 @@ public interface IDominioMapper {
 	
 	@Mappings({
 		@Mapping(source = "codigoDominio",target = "dominioPK.codigoDominio"),
-		@Mapping(source = "valorDomino",target = "dominioPK.valorDomino"),
+		@Mapping(source = "valorDominio",target = "dominioPK.valorDominio"),
 	})
 	
 	public DominioEntity dtoToEntity(DominioDTO dto);
 	
 	@Mappings({
 		@Mapping(source = "dominioPK.codigoDominio",target = "codigoDominio"),
-		@Mapping(source = "dominioPK.valorDomino",target = "valorDomino"),
+		@Mapping(source = "dominioPK.valorDominio",target = "valorDominio"),
 	})
 	
 	public DominioDTO entityToDto(DominioEntity entity);

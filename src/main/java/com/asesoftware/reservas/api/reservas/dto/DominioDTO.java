@@ -9,7 +9,7 @@ public class DominioDTO {
 	
 	private String codigoDominio;
 	
-	private String valorDomino;
+	private String valorDominio;
 
 	private String descripcion;
 

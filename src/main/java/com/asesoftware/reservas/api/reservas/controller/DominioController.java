@@ -41,6 +41,11 @@ public class DominioController {
 	
 	
 	//actualizar
+	@PostMapping(path="/update", consumes="application/json", produces="application/json")
+	public ResponseDTO updateDominio(@RequestBody DominioDTO entity) {
+		
+		return dominioService.updateDominio(entity);
+	}
 	
 	
 	//eliminar
