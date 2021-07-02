@@ -3,6 +3,10 @@ import com.asesoftware.reservas.api.reservas.dto.ResponseDTO;
 import com.asesoftware.reservas.api.reservas.dto.SucursalDTO;
 
 public interface ISucursalService {
+	
+//	public ResponseDTO getAll();
+	
+	public ResponseDTO getSucursalById(Integer id);
 
 	public ResponseDTO createSucursal(SucursalDTO sucursalDTO);
 

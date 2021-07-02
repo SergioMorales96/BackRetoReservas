@@ -1,5 +1,7 @@
 package com.asesoftware.reservas.api.reservas.service.imp;
 
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
@@ -20,9 +22,28 @@ public class SucursalService implements ISucursalService{
 	@Autowired
 	private ISucursalMapper mapperSucursal;
 
+//	@Override
+//	public ResponseDTO getAll(){
+//		return new ResponseDTO( mapperSucursal.listEntityToDto( sucursalRepository.findAll()), true, "ok", HttpStatus.OK);
+//	}
+
+	// Listar Sucursal por ID
 	
+	@Override
+	public ResponseDTO getSucursalById(Integer id) {
+		
+		Optional<SucursalEntity> optional = sucursalRepository.findById(id);
+
+		if (optional.isPresent()) {
+			return new ResponseDTO(optional.get(), true, "ok", HttpStatus.OK);
+		}else {
+			return  new ResponseDTO(null, false, "Sucursal no encontrada", HttpStatus.OK);
+		}
+	}
+
+
 	// Crear Sucursal
-	
+
 	@Override
 	public ResponseDTO createSucursal(SucursalDTO sucursalDTO) {
 		try {
@@ -34,9 +55,9 @@ public class SucursalService implements ISucursalService{
 		}
 
 	}
-	
+
 	// Editar Sucursal
-	
+
 	@Override
 	public ResponseDTO updateSucursal(SucursalDTO sucursalDTO) {
 		try {
@@ -46,7 +67,7 @@ public class SucursalService implements ISucursalService{
 		}catch(Exception e) {
 			return new ResponseDTO(null, false, "No se puede editar la sucursal", HttpStatus.OK);
 		}
-		
+
 	}
 
 
