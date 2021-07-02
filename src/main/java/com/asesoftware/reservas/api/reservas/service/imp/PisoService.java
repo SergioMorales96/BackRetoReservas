@@ -9,6 +9,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
 import static com.asesoftware.reservas.api.reservas.utils.Constantes.OK;
+import static com.asesoftware.reservas.api.reservas.utils.Constantes.ERROR_GENERICO;
+
 import com.asesoftware.reservas.api.reservas.dto.PisoDTO;
 import com.asesoftware.reservas.api.reservas.dto.ResponseDTO;
 import com.asesoftware.reservas.api.reservas.mapper.IPisoMapper;
@@ -40,9 +42,9 @@ public class PisoService implements IPisoService {
 		try {
 			List<PisoDTO> listPisoSucursal = pisoMapper.entitysToDtos(pisoRepository.queryPisoPorSucursal(idSucursal));
 
-			return new ResponseDTO(listPisoSucursal, true, "ok", HttpStatus.OK);
+			return new ResponseDTO(listPisoSucursal, true, OK, HttpStatus.OK);
 		}catch(Exception e) {
-			return new ResponseDTO(null, true, OK, HttpStatus.OK);
+			return new ResponseDTO(null, true, ERROR_GENERICO, HttpStatus.OK);
 		}
 	}
 }
