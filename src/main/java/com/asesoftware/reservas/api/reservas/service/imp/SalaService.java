@@ -74,7 +74,11 @@ public class SalaService implements ISalaService{
 		}
 	}
 	
-
+	/**
+	* Metodo para editar una sala
+	* @author fpena
+	* @version 0.1, 2021/07/02
+	*/
 	@Override
 	public ResponseDTO actualizarSala(SalaDTO salaDTO) {
 		
@@ -98,6 +102,12 @@ public class SalaService implements ISalaService{
 
 	}
 
+	
+	/**
+	* Metodo para eliminar una sala
+	* @author fpena
+	* @version 0.1, 2021/07/02
+	*/
 	@Override
 	public ResponseDTO eliminarSala(Integer idSala) {
 		logger.info("eliminarSala: {} ", idSala);

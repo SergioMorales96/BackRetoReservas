@@ -44,6 +44,12 @@ public class SalaController {
 		return salaService.crearSala(salaDTO); 
 	}
 	
+	
+	/**
+	* Metodo para editar una sala
+	* @author fpena
+	* @version 0.1, 2021/07/02
+	*/
 	@PostMapping(path = "/actualizar", consumes = "application/json", produces = "application/json")
 	public ResponseDTO actualizarSala(@RequestBody SalaDTO salaDTO){
 		logger.info("Sala para actualizar: {}", salaDTO);
@@ -51,6 +57,12 @@ public class SalaController {
 
 	}
 	
+	
+	/**
+	* Metodo para eliminar una sala
+	* @author fpena
+	* @version 0.1, 2021/07/02
+	*/
 	@GetMapping(path = "/eliminar/{idSala}")
 	public ResponseDTO eliminarSala(@PathVariable Integer idSala) {
 		logger.info("Sala a eliminar: {}", idSala);
