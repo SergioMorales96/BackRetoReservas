@@ -80,7 +80,7 @@ public class HorarioPuestoTrabajoService implements IHorarioPuestoTrabajoService
 					HttpStatus.OK);
 
 		} catch (Exception e) {
-			logger.info("consultarTodos(). error de consulta. ", e.getMessage());
+			logger.error(e.getMessage());
 			return new ResponseDTO(null, false, ERROR_GENERICO, HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 
@@ -88,7 +88,7 @@ public class HorarioPuestoTrabajoService implements IHorarioPuestoTrabajoService
 
 	/**
 	 * Método que Crea un nuevo registro para la tabla HorarioPuestoTrabajo a través
-	 * del mapper .
+	 * del mapper.
 	 * 
 	 * @author jlucero
 	 * @param HorarioPuestoTrabajoDTO
@@ -97,7 +97,7 @@ public class HorarioPuestoTrabajoService implements IHorarioPuestoTrabajoService
 	@Override
 	public ResponseDTO crearHorario(HorarioPuestoTrabajoDTO horarioPuestoTrabajoDTO) {
 		// Se genera el Logger que indica que ingresó al método
-		// crearHorarioPuestoTrabajo y se crean los Loggers correspondientes
+		// crearHorarioPuestoTrabajo y se crean los Loggers correspondientes.
 		logger.info("Ingresó al método crearHorarioPuestoTrabajo()");
 		try {
 			HorarioPuestoTrabajoEntity horarioPuestoTrabajoEntity = horarioPuestoTrabajoMapper
