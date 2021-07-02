@@ -3,8 +3,8 @@ import com.asesoftware.reservas.api.reservas.dto.ResponseDTO;
 import com.asesoftware.reservas.api.reservas.dto.SucursalDTO;
 
 public interface ISucursalService {
-	
-//	public ResponseDTO getAll();
+
+	public ResponseDTO getAll();
 	
 	public ResponseDTO getSucursalById(Integer id);
 
@@ -12,8 +12,6 @@ public interface ISucursalService {
 
 	public ResponseDTO updateSucursal(SucursalDTO sucursalDTO);
 	
-	public ResponseDTO getAll();
-	
-	public ResponseDTO deleteSucursal(Integer idSucursal);
+	public ResponseDTO deleteSucursal(Integer id);
 
 }

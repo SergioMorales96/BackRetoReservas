@@ -27,6 +27,12 @@ public class SucursalService implements ISucursalService{
 	@Autowired
 	private ISucursalMapper mapperSucursal;
 	
+	//Listar todas las sucursales
+	@Override
+	public ResponseDTO getAll() {
+
+		return new ResponseDTO( mapperSucursal.listEntityToDto( sucursalRepository.findAll()), true, "ok", HttpStatus.OK);
+	}	
 
 	// Listar Sucursal por ID
 	
@@ -71,21 +77,15 @@ public class SucursalService implements ISucursalService{
 
 	}
 	
-	//Listar 
-	@Override
-	public ResponseDTO getAll() {
-
-		return new ResponseDTO( mapperSucursal.listEntityToDto( sucursalRepository.findAll()), true, "ok", HttpStatus.OK);
-	}
 	
 	// Eliminar Sucursal
 	@Override
-	public ResponseDTO deleteSucursal(Integer idSucursal) {
+	public ResponseDTO deleteSucursal(Integer id) {
 
 		logger.info("ingreso al metodo deleteSucursal");
 		try {
-			sucursalRepository.deleteById(idSucursal);
-			logger.info("La sucursal {} se elimino",idSucursal);
+			sucursalRepository.deleteById(id);
+			logger.info("La sucursal {} se elimino",id);
 
 			return  new ResponseDTO(null, true, "Sucursal eliminada", HttpStatus.OK); 
 		}catch (Exception e) {

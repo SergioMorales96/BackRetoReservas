@@ -20,11 +20,12 @@ public class SucursalController {
 	private ISucursalService sucursalService;
 
 
-//	@GetMapping(path = "/all")
-//	public ResponseDTO getAll(){
-//
-//		return sucursalService.getAll();
-//	}
+	//Listar sucursales
+	@GetMapping(path = "/all")
+	public ResponseDTO getAll(){
+
+		return sucursalService.getAll();
+	}
 
 
 	// Listar Sucursal por ID
@@ -41,7 +42,6 @@ public class SucursalController {
 		return sucursalService.getSucursalById(id);
 	}
 
-
 	// Crear Sucursal
 
 	@PostMapping(path = "/crear", consumes = "application/json", produces = "application/json")
@@ -57,5 +57,13 @@ public class SucursalController {
 
 		return sucursalService.updateSucursal(entity);
 	}
+	
+	// Eliminar Sucursal
+	@GetMapping(path = "/delete/{id}")
+	public ResponseDTO deleteSucursal(@PathVariable Integer id) {
+		
+		return sucursalService.deleteSucursal(id);
+	}
+	
 
 }
