@@ -12,6 +12,8 @@ import com.asesoftware.reservas.api.reservas.entity.SucursalEntity;
 import com.asesoftware.reservas.api.reservas.mapper.ISucursalMapper;
 import com.asesoftware.reservas.api.reservas.repository.ISucursalRepository;
 import com.asesoftware.reservas.api.reservas.service.ISucursalService;
+import static com.asesoftware.reservas.api.reservas.utils.Constantes.OK;
+import static com.asesoftware.reservas.api.reservas.utils.Constantes.ERROR_GENERICO;
 
 @Service
 public class SucursalService implements ISucursalService{
@@ -41,10 +43,10 @@ public class SucursalService implements ISucursalService{
 
 		if (optional.isPresent()) {
 			logger.info("La sucursal {} fue encontrada",id);
-			return new ResponseDTO(optional.get(), true, "ok", HttpStatus.OK);
+			return new ResponseDTO(optional.get(), true, OK, HttpStatus.OK);
 		}else {
 			logger.info("La sucursal {} no fue encontrada",id);
-			return  new ResponseDTO(null, false, "Sucursal no encontrada", HttpStatus.OK);
+			return  new ResponseDTO(null, false, ERROR_GENERICO, HttpStatus.OK);
 		}
 	}
 
