@@ -57,4 +57,11 @@ public class UsuarioBloqueadoController {
 		logger.info("usuario bloqueado a eliminar con id {}",id);
 		return usuarioBloqueadoService.eliminarUsuarioBloqueado(id);
 	}
+	
+	
+	@GetMapping(path = "/porSucursal/{id}")
+	public ResponseDTO consultarUsuariosBloqueadosPorSucursal(@PathVariable Integer id) {
+		logger.info("consultar usuarios bloqueados por sucursal con id {}",id);
+		return this.usuarioBloqueadoService.consultarUsuariosBloqueadosPorSucursal(id);
+	}
 }
