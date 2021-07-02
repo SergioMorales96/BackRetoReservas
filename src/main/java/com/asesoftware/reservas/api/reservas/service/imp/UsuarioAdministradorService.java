@@ -59,6 +59,7 @@ public class UsuarioAdministradorService implements IUsuarioAdministradorService
 
 	@Override
 	public ResponseDTO crearUsuario(UsuarioAdministradorEntity userAdmin) {
+		//hacer try catch
 		logger.info("crear usuario");
 		UsuarioAdministradorEntity usuarioAdministardor = administradorRepository.save(userAdmin);
 		logger.info("crear usuario: {}", usuarioAdministardor);

@@ -13,8 +13,6 @@ import org.springframework.web.bind.annotation.RestController;
 import com.asesoftware.reservas.api.reservas.dto.ResponseDTO;
 import com.asesoftware.reservas.api.reservas.entity.UsuarioAdministradorEntity;
 import com.asesoftware.reservas.api.reservas.service.IUsuarioAdministradorService;
-import com.asesoftware.reservas.api.reservas.service.imp.EmpresaService;
-import com.asesoftware.reservas.api.reservas.service.imp.UsuarioAdministradorService;
 
 @RestController
 @RequestMapping(path = "/api/v1/usuarioAdministrador")
@@ -26,6 +24,12 @@ public class UsuarioAdministradorController {
 	@Autowired
 	private IUsuarioAdministradorService usuarioAdminService;
 	
+	
+	/**
+	* Frase corta descriptiva
+	* @author Nombre Apellido 
+	* @version 0.1, 2021/07/01
+	*/
 	@GetMapping(path = "/{idAdministrador}")
 	public ResponseDTO usuarioAdministradorPorId(@PathVariable Integer idAdministrador) {
 		
@@ -44,7 +48,7 @@ public class UsuarioAdministradorController {
 	
 	@PostMapping(path ="/crear",consumes = "application/json", produces = "application/json")
 	public ResponseDTO crearAdministrador(@RequestBody UsuarioAdministradorEntity admin) {
-		logger.info("crear nuevo usuario");
+		logger.info("crear nuevo usuario{}",admin);
 		return usuarioAdminService.crearUsuario(admin);
 	}
 	
