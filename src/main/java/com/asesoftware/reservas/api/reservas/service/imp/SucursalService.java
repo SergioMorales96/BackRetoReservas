@@ -58,8 +58,8 @@ public class SucursalService implements ISucursalService{
 			logger.info("La sucursal {} se creo", sucursalDTO);
 			return new ResponseDTO(mapperSucursal.entityToDto(sucursalEntity), true, "ok", HttpStatus.OK);
 		}catch (Exception e) {
-			logger.error("Error {}",e.getMessage());
-			return new ResponseDTO(null, false, "No se puede crear la sucursal", HttpStatus.OK);
+			logger.error("Error en crear {}",e.getMessage());
+			return new ResponseDTO(null, false, "No se puede crear la sucursal", HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 
 	}
@@ -74,8 +74,8 @@ public class SucursalService implements ISucursalService{
 			logger.info("La sucursal {} se actualizo", sucursalDTO);
 			return new ResponseDTO(mapperSucursal.entityToDto(sucursalEntity), true, "ok", HttpStatus.OK);
 		}catch(Exception e) {
-			logger.error("Error {}",e.getMessage());
-			return new ResponseDTO(null, false, "No se puede editar la sucursal", HttpStatus.OK);
+			logger.error("Error en editar {}",e.getMessage());
+			return new ResponseDTO(null, false, "No se puede editar la sucursal", HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 
 	}
@@ -90,8 +90,8 @@ public class SucursalService implements ISucursalService{
 			logger.info("La sucursal {} se elimino",id);
 			return  new ResponseDTO(null, true, "Sucursal eliminada", HttpStatus.OK); 
 		}catch (Exception e) {
-			logger.error("Error {}",e.getMessage());
-			return  new ResponseDTO(null, false, "La sucursal no se puede eliminar", HttpStatus.OK); 
+			logger.error("Error  en eliminar{}",e.getMessage());
+			return  new ResponseDTO(null, false, "La sucursal no se puede eliminar", HttpStatus.INTERNAL_SERVER_ERROR); 
 		}
 
 	}

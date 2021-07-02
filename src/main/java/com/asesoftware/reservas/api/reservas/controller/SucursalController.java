@@ -39,7 +39,7 @@ public class SucursalController {
 	@GetMapping(path = "/sucursales/{id}")
 	public ResponseDTO getSucursalById(@PathVariable Integer id) {
 
-		logger.info("ingreso al metodo getSucursalById");
+		logger.info("ingreso al metodo getSucursalById {}", id);
 		
 		return sucursalService.getSucursalById(id);
 	}
@@ -47,7 +47,7 @@ public class SucursalController {
 	@GetMapping(path = "/sucursales")
 	public ResponseDTO getSucursalParametroById(@RequestParam Integer id) {
 		
-		logger.info("ingreso al metodo getSucursalParametroById");
+		logger.info("ingreso al metodo getSucursalParametroById {}", id);
 
 		return sucursalService.getSucursalById(id);
 	}
@@ -57,7 +57,7 @@ public class SucursalController {
 	@PostMapping(path = "/crear", consumes = "application/json", produces = "application/json")
 	public ResponseDTO createSucursal(@RequestBody SucursalDTO entity) {
 		
-		logger.info("ingreso al metodo createSucursal");
+		logger.info("ingreso al metodo createSucursal {}", entity);
 
 		return sucursalService.createSucursal(entity);
 	}
@@ -67,7 +67,7 @@ public class SucursalController {
 	@PostMapping(path = "/editar", consumes = "application/json", produces = "application/json")
 	public ResponseDTO editarSucursal(@RequestBody SucursalDTO entity) {
 		
-		logger.info("ingreso al metodo editarSucursal");
+		logger.info("ingreso al metodo editarSucursal {}", entity);
 
 		return sucursalService.updateSucursal(entity);
 	}
@@ -76,7 +76,7 @@ public class SucursalController {
 	@GetMapping(path = "/delete/{id}")
 	public ResponseDTO deleteSucursal(@PathVariable Integer id) {
 		
-		logger.info("ingreso al metodo deleteSucursal");
+		logger.info("ingreso al metodo deleteSucursal {}", id);
 		
 		return sucursalService.deleteSucursal(id);
 	}

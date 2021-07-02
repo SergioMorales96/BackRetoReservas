@@ -6,7 +6,6 @@ import com.asesoftware.reservas.api.reservas.dto.SucursalDTO;
 import com.asesoftware.reservas.api.reservas.entity.SucursalEntity;
 
 @Mapper(componentModel = "spring")
-
 public interface ISucursalMapper {
 
 	public SucursalEntity dtoToEntity(SucursalDTO sucursalDTO);
