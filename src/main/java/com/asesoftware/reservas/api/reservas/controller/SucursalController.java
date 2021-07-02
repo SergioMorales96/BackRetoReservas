@@ -23,8 +23,11 @@ public class SucursalController {
 	@Autowired
 	private ISucursalService sucursalService;
 
-
-	//Listar Sucursales
+	/**
+	* Controlador para acceder al método Listar Sucursales
+	* @author acmoya
+	* @version 0.1, 2021/07/01
+	*/
 	
 	@GetMapping(path = "/all")
 	public ResponseDTO getAll(){
@@ -34,7 +37,11 @@ public class SucursalController {
 		return sucursalService.getAll();
 	}
 
-	// Listar Sucursal por ID
+	/**
+	* Controlador para acceder al método Listar Sucursal por ID
+	* @author smmorales
+	* @version 0.1, 2021/07/01
+	*/
 
 	@GetMapping(path = "/sucursales/{id}")
 	public ResponseDTO getSucursalById(@PathVariable Integer id) {
@@ -52,33 +59,46 @@ public class SucursalController {
 		return sucursalService.getSucursalById(id);
 	}
 
-	// Crear Sucursal
+	/**
+	* Controlador para acceder al método Crear Sucursal
+	* @author smmorales
+	* @version 0.1, 2021/07/01
+	*/
 
 	@PostMapping(path = "/crear", consumes = "application/json", produces = "application/json")
-	public ResponseDTO createSucursal(@RequestBody SucursalDTO entity) {
+	public ResponseDTO crearSucursal(@RequestBody SucursalDTO entity) {
 		
 		logger.info("ingreso al metodo createSucursal {}", entity);
 
-		return sucursalService.createSucursal(entity);
+		return sucursalService.crearSucursal(entity);
 	}
 
-	// Editar Sucursal
+	/**
+	* Controlador para acceder al método Editar Sucursal
+	* @author smmorales
+	* @version 0.1, 2021/07/01
+	*/
 
 	@PostMapping(path = "/editar", consumes = "application/json", produces = "application/json")
 	public ResponseDTO editarSucursal(@RequestBody SucursalDTO entity) {
 		
 		logger.info("ingreso al metodo editarSucursal {}", entity);
 
-		return sucursalService.updateSucursal(entity);
+		return sucursalService.editarSucursal(entity);
 	}
 	
-	// Eliminar Sucursal
+	/**
+	* Controlador para acceder al método Eliminar Sucursal
+	* @author acmoya
+	* @version 0.1, 2021/07/01
+	*/
+	
 	@GetMapping(path = "/delete/{id}")
-	public ResponseDTO deleteSucursal(@PathVariable Integer id) {
+	public ResponseDTO eliminarSucursal(@PathVariable Integer id) {
 		
 		logger.info("ingreso al metodo deleteSucursal {}", id);
 		
-		return sucursalService.deleteSucursal(id);
+		return sucursalService.eliminarSucursal(id);
 	}
 
 }
