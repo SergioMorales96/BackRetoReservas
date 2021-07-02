@@ -7,7 +7,7 @@ public interface IDominioService {
 	
 	public ResponseDTO createDominio(DominioDTO dominioDTO);
 	
-	public ResponseDTO reloadDominio(DominioDTO dominioDTO);
+	public ResponseDTO readDominio();
 	
 	public ResponseDTO updateDominio(DominioDTO dominioDTO);
 	
