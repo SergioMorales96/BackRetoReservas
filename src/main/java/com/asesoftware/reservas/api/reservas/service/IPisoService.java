@@ -1,10 +1,24 @@
 package com.asesoftware.reservas.api.reservas.service;
 
-import org.springframework.stereotype.Service;
-
+import com.asesoftware.reservas.api.reservas.dto.PisoDTO;
 import com.asesoftware.reservas.api.reservas.dto.ResponseDTO;
 
-@Service
 public interface IPisoService {
+	
+	public ResponseDTO consultarTodos();
+	
+	public PisoDTO consultarpisoPorId(Integer idPiso);
+	
+	public ResponseDTO pisoPorId(Integer idPiso);
+	
+	public ResponseDTO pisoPorNumeroPiso(Integer numeroPiso);
+	
+	public ResponseDTO crearPiso(PisoDTO pisoDTO);
+	
+	public ResponseDTO actualizarPiso(PisoDTO pisoDTO);
+	
+	public ResponseDTO eliminarPiso(Integer idPiso);
+
 	public ResponseDTO pisoPorIdSucursal(Integer idSucursal);
+
 }
