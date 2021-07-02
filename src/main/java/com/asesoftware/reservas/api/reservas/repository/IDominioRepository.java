@@ -17,7 +17,13 @@ public interface IDominioRepository extends JpaRepository<DominioEntity, Dominio
 	@Modifying
 	@Transactional 
 	@Query("UPDATE DominioEntity u SET u.dominioPK.valorDominio = ?1 WHERE u.dominioPK.codigoDominio = ?2 AND u.descripcion = ?3")
-	void queryDominioActualizar(String valorDominio,String codigoDominio, String descripcion);
+	void queryDominioUpdate(String valorDominio,String codigoDominio, String descripcion);
+
+
+	@Modifying
+	@Transactional 
+	@Query("DELETE FROM DominioEntity u WHERE u.dominioPK.valorDominio = ?1 AND u.dominioPK.codigoDominio = ?2 AND u.descripcion = ?3")
+	void queryDominioDelete(String valorDominio,String codigoDominio, String descripcion);
 
 
 }

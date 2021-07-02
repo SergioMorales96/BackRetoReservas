@@ -15,6 +15,7 @@ public interface IDominioMapper {
 	@Mappings({
 		@Mapping(source = "codigoDominio",target = "dominioPK.codigoDominio"),
 		@Mapping(source = "valorDominio",target = "dominioPK.valorDominio"),
+		
 	})
 	
 	public DominioEntity dtoToEntity(DominioDTO dto);
@@ -22,6 +23,7 @@ public interface IDominioMapper {
 	@Mappings({
 		@Mapping(source = "dominioPK.codigoDominio",target = "codigoDominio"),
 		@Mapping(source = "dominioPK.valorDominio",target = "valorDominio"),
+		
 	})
 	
 	public DominioDTO entityToDto(DominioEntity entity);

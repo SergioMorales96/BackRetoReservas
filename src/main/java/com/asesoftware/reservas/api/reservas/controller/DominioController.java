@@ -4,6 +4,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -24,29 +25,48 @@ public class DominioController {
 	@Autowired
 	private IDominioService dominioService;
 	
-	//listar todo
+	/**
+	* Metodo encargado de consultar todos los dominios
+	* @author abarrios
+	* @version 0.1, 2021/07/02
+	*/
 	@GetMapping(path="/all")
 	public ResponseDTO readDominio() {
 	
 	return dominioService.readDominio();
 	}
 	
-	//crear
+	/**
+	* Metodo encargado de crear un dominios
+	* @author abarrios
+	* @version 0.1, 2021/07/02
+	*/
 	@PostMapping(path="/create", consumes="application/json", produces="application/json")
 	public ResponseDTO createDominio(@RequestBody DominioDTO entity) {
 		
 		return dominioService.createDominio(entity);
 	}
 	
-	
-	
-	//actualizar
+	/**
+	* Metodo encargado de Actualizar un dominios
+	* @author smanrique
+	* @version 0.1, 2021/07/02
+	*/
 	@PostMapping(path="/update", consumes="application/json", produces="application/json")
 	public ResponseDTO updateDominio(@RequestBody DominioDTO entity) {
 		
 		return dominioService.updateDominio(entity);
 	}
 	
-	
-	//eliminar
+
+	/**
+	* Metodo encargado de Eliminar un dominios
+	* @author smanrique
+	* @version 0.1, 2021/07/02
+	*/
+	@PostMapping(path="/delete", consumes="application/json", produces="application/json")
+	public ResponseDTO deleteDominio(@RequestBody DominioDTO entity) {
+		
+		return dominioService.deleteDominio(entity);
+	}
 }

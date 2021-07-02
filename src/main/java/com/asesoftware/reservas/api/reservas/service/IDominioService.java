@@ -11,5 +11,5 @@ public interface IDominioService {
 	
 	public ResponseDTO updateDominio(DominioDTO dominioDTO);
 	
-	public ResponseDTO deleteDominio(String dominioPK);
+	public ResponseDTO deleteDominio(DominioDTO dominioDTO);
 }

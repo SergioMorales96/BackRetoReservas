@@ -39,7 +39,7 @@ public class DominioService implements IDominioService {
 		
 			return new ResponseDTO(mapperDominio.entityToDto(dominioEntity),true,"ok",HttpStatus.OK);
 		}catch(Exception e){
-			return new ResponseDTO(null, false, "No se puede crear el dominio", HttpStatus.OK);
+			return new ResponseDTO(null, false, "No se puede crear el dominio", HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 		
 		
@@ -57,17 +57,20 @@ public class DominioService implements IDominioService {
 		
 		logger.info("updateDominio {} ", dominioDTO);
 		
-		dominioRepository.queryDominioActualizar(dominioDTO.getValorDominio(),dominioDTO.getCodigoDominio(),dominioDTO.getDescripcion());
+		dominioRepository.queryDominioUpdate(dominioDTO.getValorDominio(),dominioDTO.getCodigoDominio(),dominioDTO.getDescripcion());
 				
 		return new ResponseDTO(null,true,"ok",HttpStatus.OK);
 	}
 
 	@Override
-	public ResponseDTO deleteDominio(String dominioPK) {
+	public ResponseDTO deleteDominio(DominioDTO dominioDTO) {
 		
 		logger.info("ingerso al metodo deleteDominio");
 		
-		return null;
+		dominioRepository.queryDominioDelete(dominioDTO.getValorDominio(),dominioDTO.getCodigoDominio(), dominioDTO.getDescripcion());
+
+		return new ResponseDTO(null,true,"ok",HttpStatus.OK);
+		
 	}
 	
 }
