@@ -6,6 +6,7 @@ import lombok.Data;
 
 @Data
 public class PisoDTO {
+	
 	private Integer idPiso;
 
 	private Integer aforoMaximo;
