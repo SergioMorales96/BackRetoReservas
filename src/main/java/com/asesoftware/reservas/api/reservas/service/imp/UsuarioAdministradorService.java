@@ -27,6 +27,11 @@ public class UsuarioAdministradorService implements IUsuarioAdministradorService
 	@Autowired
 	private IUsuarioAdministradorMapper usuarioAdminMapper;
 
+	/**
+	* Método que retorna DTO del usuario administrador por su id
+	* @author cvlopez 
+	* @version 0.1, 2021/07/01
+	*/
 	@Override
 	public ResponseDTO usuarioAdministradorPorId(Integer idAdministrador) {
 		
@@ -42,9 +47,13 @@ public class UsuarioAdministradorService implements IUsuarioAdministradorService
 			return new ResponseDTO(null, false, "Usuario no encontrado",HttpStatus.OK);
 		}
 		
-
 	}
 
+	/**
+	* Método que retorna listado de DTOs con todos los usuarios administradores
+	* @author cvlopez 
+	* @version 0.1, 2021/07/01
+	*/	
 	@Override
 	public ResponseDTO consultarTodos() {
 		
@@ -57,30 +66,66 @@ public class UsuarioAdministradorService implements IUsuarioAdministradorService
 		return new ResponseDTO(usuarioAdminMapper.entitysToDtos(listUsuarioAdministrador), true, "OK", HttpStatus.OK);
 	}
 
+	/**
+	* Método que crea un nuevo usuario administrador
+	* @author nbarreto 
+	* @version 0.1, 2021/07/01
+	*/
 	@Override
-	public ResponseDTO crearUsuario(UsuarioAdministradorEntity userAdmin) {
-		//hacer try catch
-		logger.info("crear usuario");
-		UsuarioAdministradorEntity usuarioAdministardor = administradorRepository.save(userAdmin);
+	public ResponseDTO crearUsuario(UsuarioAdministradorDTO userAdmin) {
+		
+		try {
+		UsuarioAdministradorEntity usuarioAdministardor = administradorRepository.save(usuarioAdminMapper.dtoToEntity(userAdmin));
 		logger.info("crear usuario: {}", usuarioAdministardor);
-		return new ResponseDTO(usuarioAdministardor, true, "Usuario creado", HttpStatus.OK);
+		return new ResponseDTO(usuarioAdminMapper.entityToDto(usuarioAdministardor), true, "Administrador creado", HttpStatus.OK);
+		}
+		catch(Exception e) {
+			logger.error("No se ha podido crear el administrador");
+			return new ResponseDTO(null, false, "No se ha podido crear el administrador", HttpStatus.INTERNAL_SERVER_ERROR);
+		}
 	}
 
+	/**
+	* Método que edita un usuario administrador
+	* @author nbarreto 
+	* @version 0.1, 2021/07/01
+	*/
 	@Override
-	public ResponseDTO editarUsuario(UsuarioAdministradorEntity userAdmin) {
-		logger.info("editar usuario");
-		UsuarioAdministradorEntity usuarioAdministardor = administradorRepository.save(userAdmin);
-		logger.info("editar usuario: {}", usuarioAdministardor);
-		return new ResponseDTO(usuarioAdministardor, true, "Usuario modificado", HttpStatus.OK);
+	public ResponseDTO editarUsuario(UsuarioAdministradorDTO userAdmin) {
+		try {
+		UsuarioAdministradorEntity usuarioAdministardor = administradorRepository.save(usuarioAdminMapper.dtoToEntity(userAdmin));
+		logger.info("editar administrador: {}", usuarioAdministardor);
+		return new ResponseDTO(usuarioAdminMapper.entityToDto(usuarioAdministardor), true, "Administrador modificado", HttpStatus.OK);
+		}
+		catch(Exception e) {
+			logger.error("No se ha podido cambiar el usuario administrador");
+			return new ResponseDTO(null, true, "Usuario modificado", HttpStatus.OK);
+		}
 	}
 
+	/**
+	* Método que elimina un usuario administrador según su id
+	* @author nbarreto 
+	* @version 0.1, 2021/07/01
+	*/
 	@Override
-	public void eliminarUsuario(Integer idAdministrador) {
-		logger.info("eliminar usuario");
-		administradorRepository.deleteById(idAdministrador);
-		logger.info("eliminado usuario con id: {}",idAdministrador);
+	public ResponseDTO eliminarUsuario(Integer idAdministrador) {
+		try {
+			administradorRepository.deleteById(idAdministrador);
+			logger.info("eliminado usuario con id: {}",idAdministrador);
+			return new ResponseDTO(null, true, "Usuario eliminado", HttpStatus.OK);
+		}
+		catch (Exception e) {
+			logger.error("No se ha podido eliminar el usuario con id {}",idAdministrador);
+			return new ResponseDTO(null, false, "No se ha podido eliminar el usuario", HttpStatus.OK);
+		}
 	}
 
+	/**
+	* Método que busca un usuario administrador por email 
+	* @author cvlopez 
+	* @version 0.1, 2021/07/01
+	*/
 	@Override
 	public ResponseDTO usuarioAdministradorPorEmail(String email) {
 		

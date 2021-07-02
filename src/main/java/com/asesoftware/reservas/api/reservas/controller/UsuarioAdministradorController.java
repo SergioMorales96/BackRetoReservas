@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.asesoftware.reservas.api.reservas.dto.ResponseDTO;
-import com.asesoftware.reservas.api.reservas.entity.UsuarioAdministradorEntity;
+import com.asesoftware.reservas.api.reservas.dto.UsuarioAdministradorDTO;
 import com.asesoftware.reservas.api.reservas.service.IUsuarioAdministradorService;
 
 @RestController
@@ -26,8 +26,8 @@ public class UsuarioAdministradorController {
 	
 	
 	/**
-	* Frase corta descriptiva
-	* @author Nombre Apellido 
+	* Método que llama al servicio que retorna usuario administrador por id
+	* @author cvlopez
 	* @version 0.1, 2021/07/01
 	*/
 	@GetMapping(path = "/{idAdministrador}")
@@ -38,6 +38,11 @@ public class UsuarioAdministradorController {
 		return usuarioAdminService.usuarioAdministradorPorId(idAdministrador);
 	}
 	
+	/**
+	* Método que llama al servicio que retorna listado con todos los administradores
+	* @author cvlopez 
+	* @version 0.1, 2021/07/01
+	*/	
 	@GetMapping(path = "/todos")
 	public ResponseDTO consultarTodos() {
 		logger.info("consultarTodos()");
@@ -46,24 +51,44 @@ public class UsuarioAdministradorController {
 		
 	}
 	
+	/**
+	* Método que llama al servicio que crea un nuevo usuario administrador
+	* @author nbarreto 
+	* @version 0.1, 2021/07/01
+	*/
 	@PostMapping(path ="/crear",consumes = "application/json", produces = "application/json")
-	public ResponseDTO crearAdministrador(@RequestBody UsuarioAdministradorEntity admin) {
+	public ResponseDTO crearAdministrador(@RequestBody UsuarioAdministradorDTO admin) {
 		logger.info("crear nuevo usuario{}",admin);
 		return usuarioAdminService.crearUsuario(admin);
 	}
 	
+	/**
+	* Método que llama al servicio que edita un usuario administrador
+	* @author nbarreto 
+	* @version 0.1, 2021/07/01
+	*/
 	@PostMapping(path ="/editar",consumes = "application/json", produces = "application/json")
-	public ResponseDTO editarAdministrador(@RequestBody UsuarioAdministradorEntity admin) {
+	public ResponseDTO editarAdministrador(@RequestBody UsuarioAdministradorDTO admin) {
 		logger.info("editar usuario");
 		return usuarioAdminService.editarUsuario(admin);
 	}
-
+	
+	/**
+	* Método que llama al servicio que elimina un usuario administrador según id
+	* @author nbarreto 
+	* @version 0.1, 2021/07/01
+	*/
 	@GetMapping(path = "/eliminar/{idAdministrador}")
-	public void borrarAdministrador(@PathVariable Integer idAdministrador) {
+	public ResponseDTO borrarAdministrador(@PathVariable Integer idAdministrador) {
 		logger.info("eliminar usuarioPorId:{}",idAdministrador);
-		usuarioAdminService.eliminarUsuario(idAdministrador);
+		return usuarioAdminService.eliminarUsuario(idAdministrador);
 	}
 	
+	/**
+	* Método que llama al servicio que busca un usuario administrador por email 
+	* @author cvlopez 
+	* @version 0.1, 2021/07/01
+	*/
 	@GetMapping(path = "/email/{email}")
 	public ResponseDTO usuarioAdministradorPorEmail(@PathVariable String email) {
 		
