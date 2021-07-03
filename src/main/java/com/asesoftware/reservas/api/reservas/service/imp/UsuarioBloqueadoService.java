@@ -137,7 +137,7 @@ public class UsuarioBloqueadoService implements IUsuarioBloqueadoService{
 	@Override
 	public ResponseDTO consultarUsuariosBloqueadosPorSucursal(Integer id) {
 		logger.info("consultarUsuariosBloqueadosPorSucursal, id sucursal: {}", id);
-		List<UsuarioBloqueadoEntity> answ = this.usuarioBloqueadoRepository.findByIdSucursal(id);
+		List<UsuarioBloqueadoEntity> answ = this.usuarioBloqueadoRepository.findBySucursalEntityIdSucursal(id);
 		
 		if(!answ.isEmpty()) {
 			return new ResponseDTO(this.usuarioBloqueadoMapper.entitysToDtos(answ), true, OK, HttpStatus.OK);

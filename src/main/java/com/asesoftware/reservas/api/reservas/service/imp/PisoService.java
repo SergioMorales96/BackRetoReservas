@@ -54,7 +54,7 @@ public class PisoService implements IPisoService{
 		Optional<PisoEntity> pisoEntity = pisoRepository.findById(idPiso);
 		if(pisoEntity.isPresent()) {
 			logger.info("se encontro el piso por id");
-			return  new ResponseDTO(pisoEntity, true, "se encontro el piso por id", HttpStatus.OK);
+			return  new ResponseDTO(pisoMapper.entityToDto(pisoEntity.get()), true, "se encontro el piso por id", HttpStatus.OK);
 		}else{
 			logger.info("No se encontro el piso por id");
 			return  new ResponseDTO(null, false, "No se encontro el piso", HttpStatus.OK);
@@ -63,14 +63,16 @@ public class PisoService implements IPisoService{
 
 	@Override
 	public ResponseDTO pisoPorNumeroPiso(Integer numeroPiso) {
-		List<PisoEntity> pisoEntity = pisoRepository.queryPorPiso(numeroPiso);
-		if(pisoEntity.isEmpty()) {
+		
+		List<PisoDTO> pisoDTOs =  pisoMapper.entitysToDtos(pisoRepository.queryPorPiso(numeroPiso));
+		
+		if(pisoDTOs.isEmpty()) {
 			logger.error("El piso no existe");
 			return new ResponseDTO(null,false,"El piso no existe", HttpStatus.OK);
 			
 		}else {
 			logger.info("se encontro el piso");
-			return new ResponseDTO(pisoEntity, true,"se encontro el piso", HttpStatus.OK);
+			return new ResponseDTO(pisoDTOs, true,"se encontro el piso", HttpStatus.OK);
 			
 		}
 		

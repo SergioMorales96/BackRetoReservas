@@ -13,4 +13,6 @@ public class PisoDTO {
 	private String nombre;
 
 	private Integer numeroPiso;
+	
+	private String nombreSucursal;
 }

@@ -28,8 +28,9 @@ public class SalaEntity implements Serializable {
 	@Column(name="DOMINIO_ESTADO")
 	private String dominioEstado;
 
-	@Column(name="ID_PISO")
-	private Integer idPiso;
+	@ManyToOne
+    @JoinColumn(name = "ID_PISO")
+    private PisoEntity pisoEntity;
 
 	@Column(name="NOMBRE")
 	private String nombre;

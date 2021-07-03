@@ -10,4 +10,6 @@ public class UsuarioAdministradorDTO {
 	private String email;
 
 	private Integer idSucursal;
+	
+	private String nombreSucursal;
 }

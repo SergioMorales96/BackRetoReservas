@@ -11,6 +11,6 @@ import com.asesoftware.reservas.api.reservas.entity.UsuarioBloqueadoEntity;
 public interface IUsuarioBloqueadoRepository extends JpaRepository<UsuarioBloqueadoEntity, Integer> {
 	
 	public List<UsuarioBloqueadoEntity> findByEmail(String correo);
-	public List<UsuarioBloqueadoEntity> findByIdSucursal(Integer id);
+	public List<UsuarioBloqueadoEntity> findBySucursalEntityIdSucursal(Integer id);
 	
 }

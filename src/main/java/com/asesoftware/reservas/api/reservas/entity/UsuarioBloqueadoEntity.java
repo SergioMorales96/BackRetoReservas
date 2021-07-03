@@ -25,8 +25,9 @@ public class UsuarioBloqueadoEntity implements Serializable {
 	@Column(name="EMAIL")
 	private String email;
 
-	@Column(name="ID_SUCURSAL")
-	private Integer idSucursal;
+	@ManyToOne
+    @JoinColumn(name = "ID_SUCURSAL")
+    private SucursalEntity sucursalEntity;
 
 	
 
