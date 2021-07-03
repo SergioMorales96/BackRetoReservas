@@ -32,7 +32,7 @@ public class DominioService implements IDominioService {
 	@Override
 	public ResponseDTO createDominio(DominioDTO dominioDTO) {
 		
-		logger.info("updateDominio {} ", dominioDTO);
+		logger.info("createDominio {} ", dominioDTO);
 		
 		try {
 			DominioEntity dominioEntity = mapperDominio.dtoToEntity(dominioDTO);
