@@ -32,6 +32,8 @@ public class DominioService implements IDominioService {
 	@Override
 	public ResponseDTO createDominio(DominioDTO dominioDTO) {
 		
+		logger.info("updateDominio {} ", dominioDTO);
+		
 		try {
 			DominioEntity dominioEntity = mapperDominio.dtoToEntity(dominioDTO);
 			
@@ -57,9 +59,15 @@ public class DominioService implements IDominioService {
 		
 		logger.info("updateDominio {} ", dominioDTO);
 		
-		dominioRepository.queryDominioUpdate(dominioDTO.getValorDominio(),dominioDTO.getCodigoDominio(),dominioDTO.getDescripcion());
-				
-		return new ResponseDTO(null,true,"ok",HttpStatus.OK);
+		
+		try {
+			dominioRepository.queryDominioUpdate(dominioDTO.getValorDominio(),dominioDTO.getCodigoDominio(),dominioDTO.getDescripcion());
+			
+			return new ResponseDTO(null,true,"ok",HttpStatus.OK);
+		}catch(Exception e) {
+			return new ResponseDTO(null,false,"El dominio no se actualizar el dominio",HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+		
 	}
 
 	@Override
@@ -67,9 +75,18 @@ public class DominioService implements IDominioService {
 		
 		logger.info("ingerso al metodo deleteDominio");
 		
-		dominioRepository.queryDominioDelete(dominioDTO.getValorDominio(),dominioDTO.getCodigoDominio(), dominioDTO.getDescripcion());
+		try {
+			dominioRepository.queryDominioDelete(dominioDTO.getValorDominio(),dominioDTO.getCodigoDominio(), dominioDTO.getDescripcion());
+			
+			return new ResponseDTO(null,true,"El dominio se elimino correctamente",HttpStatus.OK);
+		}catch(Exception e) {
+			logger.error("Error {}",e.getMessage());
+			return new ResponseDTO(null,false,"El dominio no se puede eliminar",HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+		
+		
 
-		return new ResponseDTO(null,true,"ok",HttpStatus.OK);
+		
 		
 	}
 	
