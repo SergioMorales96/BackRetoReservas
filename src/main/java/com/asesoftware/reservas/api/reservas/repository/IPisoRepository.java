@@ -13,6 +13,6 @@ public interface IPisoRepository extends JpaRepository<PisoEntity, Integer>{
 		@Query("SELECT t FROM PisoEntity t WHERE t.numeroPiso = ?1  ")
 		 public List<PisoEntity> queryPorPiso(Integer piso);
 
-		 @Query("SELECT p FROM PisoEntity p WHERE p.idSucursal = ?1")
+		@Query("SELECT p FROM PisoEntity p WHERE p.sucursalEntity.idSucursal = ?1")
 		List<PisoEntity> queryPisoPorSucursal(Integer idSucursal);	
 }

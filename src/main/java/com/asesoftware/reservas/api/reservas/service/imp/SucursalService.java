@@ -1,5 +1,6 @@
 package com.asesoftware.reservas.api.reservas.service.imp;
 
+import java.util.List;
 import java.util.Optional;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -17,7 +18,7 @@ import static com.asesoftware.reservas.api.reservas.utils.Constantes.ERROR_GENER
 
 @Service
 public class SucursalService implements ISucursalService{
-	
+
 	private static final Logger logger = LoggerFactory.getLogger(SucursalService.class);
 
 	@Autowired
@@ -25,13 +26,13 @@ public class SucursalService implements ISucursalService{
 
 	@Autowired
 	private ISucursalMapper mapperSucursal;
-	
+
 	/**
-	* Método Listar Sucursales
-	* @author acmoya
-	* @version 0.1, 2021/07/01
-	*/
-	
+	 * Método Listar Sucursales
+	 * @author acmoya
+	 * @version 0.1, 2021/07/01
+	 */
+
 	@Override
 	public ResponseDTO getAll() {
 
@@ -39,14 +40,14 @@ public class SucursalService implements ISucursalService{
 	}	
 
 	/**
-	* Método Listar Sucursal por ID
-	* @author smmorales
-	* @version 0.1, 2021/07/01
-	*/
-	
+	 * Método Listar Sucursal por ID
+	 * @author smmorales
+	 * @version 0.1, 2021/07/01
+	 */
+
 	@Override
 	public ResponseDTO getSucursalById(Integer id) {
-		
+
 		Optional<SucursalEntity> optional = sucursalRepository.findById(id);
 
 		if (optional.isPresent()) {
@@ -59,10 +60,10 @@ public class SucursalService implements ISucursalService{
 	}
 
 	/**
-	* Método Crear Sucursal
-	* @author smmorales
-	* @version 0.1, 2021/07/01
-	*/
+	 * Método Crear Sucursal
+	 * @author smmorales
+	 * @version 0.1, 2021/07/01
+	 */
 
 	@Override
 	public ResponseDTO crearSucursal(SucursalDTO sucursalDTO) {
@@ -79,10 +80,10 @@ public class SucursalService implements ISucursalService{
 	}
 
 	/**
-	* Método Editar Sucursal
-	* @author smmorales
-	* @version 0.1, 2021/07/01
-	*/
+	 * Método Editar Sucursal
+	 * @author smmorales
+	 * @version 0.1, 2021/07/01
+	 */
 
 	@Override
 	public ResponseDTO editarSucursal(SucursalDTO sucursalDTO) {
@@ -97,13 +98,13 @@ public class SucursalService implements ISucursalService{
 		}
 
 	}
-	
+
 	/**
-	* Método Eliminar Sucursal
-	* @author acmoya
-	* @version 0.1, 2021/07/01
-	*/
-	
+	 * Método Eliminar Sucursal
+	 * @author acmoya
+	 * @version 0.1, 2021/07/01
+	 */
+
 	@Override
 	public ResponseDTO eliminarSucursal(Integer id) {
 
@@ -119,4 +120,20 @@ public class SucursalService implements ISucursalService{
 
 	}
 
+	/**
+	 * Método consultar Sucursal por Empresa
+	 * @author jcanizales
+	 * @version 0.1, 2021/07/06
+	 */
+
+	@Override
+	public ResponseDTO consultarSucursalxEmpresa(String nit) {
+		logger.info("ingreso al metodo consultarSucursalxEmpresa");
+
+		List<SucursalEntity> listSucursalEntities = sucursalRepository.findByEmpresaEntityNit(nit);
+
+
+		return new ResponseDTO(mapperSucursal.listEntityToDto(listSucursalEntities), true, OK, HttpStatus.OK);
+
+	}
 }

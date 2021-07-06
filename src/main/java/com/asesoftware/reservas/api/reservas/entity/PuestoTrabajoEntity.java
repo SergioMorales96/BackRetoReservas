@@ -28,8 +28,9 @@ public class PuestoTrabajoEntity implements Serializable {
 	@Column(name="DOMINIO_TIPO")
 	private String dominioTipo;
 
-	@Column(name="ID_PISO")
-	private Integer idPiso;
+	@ManyToOne
+    @JoinColumn(name = "ID_PISO")
+    private PisoEntity pisoEntity;
 
 	@Column(name="NOMBRE")
 	private String nombre;

@@ -15,5 +15,7 @@ public class PuestoTrabajoDTO {
 	private Integer idPiso;
 	
 	private String nombre;
+	
+	private String nombrePiso;
 
 }

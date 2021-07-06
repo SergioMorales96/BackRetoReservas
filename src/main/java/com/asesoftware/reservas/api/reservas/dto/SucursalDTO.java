@@ -14,6 +14,9 @@ public class SucursalDTO {
 	private String nit;
 	
 	private String nombre;
+	
+	private String nombreEmpresa;
+	
 
 
 }

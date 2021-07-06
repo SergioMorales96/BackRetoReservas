@@ -7,9 +7,15 @@ import org.springframework.data.jpa.repository.Query;
 
 import com.asesoftware.reservas.api.reservas.entity.UsuarioAdministradorEntity;
 
+
 public interface IAdministradorRepository extends JpaRepository<UsuarioAdministradorEntity, Integer>{
 	
-	@Query("SELECT t from UsuarioAdministradorEntity t WHERE t.idSucursal = ?1")
+	@Query("SELECT t from UsuarioAdministradorEntity t WHERE t.sucursalEntity.idSucursal = ?1")
 	List<UsuarioAdministradorEntity> queryAdminPorSucursal(Integer idSucursal);
 
+	
+	@Query("SELECT t FROM UsuarioAdministradorEntity t WHERE t.email = ?1")
+	List<UsuarioAdministradorEntity> queryUsuarioAdminPorEmail(String email);
+	
+	
 }
