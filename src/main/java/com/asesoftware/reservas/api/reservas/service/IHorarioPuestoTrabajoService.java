@@ -19,4 +19,6 @@ public interface IHorarioPuestoTrabajoService {
 	public ResponseDTO actualizarHorarioPuestoTrabajo(HorarioPuestoTrabajoDTO horarioPuestoTrabajoDTO);
 
 	public ResponseDTO borrarHorarioPorId(Integer idHorario);
+	
+	public ResponseDTO horarioSucursal(Integer idSucursal);
 }

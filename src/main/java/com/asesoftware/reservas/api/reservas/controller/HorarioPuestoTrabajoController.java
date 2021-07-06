@@ -105,5 +105,17 @@ public class HorarioPuestoTrabajoController {
 
 		return horarioPuestoTrabajoService.actualizarHorarioPuestoTrabajo(dto);
 	}
+	
+	
+	/**
+	* Metodo para obtener todos los horarios en una sucursal
+	* @author jortizg
+	* @version 0.1, 2021/07/06
+	*/
+	@GetMapping(path = "/sucursal/{idSucursal}")
+	public ResponseDTO horarioSucursal(@PathVariable Integer idSucursal) {
+		logger.info("sucursal asociada a los horarios de puesto de trabajo: {}", idSucursal);
+		return horarioPuestoTrabajoService.horarioSucursal(idSucursal);
+	}
 
 }

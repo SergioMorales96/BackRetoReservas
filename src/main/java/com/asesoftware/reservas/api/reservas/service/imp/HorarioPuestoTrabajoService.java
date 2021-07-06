@@ -157,4 +157,21 @@ public class HorarioPuestoTrabajoService implements IHorarioPuestoTrabajoService
 			return new ResponseDTO(null, false, ERROR_GENERICO, HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 	}
+
+	/**
+	* Metodo que envia los horarios de trabajo asociados a una sucursal
+	* @author fpena
+	* @version 0.1, 2021/07/06
+	*/
+	@Override
+	public ResponseDTO horarioSucursal(Integer idSucursal) {
+		try {
+			logger.info("horarioSucursal: {}", idSucursal);
+			List<HorarioPuestoTrabajoEntity> horarioPuestoTrabajoEntity = horarioPuestoTrabajoRepositorio.queryHorarioPuestoTrabajoEntities(idSucursal);
+			return new ResponseDTO(horarioPuestoTrabajoMapper.entitysToDtos(horarioPuestoTrabajoEntity), true, OK, HttpStatus.OK);
+		}catch (Exception e) {
+			logger.error(e.getMessage());
+			return new ResponseDTO(null,false,ERROR_GENERICO, HttpStatus.OK);
+		}
+	}
 }
