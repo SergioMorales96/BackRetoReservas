@@ -1,7 +1,6 @@
 package com.asesoftware.reservas.api.reservas.repository;
 
 import java.util.Optional;
-
 import org.springframework.data.jpa.repository.JpaRepository;
 import com.asesoftware.reservas.api.reservas.entity.SucursalEntity;
 
@@ -13,6 +12,6 @@ public interface ISucursalRepository extends JpaRepository<SucursalEntity, Integ
 	* @version 0.1, 2021/07/06
 	*/
 	
-	Optional<SucursalEntity> findByNit(String nit);
+	List<SucursalEntity> findByEmpresaEntityNit(String nit);
 	
 }

@@ -8,6 +8,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
@@ -39,13 +41,14 @@ public class HorarioPuestoTrabajoEntity implements Serializable {
 	@Column(name = "HORA_INICIO")
 	private Date horaInicio;
 
-	@Column(name = "ID_SUCURSAL")
-	private Integer idSucursal;
-
 	@Column(name = "NOMBRE")
 	private String nombre;
 
 	@Column(name = "NUMERO_HORAS")
 	private Integer numeroHoras;
 
+	@ManyToOne
+    @JoinColumn(name = "ID_SUCURSAL")
+    private SucursalEntity sucursalEntity;
+	
 }

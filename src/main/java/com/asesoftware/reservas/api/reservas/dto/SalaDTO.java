@@ -14,5 +14,7 @@ public class SalaDTO {
 	private Integer idPiso;
 
 	private String nombre;
+	
+	private String nombrePiso;
 
 }

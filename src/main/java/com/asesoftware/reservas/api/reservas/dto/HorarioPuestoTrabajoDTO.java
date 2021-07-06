@@ -25,6 +25,8 @@ public class HorarioPuestoTrabajoDTO {
 	private Date horaFin;
 	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "HH:mm", timezone = "America/New_York")
 	private Date horaInicio;
+	
+	private String nombreSucursal;
 
 	// VARIABLES LOGICAS
 	// Anotar aca las variables que no hacen parte de la entidad pero se requieren
