@@ -129,7 +129,6 @@ public class UsuarioAdministradorService implements IUsuarioAdministradorService
 	@Override
 	public ResponseDTO usuarioAdministradorPorEmail(String email) {
 		
-		//List<UsuarioAdministradorEntity> listUsuarioAdmin = administradorRepository.queryUsuarioAdminPorEmail(email);
 		List<UsuarioAdministradorDTO> listUsuarioAdminDtos = usuarioAdminMapper.entitysToDtos(administradorRepository.queryUsuarioAdminPorEmail(email));
 		
 		
