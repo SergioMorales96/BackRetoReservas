@@ -28,6 +28,23 @@ public class DominioService implements IDominioService {
 	
 	
 	
+	/**
+	* Metodo encargado de consultar todos los dominios
+	* @author abarrios
+	* @version 0.1, 2021/07/02
+	*/
+	
+	@Override
+	public ResponseDTO readDominio() {
+		
+		return new ResponseDTO(mapperDominio.entitysToDtos(dominioRepository.findAll()),true,"ok",HttpStatus.OK);
+	}
+	
+	/**
+	* Metodo encargado de crear un dominios
+	* @author abarrios
+	* @version 0.1, 2021/07/02
+	*/
 	
 	@Override
 	public ResponseDTO createDominio(DominioDTO dominioDTO) {
@@ -42,17 +59,14 @@ public class DominioService implements IDominioService {
 			return new ResponseDTO(mapperDominio.entityToDto(dominioEntity),true,"ok",HttpStatus.OK);
 		}catch(Exception e){
 			return new ResponseDTO(null, false, "No se puede crear el dominio", HttpStatus.INTERNAL_SERVER_ERROR);
-		}
-		
-		
-		
+		}	
 	}
 
-	@Override
-	public ResponseDTO readDominio() {
-		
-		return new ResponseDTO(mapperDominio.entitysToDtos(dominioRepository.findAll()),true,"ok",HttpStatus.OK);
-	}
+	/**
+	* Metodo encargado de Actualizar un dominios
+	* @author smanrique
+	* @version 0.1, 2021/07/02
+	*/
 
 	@Override
 	public ResponseDTO updateDominio(DominioDTO dominioDTO) {
@@ -70,6 +84,12 @@ public class DominioService implements IDominioService {
 		
 	}
 
+	/**
+	* Metodo encargado de Eliminar un dominios
+	* @author smanrique
+	* @version 0.1, 2021/07/02
+	*/
+	
 	@Override
 	public ResponseDTO deleteDominio(DominioDTO dominioDTO) {
 		

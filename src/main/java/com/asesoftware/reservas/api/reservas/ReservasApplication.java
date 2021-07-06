@@ -7,7 +7,7 @@ import org.springframework.context.annotation.PropertySource;
 
 @SpringBootApplication
 @ConfigurationProperties
-@PropertySource(value = {"classpath:application.properties","file:C://properties//reservas.properties"})
+@PropertySource(value = {"classpath:application.properties","file:C://Properties//reservas.properties"})
 public class ReservasApplication {
 
 	public static void main(String[] args) {
