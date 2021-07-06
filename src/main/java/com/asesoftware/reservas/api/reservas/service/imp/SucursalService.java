@@ -1,5 +1,6 @@
 package com.asesoftware.reservas.api.reservas.service.imp;
 
+import java.util.List;
 import java.util.Optional;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -119,4 +120,35 @@ public class SucursalService implements ISucursalService{
 
 	}
 
+	/**
+	* Método consultar Sucursal por Empresa
+	* @author jcanizales
+	* @version 0.1, 2021/07/06
+	*/
+	
+	@Override
+	public ResponseDTO consultarSucursalxEmpresa(String nit) {
+		logger.info("ingreso al metodo consultarSucursalxEmpresa");
+		
+		Optional<SucursalEntity> optional = sucursalRepository.findByNit(nit);
+		
+		if (optional.isPresent()) {
+			logger.info("Consulta por nit {} encontrada ",nit);
+			return new ResponseDTO(optional.get(), true, OK, HttpStatus.OK);
+		}else {
+			logger.info("Error en consultar con el nit {}",nit);
+			return  new ResponseDTO(null, false, ERROR_GENERICO, HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+		
+//		try {
+//			logger.info("Consulta por nit {} encontrada ",nit);
+//			List<SucursalDTO> listSucursalesDTO = mapperSucursal.listEntityToDto(sucursalRepository.findByNit(nit));
+//			return new ResponseDTO(listSucursalesDTO, true, OK, HttpStatus.OK); 
+//		}catch (Exception e) {
+//			logger.error("Error en consultar con el nit {}",e.getMessage());
+//			return new ResponseDTO(null, false, ERROR_GENERICO, HttpStatus.INTERNAL_SERVER_ERROR); 
+//		}
+		
+		
+	}
 }

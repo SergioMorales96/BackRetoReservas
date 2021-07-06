@@ -100,5 +100,17 @@ public class SucursalController {
 		
 		return sucursalService.eliminarSucursal(id);
 	}
+	
+	/**
+	* Controlador para acceder al servicio de sucursales por empresa
+	* @author jcanizales
+	* @version 0.1, 2021/07/06
+	*/
+	
+	@GetMapping(path = "/nit/{nit}")
+	public ResponseDTO consultarSucursalxEmpresa(@PathVariable String nit) {
+		logger.info("ingreso al metodo consultarSucursalxEmpresa {}", nit);
+		return sucursalService.consultarSucursalxEmpresa(nit);
+	}
 
 }
