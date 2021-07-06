@@ -28,12 +28,12 @@ public class SucursalEntity implements Serializable {
 	@Column(name="DIRECCION")
 	private String direccion;
 
-	@Column(name="NIT")
-	private String nit;
-
 	@Column(name="NOMBRE")
 	private String nombre;
-
+	
+	@ManyToOne
+    @JoinColumn(name = "NIT")
+    private EmpresaEntity empresaEntity;
 	
 
 }

@@ -25,8 +25,9 @@ public class PisoEntity implements Serializable {
 	@Column(name="AFORO_MAXIMO")
 	private Integer aforoMaximo;
 
-	@Column(name="ID_SUCURSAL")
-	private Integer idSucursal;
+	@ManyToOne
+    @JoinColumn(name = "ID_SUCURSAL")
+    private SucursalEntity sucursalEntity;
 
 	@Column(name="NOMBRE")
 	private String nombre;
