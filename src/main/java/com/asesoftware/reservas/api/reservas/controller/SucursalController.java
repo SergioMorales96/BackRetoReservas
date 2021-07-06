@@ -107,8 +107,8 @@ public class SucursalController {
 	* @version 0.1, 2021/07/06
 	*/
 	
-	@GetMapping(path = "/all/{nit}")
-	public ResponseDTO consultarSucursalxEmpresa(@RequestParam String nit) {
+	@GetMapping(path = "/nit/{nit}")
+	public ResponseDTO consultarSucursalxEmpresa(@PathVariable String nit) {
 		logger.info("ingreso al metodo consultarSucursalxEmpresa {}", nit);
 		return sucursalService.consultarSucursalxEmpresa(nit);
 	}
