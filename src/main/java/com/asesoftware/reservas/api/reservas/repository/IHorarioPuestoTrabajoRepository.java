@@ -9,7 +9,7 @@ import com.asesoftware.reservas.api.reservas.entity.HorarioPuestoTrabajoEntity;
 
 public interface IHorarioPuestoTrabajoRepository extends JpaRepository<HorarioPuestoTrabajoEntity, Integer> {
 
-	@Query("SELECT h FROM HorarioPuestoTrabajoEntity h, SucursalEntity s WHERE h.idSucursal = s.idSucursal AND s.idSucursal = ?1")
+	@Query("SELECT h FROM HorarioPuestoTrabajoEntity h, SucursalEntity s WHERE h.sucursalEntity.idSucursal = s.idSucursal AND s.idSucursal = ?1")
 	List<HorarioPuestoTrabajoEntity> queryHorarioPuestoTrabajoEntities(Integer idSucursal);
 	
 }
