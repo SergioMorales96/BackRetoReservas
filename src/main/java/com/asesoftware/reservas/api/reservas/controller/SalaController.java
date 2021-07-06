@@ -27,23 +27,44 @@ public class SalaController {
 	
 	@Autowired
 	private ISalaService salaService;
-
+	
+	/**
+	* Metodo para listar todas las salas
+	* @author jortizg
+	* @version 0.1, 2021/07/02
+	*/
+	
 	@GetMapping(path = "/todas")
 	public ResponseDTO listarTodosSalas() {
 		logger.info("ListarTodoSalas");
 		return salaService.listarTodosSalas();
 	}
+	/**
+	* Metodo para listar una sala
+	* @author jortizg
+	* @version 0.1, 2021/07/02
+	*/
 	@GetMapping(path = "/{id}")
 	public ResponseDTO obtenerSalaPorId(@PathVariable Integer id) {
 		logger.info("obtenerSalaPorId: {}",id);
 		return salaService.obtenerSalaPorId(id);
 	}
+	/**
+	* Metodo para crear una sala
+	* @author jortizg
+	* @version 0.1, 2021/07/02
+	*/
 	@PostMapping(path = "/crear", consumes = "application/json",produces = "application/json")
 	public ResponseDTO crearSala(@RequestBody SalaDTO salaDTO) {
 		logger.info("Sala creada: {}",salaDTO);
 		return salaService.crearSala(salaDTO); 
 	}
-	
+
+	/**
+	* Metodo para editar una sala
+	* @author fpena
+	* @version 0.1, 2021/07/02
+	*/
 	@PostMapping(path = "/actualizar", consumes = "application/json", produces = "application/json")
 	public ResponseDTO actualizarSala(@RequestBody SalaDTO salaDTO){
 		logger.info("Sala para actualizar: {}", salaDTO);
@@ -51,6 +72,12 @@ public class SalaController {
 
 	}
 	
+	
+	/**
+	* Metodo para eliminar una sala
+	* @author fpena
+	* @version 0.1, 2021/07/02
+	*/
 	@GetMapping(path = "/eliminar/{idSala}")
 	public ResponseDTO eliminarSala(@PathVariable Integer idSala) {
 		logger.info("Sala a eliminar: {}", idSala);
