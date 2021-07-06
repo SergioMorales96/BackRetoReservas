@@ -35,7 +35,7 @@ public class SalaService implements ISalaService{
 	
 	/**
 	* Metodo response para listar todas las salas
-	* @author jortizg
+	* @author jortiz
 	* @version 0.1, 2021/07/02
 	*/
 	@Override
@@ -71,7 +71,7 @@ public class SalaService implements ISalaService{
 	
 	/**
 	* Metodo para crear una sala
-	* @author jortizg
+	* @author jortiz
 	* @version 0.1, 2021/07/02
 	*/
 	@Override
