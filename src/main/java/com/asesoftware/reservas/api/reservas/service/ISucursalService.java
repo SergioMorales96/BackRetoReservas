@@ -14,4 +14,5 @@ public interface ISucursalService {
 	
 	public ResponseDTO eliminarSucursal(Integer id);
 
+	public ResponseDTO consultarSucursalxEmpresa(String nit);
 }
