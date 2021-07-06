@@ -12,7 +12,8 @@ import com.asesoftware.reservas.api.reservas.entity.DominioEntity;
 import com.asesoftware.reservas.api.reservas.mapper.IDominioMapper;
 import com.asesoftware.reservas.api.reservas.repository.IDominioRepository;
 import com.asesoftware.reservas.api.reservas.service.IDominioService;
-
+import static com.asesoftware.reservas.api.reservas.utils.Constantes.OK;
+import static com.asesoftware.reservas.api.reservas.utils.Constantes.ERROR_GENERICO;
 
 @Service
 public class DominioService implements IDominioService {
@@ -37,7 +38,7 @@ public class DominioService implements IDominioService {
 	@Override
 	public ResponseDTO readDominio() {
 		
-		return new ResponseDTO(mapperDominio.entitysToDtos(dominioRepository.findAll()),true,"ok",HttpStatus.OK);
+		return new ResponseDTO(mapperDominio.entitysToDtos(dominioRepository.findAll()),true,OK,HttpStatus.OK);
 	}
 	
 	/**
@@ -54,9 +55,9 @@ public class DominioService implements IDominioService {
 			
 			dominioRepository.save(dominioEntity);
 		
-			return new ResponseDTO(mapperDominio.entityToDto(dominioEntity),true,"ok",HttpStatus.OK);
+			return new ResponseDTO(mapperDominio.entityToDto(dominioEntity),true,OK,HttpStatus.OK);
 		}catch(Exception e){
-			return new ResponseDTO(null, false, "No se puede crear el dominio", HttpStatus.INTERNAL_SERVER_ERROR);
+			return new ResponseDTO(null, false, ERROR_GENERICO, HttpStatus.INTERNAL_SERVER_ERROR);
 		}	
 	}
 
@@ -73,7 +74,7 @@ public class DominioService implements IDominioService {
 		
 		dominioRepository.queryDominioUpdate(dominioDTO.getValorDominio(),dominioDTO.getCodigoDominio(),dominioDTO.getDescripcion());
 				
-		return new ResponseDTO(null,true,"ok",HttpStatus.OK);
+		return new ResponseDTO(null,true,OK,HttpStatus.OK);
 	}
 
 	/**
@@ -89,7 +90,7 @@ public class DominioService implements IDominioService {
 		
 		dominioRepository.queryDominioDelete(dominioDTO.getValorDominio(),dominioDTO.getCodigoDominio(), dominioDTO.getDescripcion());
 
-		return new ResponseDTO(null,true,"ok",HttpStatus.OK);
+		return new ResponseDTO(null,true,OK,HttpStatus.OK);
 		
 	}
 	
