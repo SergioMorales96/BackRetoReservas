@@ -8,5 +8,6 @@ public interface IEmpresaService {
 	public ResponseDTO empresaPorId(String nit);
 	public ResponseDTO consultarTodas();
 	public ResponseDTO actualizarEmpresa(EmpresaDTO empresaDTO);
+	public ResponseDTO crearEmpresa(EmpresaDTO empresaDTO);
 	
 }
