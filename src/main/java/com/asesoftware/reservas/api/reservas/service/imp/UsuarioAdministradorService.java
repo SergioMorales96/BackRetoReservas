@@ -15,6 +15,8 @@ import com.asesoftware.reservas.api.reservas.entity.UsuarioAdministradorEntity;
 import com.asesoftware.reservas.api.reservas.mapper.IUsuarioAdministradorMapper;
 import com.asesoftware.reservas.api.reservas.repository.IAdministradorRepository;
 import com.asesoftware.reservas.api.reservas.service.IUsuarioAdministradorService;
+import static com.asesoftware.reservas.api.reservas.utils.Constantes.ERROR_GENERICO;
+import static com.asesoftware.reservas.api.reservas.utils.Constantes.OK;
 
 @Service
 public class UsuarioAdministradorService implements IUsuarioAdministradorService{
@@ -41,10 +43,10 @@ public class UsuarioAdministradorService implements IUsuarioAdministradorService
 		
 		if(usuarioAdministradorEntity.isPresent()) {
 			
-			return new ResponseDTO(usuarioAdminMapper.entityToDto(usuarioAdministradorEntity.get()), true, "OK", HttpStatus.OK);
+			return new ResponseDTO(usuarioAdminMapper.entityToDto(usuarioAdministradorEntity.get()), true, OK , HttpStatus.OK);
 		}else {
 			
-			return new ResponseDTO(null, false, "Usuario no encontrado",HttpStatus.OK);
+			return new ResponseDTO(null, false, ERROR_GENERICO,HttpStatus.OK);
 		}
 		
 	}
@@ -63,7 +65,7 @@ public class UsuarioAdministradorService implements IUsuarioAdministradorService
 		
 		logger.info("consultarTodas() {}", listUsuarioAdministrador);
 		
-		return new ResponseDTO(usuarioAdminMapper.entitysToDtos(listUsuarioAdministrador), true, "OK", HttpStatus.OK);
+		return new ResponseDTO(usuarioAdminMapper.entitysToDtos(listUsuarioAdministrador), true, OK, HttpStatus.OK);
 	}
 
 	/**
@@ -77,11 +79,11 @@ public class UsuarioAdministradorService implements IUsuarioAdministradorService
 		try {
 		UsuarioAdministradorEntity usuarioAdministardor = administradorRepository.save(usuarioAdminMapper.dtoToEntity(userAdmin));
 		logger.info("crear usuario: {}", usuarioAdministardor);
-		return new ResponseDTO(usuarioAdminMapper.entityToDto(usuarioAdministardor), true, "Administrador creado", HttpStatus.OK);
+		return new ResponseDTO(usuarioAdminMapper.entityToDto(usuarioAdministardor), true, OK, HttpStatus.OK);
 		}
 		catch(Exception e) {
 			logger.error("No se ha podido crear el administrador");
-			return new ResponseDTO(null, false, "No se ha podido crear el administrador", HttpStatus.INTERNAL_SERVER_ERROR);
+			return new ResponseDTO(null, false, ERROR_GENERICO, HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 	}
 
@@ -95,11 +97,11 @@ public class UsuarioAdministradorService implements IUsuarioAdministradorService
 		try {
 		UsuarioAdministradorEntity usuarioAdministardor = administradorRepository.save(usuarioAdminMapper.dtoToEntity(userAdmin));
 		logger.info("editar administrador: {}", usuarioAdministardor);
-		return new ResponseDTO(usuarioAdminMapper.entityToDto(usuarioAdministardor), true, "Administrador modificado", HttpStatus.OK);
+		return new ResponseDTO(usuarioAdminMapper.entityToDto(usuarioAdministardor), true, OK, HttpStatus.OK);
 		}
 		catch(Exception e) {
 			logger.error("No se ha podido cambiar el usuario administrador");
-			return new ResponseDTO(null, true, "Usuario modificado", HttpStatus.OK);
+			return new ResponseDTO(null, true, ERROR_GENERICO, HttpStatus.OK);
 		}
 	}
 
@@ -113,11 +115,11 @@ public class UsuarioAdministradorService implements IUsuarioAdministradorService
 		try {
 			administradorRepository.deleteById(idAdministrador);
 			logger.info("eliminado usuario con id: {}",idAdministrador);
-			return new ResponseDTO(null, true, "Usuario eliminado", HttpStatus.OK);
+			return new ResponseDTO(null, true, OK, HttpStatus.OK);
 		}
 		catch (Exception e) {
 			logger.error("No se ha podido eliminar el usuario con id {}",idAdministrador);
-			return new ResponseDTO(null, false, "No se ha podido eliminar el usuario", HttpStatus.OK);
+			return new ResponseDTO(null, false, ERROR_GENERICO, HttpStatus.OK);
 		}
 	}
 
@@ -132,7 +134,7 @@ public class UsuarioAdministradorService implements IUsuarioAdministradorService
 		List<UsuarioAdministradorDTO> listUsuarioAdminDtos = usuarioAdminMapper.entitysToDtos(administradorRepository.queryUsuarioAdminPorEmail(email));
 		
 		
-		return new ResponseDTO(listUsuarioAdminDtos, true, "OK", HttpStatus.OK);
+		return new ResponseDTO(listUsuarioAdminDtos, true, OK, HttpStatus.OK);
 	}
 
 }
