@@ -16,7 +16,7 @@ import com.asesoftware.reservas.api.reservas.mapper.IPisoMapper;
 import com.asesoftware.reservas.api.reservas.repository.IPisoRepository;
 import com.asesoftware.reservas.api.reservas.service.IPisoService;
 import static com.asesoftware.reservas.api.reservas.utils.Constantes.ERROR_GENERICO;
-import static com.asesoftware.reservas.api.reservas.utils.Constantes.OK;;
+import static com.asesoftware.reservas.api.reservas.utils.Constantes.OK;
 
 @Service
 public class PisoService implements IPisoService{
@@ -29,6 +29,11 @@ public class PisoService implements IPisoService{
 	@Autowired
 	private IPisoMapper pisoMapper;
 
+	/**
+	* Implemantacion de metodo Consultar todos los pisos
+	* @author lhernandez 
+	* @version 0.1, 2021/06/29
+	*/
 	@Override
 	public ResponseDTO consultarTodos() {
 		logger.info("consultarTodos()");
@@ -36,7 +41,11 @@ public class PisoService implements IPisoService{
 		logger.info("consultarTodos() {}", lisPiso);
 		return new ResponseDTO(pisoMapper.entitysToDtos(lisPiso),true,"OK",HttpStatus.OK);
 	}
-
+	/**
+	* Implemantacion de metodo Consultar piso por id
+	* @author lhernandez 
+	* @version 0.1, 2021/06/30
+	*/
 	@Override
 	public PisoDTO consultarpisoPorId(Integer idPiso) {
 		Optional<PisoEntity> optional = pisoRespository.findById(idPiso);
@@ -45,78 +54,98 @@ public class PisoService implements IPisoService{
 			return pisoMapper.entityToDto(optional.get());
 		} else {
 		return null;
-	}
-}
-
-	@Override
-	public ResponseDTO pisoPorId(Integer idPiso) {
-		Optional<PisoEntity> pisoEntity = pisoRespository.findById(idPiso);
-		if(pisoEntity.isPresent()) {
-			logger.info("se encontro el piso por id");
-			return  new ResponseDTO(pisoEntity, true,OK, HttpStatus.OK);
-		}else{
-			logger.info("No se encontro el piso por id");
-			return  new ResponseDTO(null, false, ERROR_GENERICO, HttpStatus.OK);
-		}
-	}
-
-	@Override
-	public ResponseDTO pisoPorNumeroPiso(Integer numeroPiso) {
-		List<PisoEntity> pisoEntity = pisoRespository.queryPorPiso(numeroPiso);
-		if(pisoEntity.isEmpty()) {
-			logger.error("El piso no existe");
-			return new ResponseDTO(null,false,OK, HttpStatus.OK);
-			
-		}else {
-			logger.info("se encontro el piso");
-			return new ResponseDTO(pisoEntity, true,ERROR_GENERICO, HttpStatus.OK);
-			
+	   }
+     }
+	
+		/**
+		* Implemantacion de metodo Consultar piso por id que retorna un dto
+		* @author cfcruz 
+		* @version 0.1, 2021/07/01
+		*/
+	
+		@Override
+		public ResponseDTO pisoPorId(Integer idPiso) {
+			Optional<PisoEntity> pisoEntity = pisoRespository.findById(idPiso);
+			if(pisoEntity.isPresent()) {
+				logger.info("se encontro el piso por id");
+				return  new ResponseDTO(pisoEntity, true,OK, HttpStatus.OK);
+			}else{
+				logger.info("No se encontro el piso por id");
+				return  new ResponseDTO(null, false, ERROR_GENERICO, HttpStatus.OK);
+			}
 		}
 		
-		
-	}
-
-	@Override
-	public ResponseDTO crearPiso(PisoDTO pisoDTO) {
-		try {
-			PisoEntity pisoEntity = pisoMapper.dtoToEntity(pisoDTO);
-			pisoRespository.save(pisoEntity);
-			logger.info("crearPiso() {}",pisoDTO);
-			return new ResponseDTO(pisoMapper.entityToDto(pisoEntity), true,OK,HttpStatus.OK);
-		} catch (Exception e) {
-			logger.error(e.getMessage());
-			return new ResponseDTO(null,false,ERROR_GENERICO,HttpStatus.INTERNAL_SERVER_ERROR);
-		}
-	}
-    
-	@Override
-	public ResponseDTO actualizarPiso(PisoDTO pisoDTO) {
-		try {
-			logger.info("actualizando piso {}",pisoDTO);
-			PisoEntity pisoEntity = pisoMapper.dtoToEntity(pisoDTO);
-			pisoRespository.save(pisoEntity);
-			return new ResponseDTO(pisoMapper.entityToDto(pisoEntity), true,OK, HttpStatus.OK);
-		}catch (Exception e) {
-			logger.error(e.getMessage());
-			return new ResponseDTO(null,false,ERROR_GENERICO,HttpStatus.INTERNAL_SERVER_ERROR);
+		/**
+		* Implemantacion de metodo Consultar piso por numero de piso
+		* @author cfcruz 
+		* @version 0.1, 2021/07/01
+		*/
+	
+		@Override
+		public ResponseDTO pisoPorNumeroPiso(Integer numeroPiso) {
+			List<PisoEntity> pisoEntity = pisoRespository.queryPorPiso(numeroPiso);
+			if(pisoEntity.isEmpty()) {
+				logger.error("El piso no existe");
+				return new ResponseDTO(null,false,OK, HttpStatus.OK);
+				
+			}else {
+				logger.info("se encontro el piso");
+				return new ResponseDTO(pisoEntity, true,ERROR_GENERICO, HttpStatus.OK);				
+			}		
 			
 		}
 		
-	}
-	/**
-	* Frase corta descriptiva
-	* @author Nombre Apellido 
-	* @version 0.1, 2004/05/30
-	*/
-	@Override
-	public ResponseDTO eliminarPiso(Integer idPiso) {
-		try {
-			logger.info("eliminarPiso {}", idPiso);
-			pisoRespository.deleteById(idPiso);			
-			return new ResponseDTO(null,true,OK,HttpStatus.OK);
-		} catch (Exception e) {
-			logger.error(e.getMessage());
-			return new ResponseDTO(null,false,ERROR_GENERICO,HttpStatus.INTERNAL_SERVER_ERROR);
+		/**
+		* Implemantacion de metodo Crear piso
+		* @author lhernandez 
+		* @version 0.1, 2021/06/29
+		*/
+	
+		@Override
+		public ResponseDTO crearPiso(PisoDTO pisoDTO) {
+			try {
+				PisoEntity pisoEntity = pisoMapper.dtoToEntity(pisoDTO);
+				pisoRespository.save(pisoEntity);
+				logger.info("crearPiso() {}",pisoDTO);
+				return new ResponseDTO(pisoMapper.entityToDto(pisoEntity), true,OK,HttpStatus.OK);
+			} catch (Exception e) {
+				logger.error(e.getMessage());
+				return new ResponseDTO(null,false,ERROR_GENERICO,HttpStatus.INTERNAL_SERVER_ERROR);
+			}
+		}
+		
+		/**
+		* Implemantacion de metodo Actualizar piso
+		* @author cfcruz 
+		* @version 0.1, 2021/07/01
+		*/
+		@Override
+		public ResponseDTO actualizarPiso(PisoDTO pisoDTO) {
+			try {
+				logger.info("actualizando piso {}",pisoDTO);
+				PisoEntity pisoEntity = pisoMapper.dtoToEntity(pisoDTO);
+				pisoRespository.save(pisoEntity);
+				return new ResponseDTO(pisoMapper.entityToDto(pisoEntity), true,OK, HttpStatus.OK);
+			}catch (Exception e) {
+				logger.error(e.getMessage());
+				return new ResponseDTO(null,false,ERROR_GENERICO,HttpStatus.INTERNAL_SERVER_ERROR);			
+			}		
+		}
+		
+		/**
+		* Implemantacion de metodo Eliminar por piso
+		* @author lhernandez 
+		* @version 0.1, 2021/06/29
+		*/
+		@Override
+		public ResponseDTO eliminarPiso(Integer idPiso) {
+			try {
+				logger.info("eliminarPiso {}", idPiso);
+				pisoRespository.deleteById(idPiso);			
+				return new ResponseDTO(null,true,OK,HttpStatus.OK);
+			} catch (Exception e) {
+				logger.error(e.getMessage());
+				return new ResponseDTO(null,false,ERROR_GENERICO,HttpStatus.INTERNAL_SERVER_ERROR);
+			}
 		}
 	}
-}
