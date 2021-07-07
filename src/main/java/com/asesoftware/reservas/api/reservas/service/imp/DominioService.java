@@ -55,17 +55,19 @@ public class DominioService implements IDominioService {
 	public ResponseDTO createDominio(DominioDTO dominioDTO) {
 		
 		
-		
-		logger.info("createDominio {} ", dominioDTO);
-		
-		if(dominioRepository.findByDominioPKCodigoDominioAndDescripcion(dominioDTO.getCodigoDominio(), dominioDTO.getDescripcion()) == null) {
-			DominioEntity dominioEntity = mapperDominio.dtoToEntity(dominioDTO);
-			dominioRepository.save(dominioEntity);
-			return new ResponseDTO(mapperDominio.entityToDto(dominioEntity),true,OK,HttpStatus.OK);
-		}else {
+		try {	
+			logger.info("createDominio {} ", dominioDTO);
+			
+			if(dominioRepository.findByDominioPKCodigoDominioAndDescripcion(dominioDTO.getCodigoDominio(), dominioDTO.getDescripcion()) == null) {
+				DominioEntity dominioEntity = mapperDominio.dtoToEntity(dominioDTO);
+				dominioRepository.save(dominioEntity);
+				return new ResponseDTO(mapperDominio.entityToDto(dominioEntity),true,OK,HttpStatus.OK);
+			}else {
+				return new ResponseDTO(null, false, ERROR_GENERICO, HttpStatus.INTERNAL_SERVER_ERROR);
+			}	
+		}catch(Exception e) {
 			return new ResponseDTO(null, false, ERROR_GENERICO, HttpStatus.INTERNAL_SERVER_ERROR);
-		}	
-		
+		}
 	}
 
 	/**
@@ -76,19 +78,20 @@ public class DominioService implements IDominioService {
 
 	@Override
 	public ResponseDTO updateDominio(DominioDTO dominioDTO) {
-		
-		logger.info("updateDominio {} ", dominioDTO);
+		try {	
+			logger.info("updateDominio {} ", dominioDTO);
+					
+			if(dominioRepository.findByDominioPKCodigoDominioAndDescripcion(dominioDTO.getCodigoDominio(), dominioDTO.getDescripcion()) != null) {
 				
-		if(dominioRepository.findByDominioPKCodigoDominioAndDescripcion(dominioDTO.getCodigoDominio(), dominioDTO.getDescripcion()) != null) {
-			
-			dominioRepository.queryDominioUpdate(dominioDTO.getValorDominio(),dominioDTO.getCodigoDominio(),dominioDTO.getDescripcion());
-			
-			return new ResponseDTO(null,true,OK,HttpStatus.OK);
-		}else {
+				dominioRepository.queryDominioUpdate(dominioDTO.getValorDominio(),dominioDTO.getCodigoDominio(),dominioDTO.getDescripcion());
+				
+				return new ResponseDTO(null,true,OK,HttpStatus.OK);
+			}else {
+				return new ResponseDTO(null,false,ERROR_GENERICO,HttpStatus.INTERNAL_SERVER_ERROR);
+			}
+		}catch( Exception e) {
 			return new ResponseDTO(null,false,ERROR_GENERICO,HttpStatus.INTERNAL_SERVER_ERROR);
-		}
-		
-	} 
+	}} 
 
 	/**
 	* Metodo encargado de Eliminar un dominios
@@ -99,18 +102,21 @@ public class DominioService implements IDominioService {
 	@Override
 	public ResponseDTO deleteDominio(DominioDTO dominioDTO) {
 		
-		logger.info("ingerso al metodo deleteDominio");
+		try {
+			logger.info("ingerso al metodo deleteDominio");
 		
-		if(dominioRepository.findByDominioPKCodigoDominioAndDescripcion(dominioDTO.getCodigoDominio(), dominioDTO.getDescripcion()) != null) {
+			if(dominioRepository.findByDominioPKCodigoDominioAndDescripcion(dominioDTO.getCodigoDominio(), dominioDTO.getDescripcion()) != null) {
 			
-			dominioRepository.queryDominioDelete(dominioDTO.getValorDominio(),dominioDTO.getCodigoDominio(), dominioDTO.getDescripcion());
+				dominioRepository.queryDominioDelete(dominioDTO.getValorDominio(),dominioDTO.getCodigoDominio(), dominioDTO.getDescripcion());
 			
-			return new ResponseDTO(null,true,OK,HttpStatus.OK);
-		}else {
+				return new ResponseDTO(null,true,OK,HttpStatus.OK);
+			}else {
 			
+				return new ResponseDTO(null,false,ERROR_GENERICO,HttpStatus.INTERNAL_SERVER_ERROR);
+			}
+		}catch(Exception e) {
 			return new ResponseDTO(null,false,ERROR_GENERICO,HttpStatus.INTERNAL_SERVER_ERROR);
 		}
-		
 		
 		/**
 		* Metodo encargado de buscar dominios por CODIGO_DOMINIO
@@ -124,16 +130,20 @@ public class DominioService implements IDominioService {
 	@Override
 	public ResponseDTO readDominioByCodDomi(String codigoDominio) {
 		
+		try {
+			
+			
+			List<DominioEntity> dominioEntity = dominioRepository.findByDominioPKCodigoDominio(codigoDominio);
+			logger.info("consultar dominio por codigo de dominio {}",codigoDominio);
+			if (dominioEntity != null) {
+				return new ResponseDTO(mapperDominio.entitysToDtos(dominioEntity),true,OK,HttpStatus.OK);
+			}else {
+				return new ResponseDTO(null,false,ERROR_GENERICO,HttpStatus.INTERNAL_SERVER_ERROR);
+		}}catch (Exception e) {
+			return new ResponseDTO(null,false,ERROR_GENERICO,HttpStatus.INTERNAL_SERVER_ERROR);
+		}
 		
-		List<DominioEntity> dominioEntity = dominioRepository.findByDominioPKCodigoDominio(codigoDominio);
-		
-		if (dominioEntity != null) {
-			return new ResponseDTO(mapperDominio.entitysToDtos(dominioEntity),true,OK,HttpStatus.OK);
-		}else {
-				
-		
-		return new ResponseDTO(mapperDominio.entitysToDtos(dominioEntity),false,ERROR_GENERICO,HttpStatus.INTERNAL_SERVER_ERROR);
-	}}
+		}}
 
 	
-}
+
