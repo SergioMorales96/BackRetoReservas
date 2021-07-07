@@ -20,13 +20,13 @@ public class DominioPK implements Serializable {
 	private String codigoDominio;
 	
 	@Column(name="VALOR_DOMINO")
-	private String valorDomino;
+	private String valorDominio;
 
 	public DominioPK() {}
 	
-	public DominioPK( String codigoDominio,String valorDomino) {
+	public DominioPK( String codigoDominio,String valorDominio) {
 		
-		this.valorDomino = valorDomino;
+		this.valorDominio = valorDominio;
 		this.codigoDominio = codigoDominio;
 	}
 	

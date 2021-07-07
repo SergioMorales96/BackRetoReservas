@@ -17,7 +17,7 @@ public class DominioEntity implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@EmbeddedId
-	private DominioPK id;
+	private DominioPK dominioPK;
 
 	@Column(name="DESCRIPCION")
 	private String descripcion;
