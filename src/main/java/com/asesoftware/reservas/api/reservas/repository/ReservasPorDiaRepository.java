@@ -32,7 +32,7 @@ public class ReservasPorDiaRepository {
 	public ReservasPorDiaRepository(final EntityManager entityManager) {
 		this.entityManager = entityManager;
 	}
-		
+	
 	public List<ReservasPTDiaSPDTO> getReservaPTDia(Date fechaReserva) {
 		
 		StoredProcedureQuery storedProcedureQuery = entityManager.createStoredProcedureQuery("PR_RESERVAS_DIA_PT_3")
