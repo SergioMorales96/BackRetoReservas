@@ -1,9 +1,8 @@
 package com.asesoftware.reservas.api.reservas.controller;
 
-import java.util.Date;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -18,6 +17,7 @@ public class ReservaController {
 
 	private static final Logger logger  = LoggerFactory.getLogger(ReservaController.class);
 	
+	@Autowired
 	private IReservaService reservaService;
 	
 	/**
@@ -27,7 +27,7 @@ public class ReservaController {
 	*/
 	
 	@GetMapping(path = "/reserva_fecha/{fecha}")
-	public ResponseDTO consultarReservaXDiaPT(@PathVariable Date fecha) {
+	public ResponseDTO consultarReservaXDiaPT(@PathVariable String fecha) {
 
 		logger.info("ingreso al metodo consultarReservaXDiaPT {}", fecha);
 		

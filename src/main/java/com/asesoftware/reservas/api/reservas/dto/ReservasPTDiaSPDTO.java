@@ -1,5 +1,6 @@
 package com.asesoftware.reservas.api.reservas.dto;
 
+import java.io.Serializable;
 import java.util.Date;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
@@ -7,12 +8,13 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Data;
 
 @Data
-public class ReservasPTDiaSPDTO {
+public class ReservasPTDiaSPDTO implements Serializable{
 	
+	private static final long serialVersionUID = 1L;
 	private String correo;
 	private Integer numReserva;
 	
-	@JsonFormat(shape = JsonFormat.Shape.STRING,pattern = "dd-mm-yyyy",timezone = "America/New_York")
+	@JsonFormat(shape = JsonFormat.Shape.STRING,pattern = "dd-MM-yyyy",timezone = "America/New_York")
 	private Date dia;
 	
 	@JsonFormat(shape = JsonFormat.Shape.STRING,pattern = "HH24:mm",timezone = "America/New_York")

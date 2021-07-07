@@ -1,5 +1,6 @@
 package com.asesoftware.reservas.api.reservas.repository;
 
+import java.math.BigDecimal;
 import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -41,20 +42,21 @@ public class ReservasPorDiaRepository {
 				.registerStoredProcedureParameter("OUT_DATA", ReservasPTDiaSPDTO.class, ParameterMode.REF_CURSOR);
 		
 		//Ejecuta el metodo que retorna una lista de objetos
+		@SuppressWarnings("unchecked")
 		List<Object[]> listReservas = storedProcedureQuery.getResultList(); 
-		
+			
 		//se pasa a dto
 		List<ReservasPTDiaSPDTO> dataDTOs = listReservas.stream()
 				.map(datos -> new ReservasPTDiaSPDTO(
 						(String)datos[0], 
-						(Integer)datos[1], 
+						((BigDecimal)datos[1]).intValueExact(), 
 						(Date)datos[2], 
 						(Date)datos[3], 
 						(Date)datos[4], 
 						(String)datos[5], 
-						(Integer)datos[6], 
+						((BigDecimal)datos[6]).intValueExact(), 
 						(String)datos[7], 
-						(Integer)datos[8], 
+						((BigDecimal)datos[8]).intValueExact(), 
 						(String)datos[9], 
 						(String)datos[10], 
 						(String)datos[11])
