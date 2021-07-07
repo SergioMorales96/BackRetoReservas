@@ -15,7 +15,7 @@ import com.asesoftware.reservas.api.reservas.repository.IPuestoTrabajoRepository
 import com.asesoftware.reservas.api.reservas.service.IPuestoTrabajoService;
 
 import static com.asesoftware.reservas.api.reservas.utils.Constantes.OK;
-import static com.asesoftware.reservas.api.reservas.utils.Constantes.ERROR_GENERICO;;
+import static com.asesoftware.reservas.api.reservas.utils.Constantes.ERROR_GENERICO;
 
 @Service
 public class PuestoTrabajoService implements IPuestoTrabajoService{
