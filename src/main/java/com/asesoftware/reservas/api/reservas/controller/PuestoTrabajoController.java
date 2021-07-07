@@ -83,6 +83,16 @@ public class PuestoTrabajoController {
 
 		return puestoTrabajoService.borrarPuestoTrabajo(idPuestoTrabajo);
 	}
-
-
+	
+	/**
+	* Controlador para acceder al servicio de puestos de trabajo por piso
+	* @author jcanizales
+	* @version 0.1, 2021/07/07
+	*/
+	
+	@GetMapping(path = "/puestoTrabajo/{idPiso}")
+	public ResponseDTO puestoTrabajoXPiso(@PathVariable Integer idPiso) {
+		logger.info("ingreso al metodo puestoTrabajoXPiso {}", idPiso);
+		return puestoTrabajoService.puestoTrabajoXPiso(idPiso);
+	}
 }

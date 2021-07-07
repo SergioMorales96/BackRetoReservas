@@ -129,5 +129,21 @@ public class PuestoTrabajoService implements IPuestoTrabajoService{
 			return  new ResponseDTO(null, false, ERROR_GENERICO, HttpStatus.OK); 
 		}
 	}
+	
+	/**
+	* Metodo para consultar puestos de trabajo por piso
+	* @author jcanizales
+	* @version 0.1, 2021/07/07
+	*/
+	
+	@Override
+	public ResponseDTO puestoTrabajoXPiso(Integer idPiso) {
+		
+		logger.info("ingreso al metodo consultarSucursalxEmpresa");
+		
+		List<PuestoTrabajoEntity> listPuestosTrabajoEntities = puestoTrabajoRepositorio.findByPisoEntityIdPiso(idPiso);
+		
+		return new ResponseDTO(puestoTrabajoMapper.entitysToDtos(listPuestosTrabajoEntities), true, OK, HttpStatus.OK);
+	}
 
 }
