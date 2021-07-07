@@ -58,15 +58,14 @@ public class DominioService implements IDominioService {
 		
 		logger.info("createDominio {} ", dominioDTO);
 		
-		try {
+		if(dominioRepository.findByDominioPKCodigoDominioAndDescripcion(dominioDTO.getCodigoDominio(), dominioDTO.getDescripcion()) == null) {
 			DominioEntity dominioEntity = mapperDominio.dtoToEntity(dominioDTO);
-			
 			dominioRepository.save(dominioEntity);
-		
 			return new ResponseDTO(mapperDominio.entityToDto(dominioEntity),true,OK,HttpStatus.OK);
-		}catch(Exception e){
+		}else {
 			return new ResponseDTO(null, false, ERROR_GENERICO, HttpStatus.INTERNAL_SERVER_ERROR);
 		}	
+		
 	}
 
 	/**
@@ -84,9 +83,9 @@ public class DominioService implements IDominioService {
 			
 			dominioRepository.queryDominioUpdate(dominioDTO.getValorDominio(),dominioDTO.getCodigoDominio(),dominioDTO.getDescripcion());
 			
-			return new ResponseDTO(null,true,"ok",HttpStatus.OK);
+			return new ResponseDTO(null,true,OK,HttpStatus.OK);
 		}else {
-			return new ResponseDTO(null,false,"El dominio no se actualizar el dominio, porque no existe",HttpStatus.INTERNAL_SERVER_ERROR);
+			return new ResponseDTO(null,false,ERROR_GENERICO,HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 		
 	} 
@@ -106,13 +105,18 @@ public class DominioService implements IDominioService {
 			
 			dominioRepository.queryDominioDelete(dominioDTO.getValorDominio(),dominioDTO.getCodigoDominio(), dominioDTO.getDescripcion());
 			
-			return new ResponseDTO(null,true,"El dominio se elimino correctamente",HttpStatus.OK);
+			return new ResponseDTO(null,true,OK,HttpStatus.OK);
 		}else {
 			
-			return new ResponseDTO(null,false,"No se elimino ningun dominio porque no existe",HttpStatus.INTERNAL_SERVER_ERROR);
+			return new ResponseDTO(null,false,ERROR_GENERICO,HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 		
-
+		
+		/**
+		* Metodo encargado de buscar dominios por CODIGO_DOMINIO
+		* @author abarrios
+		* @version 0.1, 2021/07/02
+		*/
 		
 		
 	}
@@ -124,11 +128,11 @@ public class DominioService implements IDominioService {
 		List<DominioEntity> dominioEntity = dominioRepository.findByDominioPKCodigoDominio(codigoDominio);
 		
 		if (dominioEntity != null) {
-			return new ResponseDTO(mapperDominio.entitysToDtos(dominioEntity),true,"Los dominios son estos",HttpStatus.OK);
+			return new ResponseDTO(mapperDominio.entitysToDtos(dominioEntity),true,OK,HttpStatus.OK);
 		}else {
 				
 		
-		return new ResponseDTO(mapperDominio.entitysToDtos(dominioEntity),false,"No se encontro el dominio",HttpStatus.INTERNAL_SERVER_ERROR);
+		return new ResponseDTO(mapperDominio.entitysToDtos(dominioEntity),false,ERROR_GENERICO,HttpStatus.INTERNAL_SERVER_ERROR);
 	}}
 
 	
