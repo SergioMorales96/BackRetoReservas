@@ -1,5 +1,8 @@
 package com.asesoftware.reservas.api.reservas.service.imp;
 
+import java.util.List;
+import java.util.Optional;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,6 +12,7 @@ import org.springframework.stereotype.Service;
 import com.asesoftware.reservas.api.reservas.dto.DominioDTO;
 import com.asesoftware.reservas.api.reservas.dto.ResponseDTO;
 import com.asesoftware.reservas.api.reservas.entity.DominioEntity;
+import com.asesoftware.reservas.api.reservas.entity.DominioPK;
 import com.asesoftware.reservas.api.reservas.mapper.IDominioMapper;
 import com.asesoftware.reservas.api.reservas.repository.IDominioRepository;
 import com.asesoftware.reservas.api.reservas.service.IDominioService;
@@ -50,6 +54,10 @@ public class DominioService implements IDominioService {
 	@Override
 	public ResponseDTO createDominio(DominioDTO dominioDTO) {
 		
+		
+		
+		logger.info("createDominio {} ", dominioDTO);
+		
 		try {
 			DominioEntity dominioEntity = mapperDominio.dtoToEntity(dominioDTO);
 			
@@ -71,11 +79,17 @@ public class DominioService implements IDominioService {
 	public ResponseDTO updateDominio(DominioDTO dominioDTO) {
 		
 		logger.info("updateDominio {} ", dominioDTO);
-		
-		dominioRepository.queryDominioUpdate(dominioDTO.getValorDominio(),dominioDTO.getCodigoDominio(),dominioDTO.getDescripcion());
 				
-		return new ResponseDTO(null,true,OK,HttpStatus.OK);
-	}
+		if(dominioRepository.findByDominioPKCodigoDominioAndDescripcion(dominioDTO.getCodigoDominio(), dominioDTO.getDescripcion()) != null) {
+			
+			dominioRepository.queryDominioUpdate(dominioDTO.getValorDominio(),dominioDTO.getCodigoDominio(),dominioDTO.getDescripcion());
+			
+			return new ResponseDTO(null,true,"ok",HttpStatus.OK);
+		}else {
+			return new ResponseDTO(null,false,"El dominio no se actualizar el dominio, porque no existe",HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+		
+	} 
 
 	/**
 	* Metodo encargado de Eliminar un dominios
@@ -88,10 +102,34 @@ public class DominioService implements IDominioService {
 		
 		logger.info("ingerso al metodo deleteDominio");
 		
-		dominioRepository.queryDominioDelete(dominioDTO.getValorDominio(),dominioDTO.getCodigoDominio(), dominioDTO.getDescripcion());
+		if(dominioRepository.findByDominioPKCodigoDominioAndDescripcion(dominioDTO.getCodigoDominio(), dominioDTO.getDescripcion()) != null) {
+			
+			dominioRepository.queryDominioDelete(dominioDTO.getValorDominio(),dominioDTO.getCodigoDominio(), dominioDTO.getDescripcion());
+			
+			return new ResponseDTO(null,true,"El dominio se elimino correctamente",HttpStatus.OK);
+		}else {
+			
+			return new ResponseDTO(null,false,"No se elimino ningun dominio porque no existe",HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+		
 
-		return new ResponseDTO(null,true,OK,HttpStatus.OK);
+		
 		
 	}
+
+	@Override
+	public ResponseDTO readDominioByCodDomi(String codigoDominio) {
+		
+		
+		List<DominioEntity> dominioEntity = dominioRepository.findByDominioPKCodigoDominio(codigoDominio);
+		
+		if (dominioEntity != null) {
+			return new ResponseDTO(mapperDominio.entitysToDtos(dominioEntity),true,"Los dominios son estos",HttpStatus.OK);
+		}else {
+				
+		
+		return new ResponseDTO(mapperDominio.entitysToDtos(dominioEntity),false,"No se encontro el dominio",HttpStatus.INTERNAL_SERVER_ERROR);
+	}}
+
 	
 }
