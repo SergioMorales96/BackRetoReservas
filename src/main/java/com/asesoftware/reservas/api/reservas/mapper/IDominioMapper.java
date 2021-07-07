@@ -12,20 +12,12 @@ import com.asesoftware.reservas.api.reservas.entity.DominioEntity;
 @Mapper(componentModel = "spring")
 public interface IDominioMapper {
 	
-	
-		@Mapping(source = "codigoDominio",target = "dominioPK.codigoDominio")
-		@Mapping(source = "valorDominio",target = "dominioPK.valorDominio")
-		
-
-	
+	@Mapping(source = "codigoDominio",target = "dominioPK.codigoDominio")
+	@Mapping(source = "valorDominio",target = "dominioPK.valorDominio")
 	public DominioEntity dtoToEntity(DominioDTO dto);
 	
-	
-		@Mapping(source = "dominioPK.codigoDominio",target = "codigoDominio")
-		@Mapping(source = "dominioPK.valorDominio",target = "valorDominio")
-		
-
-	
+	@Mapping(source = "dominioPK.codigoDominio",target = "codigoDominio")
+	@Mapping(source = "dominioPK.valorDominio",target = "valorDominio")
 	public DominioDTO entityToDto(DominioEntity entity);
 	
 	public List<DominioEntity> dtosToEntitys(List<DominioDTO> dtos);
