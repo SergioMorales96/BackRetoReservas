@@ -14,5 +14,7 @@ public interface IPuestoTrabajoService {
 	public ResponseDTO actualizarPuestoTrabajo(PuestoTrabajoDTO puestoTrabajoDTO);
 	
 	public ResponseDTO borrarPuestoTrabajo(Integer idPuestoTrabajo);
+	
+	public ResponseDTO puestoTrabajoXPiso(Integer idPiso);
 
 }
