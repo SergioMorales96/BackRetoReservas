@@ -1,7 +1,6 @@
 package com.asesoftware.reservas.api.reservas.service.imp;
 
 import java.util.List;
-import java.util.Optional;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -12,7 +11,7 @@ import org.springframework.stereotype.Service;
 import com.asesoftware.reservas.api.reservas.dto.DominioDTO;
 import com.asesoftware.reservas.api.reservas.dto.ResponseDTO;
 import com.asesoftware.reservas.api.reservas.entity.DominioEntity;
-import com.asesoftware.reservas.api.reservas.entity.DominioPK;
+
 import com.asesoftware.reservas.api.reservas.mapper.IDominioMapper;
 import com.asesoftware.reservas.api.reservas.repository.IDominioRepository;
 import com.asesoftware.reservas.api.reservas.service.IDominioService;
