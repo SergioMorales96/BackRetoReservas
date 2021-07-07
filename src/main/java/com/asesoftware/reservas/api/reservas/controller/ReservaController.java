@@ -26,7 +26,7 @@ public class ReservaController {
 	* @version 0.1, 2021/07/06
 	*/
 	
-	@GetMapping(path = "/reserva/{fecha}")
+	@GetMapping(path = "/reserva_fecha/{fecha}")
 	public ResponseDTO consultarReservaXDiaPT(@PathVariable Date fecha) {
 
 		logger.info("ingreso al metodo consultarReservaXDiaPT {}", fecha);

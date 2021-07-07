@@ -12,7 +12,7 @@ public class ReservasPTDiaSPDTO {
 	private String correo;
 	private Integer numReserva;
 	
-	@JsonFormat(shape = JsonFormat.Shape.STRING,pattern = "yyyy/MM/dd",timezone = "America/New_York")
+	@JsonFormat(shape = JsonFormat.Shape.STRING,pattern = "dd-mm-yyyy",timezone = "America/New_York")
 	private Date dia;
 	
 	@JsonFormat(shape = JsonFormat.Shape.STRING,pattern = "HH24:mm",timezone = "America/New_York")
