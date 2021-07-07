@@ -90,7 +90,7 @@ public class PuestoTrabajoController {
 	* @version 0.1, 2021/07/07
 	*/
 	
-	@GetMapping(path = "/puestoTrabajo/{idPiso}")
+	@GetMapping(path = "/id_Piso/{idPiso}")
 	public ResponseDTO puestoTrabajoXPiso(@PathVariable Integer idPiso) {
 		logger.info("ingreso al metodo puestoTrabajoXPiso {}", idPiso);
 		return puestoTrabajoService.puestoTrabajoXPiso(idPiso);

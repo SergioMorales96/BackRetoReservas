@@ -143,7 +143,13 @@ public class PuestoTrabajoService implements IPuestoTrabajoService{
 		
 		List<PuestoTrabajoEntity> listPuestosTrabajoEntities = puestoTrabajoRepositorio.findByPisoEntityIdPiso(idPiso);
 		
-		return new ResponseDTO(puestoTrabajoMapper.entitysToDtos(listPuestosTrabajoEntities), true, OK, HttpStatus.OK);
+		//return new ResponseDTO(puestoTrabajoMapper.entitysToDtos(listPuestosTrabajoEntities), true, OK, HttpStatus.OK);
+		
+		if (listPuestosTrabajoEntities.isEmpty()) {
+			logger.info("Error en consultar con el id piso {}. Sin datos", idPiso);
+			return new ResponseDTO(null, false, "Sin datos", HttpStatus.INTERNAL_SERVER_ERROR);
+		}else {
+			return new ResponseDTO(puestoTrabajoMapper.entitysToDtos(listPuestosTrabajoEntities), true, OK, HttpStatus.OK);
+		}
 	}
-
 }
