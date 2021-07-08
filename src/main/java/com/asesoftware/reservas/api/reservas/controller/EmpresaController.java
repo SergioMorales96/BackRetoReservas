@@ -51,5 +51,12 @@ public class EmpresaController {
 		logger.info("crearEmpresa {}",empresaDTO);
 		return empresaService.actualizarEmpresa(empresaDTO);
 	}
+	
+	@GetMapping(path = "/eliminar")
+	public ResponseDTO eliminarEmpresa() {
+		logger.info("consultarTodas()");
+		return empresaService.consultarTodas();
+	}
+	
 
 }
