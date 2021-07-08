@@ -14,7 +14,7 @@ public class ReservasPTDiaSPDTO implements Serializable{
 	private String correo;
 	private Integer numReserva;
 	
-	@JsonFormat(shape = JsonFormat.Shape.STRING,pattern = "dd-MM-yyyy",timezone = "America/New_York")
+	@JsonFormat(shape = JsonFormat.Shape.STRING,pattern = "dd-MM-yyyy",timezone = "America/Bogota")
 	private Date dia;
 	
 	@JsonFormat(shape = JsonFormat.Shape.STRING,pattern = "HH:mm",timezone = "America/Bogota")

@@ -17,7 +17,7 @@ import org.springframework.stereotype.Repository;
 import com.asesoftware.reservas.api.reservas.dto.ReservasPTDiaSPDTO;
 
 /**
-* Clase ReservasPorDiaRepository para usar el SP PR_RESERVAS_DIA_PT_3
+* Clase ReservasPorDiaRepository para usar el SP PR_RESERVAS_DIA_PT
 * @author jcanizales
 * @version 0.1, 2021/07/06
 */
@@ -36,7 +36,7 @@ public class ReservasPorDiaRepository {
 	
 	public List<ReservasPTDiaSPDTO> getReservaPTDia(Date fechaReserva) {
 		
-		StoredProcedureQuery storedProcedureQuery = entityManager.createStoredProcedureQuery("PR_RESERVAS_DIA_PT_3")
+		StoredProcedureQuery storedProcedureQuery = entityManager.createStoredProcedureQuery("PR_RESERVAS_DIA_PT")
 				.registerStoredProcedureParameter("p_fFecha", Date.class, ParameterMode.IN) //Dato de entrada
 				.setParameter("p_fFecha", fechaReserva)
 				.registerStoredProcedureParameter("OUT_DATA", ReservasPTDiaSPDTO.class, ParameterMode.REF_CURSOR);
