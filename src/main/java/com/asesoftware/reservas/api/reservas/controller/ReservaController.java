@@ -35,6 +35,18 @@ public class ReservaController {
 	}
 	
 	
+	/**
+	* Controlador que gestiona la solicitud para consultar el calendario de una sala
+	* @author ajgutierrez
+	* @version 0.1, 2021/07/08
+	*/
+	@GetMapping(path = "/reservas_sala/{id}/{fechaInicio}/{fechaFin}")
+	public ResponseDTO consultaCalendarioSalas(@PathVariable Integer id, @PathVariable String fechaInicio, @PathVariable String fechaFin) {
+		
+		logger.info("consultaCalendarioSalas() id: {} fecha inicio: {} fecha fin {}", id, fechaInicio, fechaFin);
+		
+		return reservaService.consultaCalendarioSalas(id, fechaInicio, fechaFin);
+	}
 	
 	
 }
