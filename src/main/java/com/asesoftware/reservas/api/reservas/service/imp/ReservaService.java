@@ -19,7 +19,7 @@ import com.asesoftware.reservas.api.reservas.dto.ReservasPTDiaSPDTO;
 import com.asesoftware.reservas.api.reservas.dto.ResponseDTO;
 
 import com.asesoftware.reservas.api.reservas.repository.CalendarioSalaRepository;
-import com.asesoftware.reservas.api.reservas.repository.ReservasPorDiaRepository;
+
 
 import com.asesoftware.reservas.api.reservas.repository.ReservaEMRepository;
 import com.asesoftware.reservas.api.reservas.service.IReservaService;
