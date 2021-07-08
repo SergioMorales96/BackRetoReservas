@@ -52,10 +52,10 @@ public class EmpresaController {
 		return empresaService.actualizarEmpresa(empresaDTO);
 	}
 	
-	@GetMapping(path = "/eliminar")
-	public ResponseDTO eliminarEmpresa() {
-		logger.info("consultarTodas()");
-		return empresaService.consultarTodas();
+	@GetMapping(path = "/eliminar/{nit}")
+	public ResponseDTO eliminarEmpresa(@PathVariable String nit) {
+		logger.info("consultarTodas() {}",nit);
+		return empresaService.eliminarEmpresa(nit);
 	}
 	
 
