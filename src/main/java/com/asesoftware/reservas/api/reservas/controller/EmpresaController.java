@@ -51,5 +51,12 @@ public class EmpresaController {
 		logger.info("crearEmpresa {}",empresaDTO);
 		return empresaService.actualizarEmpresa(empresaDTO);
 	}
+	
+	@GetMapping(path = "/eliminar/{nit}")
+	public ResponseDTO eliminarEmpresa(@PathVariable String nit) {
+		logger.info("consultarTodas() {}",nit);
+		return empresaService.eliminarEmpresa(nit);
+	}
+	
 
 }
