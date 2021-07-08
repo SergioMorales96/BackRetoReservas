@@ -1,5 +1,6 @@
 package com.asesoftware.reservas.api.reservas.dto;
 
+import java.io.Serializable;
 import java.util.Date;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
@@ -14,8 +15,9 @@ import lombok.Data;
  *
  */
 @Data
-public class HorarioPuestoTrabajoDTO {
+public class HorarioPuestoTrabajoDTO implements Serializable  {
 
+	private static final long serialVersionUID = 1L;
 	// VARIABLES DE LA ENTIDAD
 	private Integer idHorario;
 	private Integer idSucursal;
