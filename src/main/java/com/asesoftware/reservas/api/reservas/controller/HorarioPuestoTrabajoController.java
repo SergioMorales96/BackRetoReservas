@@ -109,7 +109,7 @@ public class HorarioPuestoTrabajoController {
 	
 	/**
 	* Metodo para obtener todos los horarios en una sucursal
-	* @author jortizg
+	* @author fpena
 	* @version 0.1, 2021/07/06
 	*/
 	@GetMapping(path = "/sucursal/{idSucursal}")

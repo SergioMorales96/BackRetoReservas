@@ -15,6 +15,7 @@ import org.springframework.stereotype.Service;
 
 import com.asesoftware.reservas.api.reservas.dto.ReservasPTDiaSPDTO;
 import com.asesoftware.reservas.api.reservas.dto.ResponseDTO;
+import com.asesoftware.reservas.api.reservas.repository.ParqueaderoBicicletaEMRepository;
 import com.asesoftware.reservas.api.reservas.repository.ReservaEMRepository;
 import com.asesoftware.reservas.api.reservas.service.IReservaService;
 
@@ -25,6 +26,9 @@ public class ReservaService implements IReservaService{
 	
 	@Autowired
 	ReservaEMRepository reservasPorDiaRepository;
+	
+	@Autowired
+	private ParqueaderoBicicletaEMRepository parqueaderoBicicletaEMRepository;
 	
 	/**
 	* Método Consultar reservas por día PT
@@ -48,5 +52,36 @@ public class ReservaService implements IReservaService{
 			return new ResponseDTO(null, false, OK, HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 	}
+	
+	/**
+	* Servicio disponibilidadParqueaderoBicis para usar el SP PR_DIS_PAR_BICICLETA
+	* @author jortizg
+	* @version 0.1, 2021/07/08
+	*/
+	@Override
+	public ResponseDTO disponibilidadParqueaderoBicis(String fechaString) {
+
+		SimpleDateFormat fechaFormat = new SimpleDateFormat("dd-MM-yyyy");
+		
+		Date fecha;
+		try {
+			fecha = fechaFormat.parse(fechaString);
+			logger.info("ingreso al metodo disponibilidadParqueaderoBicis de service {}", fecha);
+			
+			Integer parqueaderosDisponibles = parqueaderoBicicletaEMRepository.getDisponibilidadParqueaderoBicis(fecha);
+			
+			logger.info("salida del metodo disponibilidadParqueaderoBicis de service {}", parqueaderosDisponibles);
+			
+			if (parqueaderosDisponibles <= 0) {
+				return new ResponseDTO(null, false, OK, HttpStatus.INTERNAL_SERVER_ERROR);
+			} else {
+				return new ResponseDTO(parqueaderosDisponibles, true, OK, HttpStatus.OK);
+			}
+			
+		} catch (ParseException e) {
+			return new ResponseDTO(null, false, OK, HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+	}
+	
 
 }
