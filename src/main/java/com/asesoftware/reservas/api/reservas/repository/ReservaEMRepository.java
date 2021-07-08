@@ -23,14 +23,14 @@ import com.asesoftware.reservas.api.reservas.dto.ReservasPTDiaSPDTO;
 */
 
 @Repository
-public class ReservasPorDiaRepository {
+public class ReservaEMRepository {
 
-	private static final Logger logger = LoggerFactory.getLogger(ReservasPorDiaRepository.class);
+	private static final Logger logger = LoggerFactory.getLogger(ReservaEMRepository.class);
 	
 	private final EntityManager entityManager;
 	
 	@Autowired
-	public ReservasPorDiaRepository(final EntityManager entityManager) {
+	public ReservaEMRepository(final EntityManager entityManager) {
 		this.entityManager = entityManager;
 	}
 	

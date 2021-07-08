@@ -15,16 +15,16 @@ import org.springframework.stereotype.Service;
 
 import com.asesoftware.reservas.api.reservas.dto.ReservasPTDiaSPDTO;
 import com.asesoftware.reservas.api.reservas.dto.ResponseDTO;
-import com.asesoftware.reservas.api.reservas.repository.ReservasPorDiaRepository;
+import com.asesoftware.reservas.api.reservas.repository.ReservaEMRepository;
 import com.asesoftware.reservas.api.reservas.service.IReservaService;
 
 @Service
 public class ReservaService implements IReservaService{
 
-	private static final Logger logger = LoggerFactory.getLogger(DominioService.class);
+	private static final Logger logger = LoggerFactory.getLogger(ReservaService.class);
 	
 	@Autowired
-	ReservasPorDiaRepository reservasPorDiaRepository;
+	ReservaEMRepository reservasPorDiaRepository;
 	
 	/**
 	* Método Consultar reservas por día PT

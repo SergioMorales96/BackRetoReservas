@@ -18,10 +18,10 @@ public class ReservasPTDiaSPDTO implements Serializable{
 	private Date dia;
 	
 	@JsonFormat(shape = JsonFormat.Shape.STRING,pattern = "HH:mm",timezone = "America/Bogota")
-	private Date hora_Inicio;
+	private Date horaInicio;
 	
 	@JsonFormat(shape = JsonFormat.Shape.STRING,pattern = "HH:mm",timezone = "America/Bogota")
-	private Date hora_Fin;
+	private Date horaFin;
 	
 	private String estado; 
 	private Integer puestoDeTrabajo;
@@ -34,14 +34,14 @@ public class ReservasPTDiaSPDTO implements Serializable{
 	public ReservasPTDiaSPDTO() {
 	}
 	
-	public ReservasPTDiaSPDTO(String correo, Integer numReserva, Date dia, Date hora_Inicio, Date hora_Fin,
+	public ReservasPTDiaSPDTO(String correo, Integer numReserva, Date dia, Date horaInicio, Date horaFin,
 			String estado, Integer puestoDeTrabajo, String nombre, Integer piso, String nombrePiso, String sucursal,
 			String empresa) {
 		this.correo = correo;
 		this.numReserva = numReserva;
 		this.dia = dia;
-		this.hora_Inicio = hora_Inicio;
-		this.hora_Fin = hora_Fin;
+		this.horaInicio = horaInicio;
+		this.horaFin = horaFin;
 		this.estado = estado;
 		this.puestoDeTrabajo = puestoDeTrabajo;
 		this.nombre = nombre;
