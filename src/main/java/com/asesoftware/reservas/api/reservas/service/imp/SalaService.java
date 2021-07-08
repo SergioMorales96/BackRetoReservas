@@ -143,5 +143,23 @@ public class SalaService implements ISalaService{
 		}
 
 	}
+	/**
+	* Metodo para obtener todas las salas por id de un piso 
+	* @author jlucero
+	* @version 0.1, 2021/07/08
+	*/
+	@Override
+	public ResponseDTO obtenerSalaPorPiso(Integer id) {
+		try {
+			logger.info("obtenerSalaPorPiso: {}",id);
+			List<SalaEntity> salaEntity = salaRepository.getSalasByPiso(id);
+			logger.info("obtenerSalaPorPiso: {}",salaEntity);
+			return new ResponseDTO(salaMapper.entitysToDtos(salaEntity),true,OK,HttpStatus.OK);
+		} catch (Exception e) {
+			logger.error(e.getMessage());
+			return new ResponseDTO(null,false,ERROR_GENERICO, HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+		
+	}
 
 }

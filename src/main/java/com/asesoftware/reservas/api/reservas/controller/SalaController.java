@@ -85,4 +85,10 @@ public class SalaController {
 
 	}
 	
+	@GetMapping(path = "/salasPorPiso/{id}")
+	public ResponseDTO obtenerSalaPorPiso(@PathVariable Integer id) {
+		logger.info("obtenerSalaPorPiso: {}",id);
+		return salaService.obtenerSalaPorPiso(id);
+	}
+	
 }

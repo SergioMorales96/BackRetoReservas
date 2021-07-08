@@ -16,5 +16,7 @@ public interface ISalaService {
 	public ResponseDTO actualizarSala(SalaDTO salaDTO);
 	
 	public ResponseDTO eliminarSala(Integer idSala);
+	
+	public ResponseDTO obtenerSalaPorPiso(Integer id);
 
 }
