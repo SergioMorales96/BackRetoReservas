@@ -47,8 +47,6 @@ public class ReservaService implements IReservaService{
 		} catch (ParseException e) {
 			return new ResponseDTO(null, false, OK, HttpStatus.INTERNAL_SERVER_ERROR);
 		}
-		
-		
 	}
 
 }
