@@ -9,4 +9,5 @@ public interface IReservaService {
 	
 	
 	
+	public ResponseDTO disponibilidadParqueaderoBicis(String fechaString);
 }

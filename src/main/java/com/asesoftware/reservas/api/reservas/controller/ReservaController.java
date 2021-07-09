@@ -36,6 +36,18 @@ public class ReservaController {
 		return reservaService.consultarReservaXDiaPT(fecha);
 	}
 	
+	/**
+	* Controlador disponibilidadParqueaderoBicis para usar el SP PR_DIS_PAR_BICICLETA
+	* @author jortizg
+	* @version 0.1, 2021/07/08
+	*/
+	@GetMapping(path = "/disponibilidadParqueaderoBicis/{fecha}")
+	public ResponseDTO disponibilidadParqueaderoBicis(@PathVariable String fecha) {
+
+		logger.info("ingreso al metodo disponibilidadParqueaderoBicis {}", fecha);
+		
+		return reservaService.disponibilidadParqueaderoBicis(fecha);
+	}
 	
 	/**
 	* Controlador que gestiona la solicitud para consultar el calendario de una sala
