@@ -17,54 +17,54 @@ import org.springframework.stereotype.Repository;
 import com.asesoftware.reservas.api.reservas.dto.ReservasPTDiaSPDTO;
 
 /**
-* Clase ReservasPorDiaRepository para usar el SP PR_RESERVAS_DIA_PT
-* @author jcanizales
-* @version 0.1, 2021/07/06
-*/
+ * Clase ReservasPorDiaRepository para usar el SP PR_RESERVAS_DIA_PT
+ * @author jcanizales
+ * @version 0.1, 2021/07/06
+ */
 
 @Repository
 public class ReservaEMRepository {
 
 	private static final Logger logger = LoggerFactory.getLogger(ReservaEMRepository.class);
-	
+
 	private final EntityManager entityManager;
-	
+
 	@Autowired
 	public ReservaEMRepository(final EntityManager entityManager) {
 		this.entityManager = entityManager;
 	}
-	
+
 	public List<ReservasPTDiaSPDTO> getReservaPTDia(Date fechaReserva) {
-		
+
 		StoredProcedureQuery storedProcedureQuery = entityManager.createStoredProcedureQuery("PR_RESERVAS_DIA_PT")
 				.registerStoredProcedureParameter("p_fFecha", Date.class, ParameterMode.IN) //Dato de entrada
 				.setParameter("p_fFecha", fechaReserva)
 				.registerStoredProcedureParameter("OUT_DATA", ReservasPTDiaSPDTO.class, ParameterMode.REF_CURSOR);
-		
+
 		//Ejecuta el metodo que retorna una lista de objetos
 		@SuppressWarnings("unchecked")
 		List<Object[]> listReservas = storedProcedureQuery.getResultList(); 
-			
+
 		//se pasa a dto
 		List<ReservasPTDiaSPDTO> dataDTOs = listReservas.stream()
-				.map(datos -> new ReservasPTDiaSPDTO(
-						(String)datos[0], 
-						((BigDecimal)datos[1]).intValueExact(), 
-						(Date)datos[2], 
-						(Date)datos[3], 
-						(Date)datos[4], 
-						(String)datos[5], 
-						((BigDecimal)datos[6]).intValueExact(), 
-						(String)datos[7], 
-						((BigDecimal)datos[8]).intValueExact(), 
-						(String)datos[9], 
-						(String)datos[10], 
-						(String)datos[11])
-				)
+				.map(datos -> ReservasPTDiaSPDTO
+						.builder()
+						.correo((String)datos[0])
+						.numReserva(((BigDecimal)datos[1]).intValueExact())
+						.dia((Date)datos[2])
+						.horaInicio((Date)datos[3])
+						.horaFin((Date)datos[4])
+						.estado((String)datos[5])
+						.puestoDeTrabajo(((BigDecimal)datos[6]).intValueExact())
+						.nombre((String)datos[7])
+						.piso(((BigDecimal)datos[8]).intValueExact())
+						.nombrePiso((String)datos[9])
+						.sucursal((String)datos[10])
+						.empresa((String)datos[11]).build())
 				.collect(Collectors.toList());
-		
+
 		logger.info("Las reservas para la fecha {} son {}", fechaReserva, dataDTOs);
-		
+
 		return dataDTOs;
 	}
 }

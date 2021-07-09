@@ -5,9 +5,11 @@ import java.util.Date;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 
+import lombok.Builder;
 import lombok.Data;
 
 @Data
+@Builder
 public class ReservasPTDiaSPDTO implements Serializable{
 	
 	private static final long serialVersionUID = 1L;
@@ -31,24 +33,6 @@ public class ReservasPTDiaSPDTO implements Serializable{
 	private String sucursal;
 	private String empresa;
 	
-	public ReservasPTDiaSPDTO() {
-	}
 	
-	public ReservasPTDiaSPDTO(String correo, Integer numReserva, Date dia, Date horaInicio, Date horaFin,
-			String estado, Integer puestoDeTrabajo, String nombre, Integer piso, String nombrePiso, String sucursal,
-			String empresa) {
-		this.correo = correo;
-		this.numReserva = numReserva;
-		this.dia = dia;
-		this.horaInicio = horaInicio;
-		this.horaFin = horaFin;
-		this.estado = estado;
-		this.puestoDeTrabajo = puestoDeTrabajo;
-		this.nombre = nombre;
-		this.piso = piso;
-		this.nombrePiso = nombrePiso;
-		this.sucursal = sucursal;
-		this.empresa = empresa;
-	}
 }
 
