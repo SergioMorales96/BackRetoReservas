@@ -15,6 +15,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.asesoftware.reservas.api.reservas.dto.ReservasPTDiaSPDTO;
+import com.asesoftware.reservas.api.reservas.dto.ReservasSDiaSPDTO;
 
 /**
 * Clase ReservasPorDiaRepository para usar el SP PR_RESERVAS_DIA_PT
@@ -64,6 +65,41 @@ public class ReservaEMRepository {
 				.collect(Collectors.toList());
 		
 		logger.info("Las reservas para la fecha {} son {}", fechaReserva, dataDTOs);
+		
+		return dataDTOs;
+	}
+	
+	/**
+	* Método para usar el procedimiento almacenado SP_CONSULTA_RESERVAS_SALAS_DIA
+	* @author wsierra
+	* @version 0.1, 2021/07/09
+	*/
+	
+	public List<ReservasSDiaSPDTO> getReservaSDia(Date fechaReservaS) {
+		
+		StoredProcedureQuery storedProcedureQuery = entityManager.createStoredProcedureQuery("SP_CONSULTA_RESERVAS_SALAS_DIA")
+				.registerStoredProcedureParameter("in_fecha", Date.class, ParameterMode.IN) //Dato de entrada
+				.setParameter("in_fecha", fechaReservaS)
+				.registerStoredProcedureParameter("resultados", ReservasSDiaSPDTO.class, ParameterMode.REF_CURSOR);
+		
+		//Ejecuta el metodo que retorna una lista de objetos
+		@SuppressWarnings("unchecked")
+		List<Object[]> listReservas = storedProcedureQuery.getResultList(); 
+			
+		//se pasa a dto
+		List<ReservasSDiaSPDTO> dataDTOs = listReservas.stream()
+				.map(datos -> new ReservasSDiaSPDTO(
+						((BigDecimal)datos[0]).intValueExact(), 
+						(Date)datos[1], 
+						(Date)datos[2], 
+						(Date)datos[3], 
+						(String)datos[4], 
+						(String)datos[5], 
+						((BigDecimal)datos[6]).intValueExact())
+				)
+				.collect(Collectors.toList());
+		
+		logger.info("Las reservas de salas para la fecha {} son {}", fechaReservaS, dataDTOs);
 		
 		return dataDTOs;
 	}
