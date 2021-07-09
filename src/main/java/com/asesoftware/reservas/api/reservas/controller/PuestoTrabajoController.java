@@ -78,8 +78,8 @@ public class PuestoTrabajoController {
 	 * @author: kpinilla
 	 * @version: 01/07/2021
 	 */
-	@GetMapping(path = "/borrar")
-	public ResponseDTO borrarPuestoTrabajo(Integer idPuestoTrabajo) {
+	@GetMapping(path = "/borrar/{idPuestoTrabajo}")
+	public ResponseDTO borrarPuestoTrabajo(@PathVariable Integer idPuestoTrabajo) {
 
 		logger.info("Puesto de trabajo a eliminar {}",idPuestoTrabajo);
 
