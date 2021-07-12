@@ -23,6 +23,7 @@ import com.asesoftware.reservas.api.reservas.repository.CalendarioSalaRepository
 
 
 import com.asesoftware.reservas.api.reservas.repository.ParqueaderoBicicletaEMRepository;
+import com.asesoftware.reservas.api.reservas.repository.ParqueaderoCarroEMRepository;
 import com.asesoftware.reservas.api.reservas.repository.ReservaEMRepository;
 import com.asesoftware.reservas.api.reservas.service.IReservaService;
 
@@ -41,6 +42,9 @@ public class ReservaService implements IReservaService{
 	
 	@Autowired
 	private ParqueaderoBicicletaEMRepository parqueaderoBicicletaEMRepository;
+	
+	@Autowired
+	private ParqueaderoCarroEMRepository parqueaderoCarroEMRepository;
 	
 	/**
 	* Método Consultar reservas por día PT
@@ -140,6 +144,36 @@ public class ReservaService implements IReservaService{
 			return new ResponseDTO(listaReservasXDia, true, OK, HttpStatus.OK);
 		} catch (ParseException e) {
 			return new ResponseDTO(null, false, ERROR_GENERICO, HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+	}
+	
+	/**
+	* Servicio disponibilidadParqueaderoCarro para usar el SP PR_CON_PARQUEADEROS_CARRO 
+	* @author kpinilla
+	* @version 0.1, 2021/07/08
+	*/
+
+	@Override
+	public ResponseDTO disponibilidadParqueaderoCarro(String fecha) {
+		SimpleDateFormat fechaFormat = new SimpleDateFormat(FORMATO_FECHA);
+		
+		Date fecha2;
+		try {
+			fecha2 = fechaFormat.parse(fecha);
+			logger.info("ingreso al metodo disponibilidadParqueaderoCarro de service {}", fecha2);
+			
+			Integer parqueaderosDisponibles = parqueaderoCarroEMRepository.getDisponibilidadParqueaderoCarro(fecha2);
+			
+			logger.info("salida del metodo disponibilidadParqueaderoCarro de service {}", parqueaderosDisponibles);
+			
+			if (parqueaderosDisponibles <= 0) {
+				return new ResponseDTO(null, false, OK, HttpStatus.INTERNAL_SERVER_ERROR);
+			} else {
+				return new ResponseDTO(parqueaderosDisponibles, true, OK, HttpStatus.OK);
+			}
+			
+		} catch (ParseException e) {
+			return new ResponseDTO(null, false, OK, HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 	}
 
