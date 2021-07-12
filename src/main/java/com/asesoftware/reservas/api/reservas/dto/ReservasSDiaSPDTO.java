@@ -4,10 +4,12 @@ import java.util.Date;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 
+import lombok.Builder;
 import lombok.Data;
 
 
 @Data
+@Builder
 public class ReservasSDiaSPDTO {
 	
 	private Integer numeroReserva;
@@ -29,23 +31,4 @@ public class ReservasSDiaSPDTO {
 	
 	private Integer numeroAsistentes;
 	
-	public ReservasSDiaSPDTO() {}
-
-	public ReservasSDiaSPDTO(Integer numeroReserva, Date dia, Date horaInicio, Date horaFin, String nombreUsuario,
-			String nombreSala, String nombrePiso, Integer numeroAsistentes) {
-		
-		this.numeroReserva = numeroReserva;
-		this.dia = dia;
-		this.horaInicio = horaInicio;
-		this.horaFin = horaFin;
-		this.nombreUsuario = nombreUsuario;
-		this.nombreSala = nombreSala;
-		this.nombrePiso = nombrePiso;
-		this.numeroAsistentes = numeroAsistentes;
-	}
-
-	
-	
-	
-
 }
