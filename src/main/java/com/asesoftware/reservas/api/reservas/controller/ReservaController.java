@@ -62,5 +62,18 @@ public class ReservaController {
 		return reservaService.consultaCalendarioSalas(id, fechaInicio, fechaFin);
 	}
 	
+	/**
+	* Controlador que gestiona la solicitud para consultar las reservas por día de las salas
+	* @author wsierra
+	* @version 0.1, 2021/07/09
+	*/
+	@GetMapping(path = "/reservas_sala_dia/{fecha}")
+	public ResponseDTO consultaXDiaS(@PathVariable String fecha) {
+		
+		logger.info("consultaXDiaS() ");
+		
+		return reservaService.consultarReservaXDiaS(fecha);
+	}
+	
 	
 }
