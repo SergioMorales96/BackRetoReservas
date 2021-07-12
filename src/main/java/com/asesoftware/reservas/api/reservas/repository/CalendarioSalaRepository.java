@@ -55,11 +55,13 @@ public class CalendarioSalaRepository {
 		List<Object[]> listObjects = storedProcedureQuery.getResultList();
 
 
-		List<CalendarioSalaDTO> dataDTOs = listObjects.stream()
-				.map(datos-> new CalendarioSalaDTO(((BigDecimal) datos[0]).intValue(), (Date) datos[1], (Date) datos[2], (Date) datos[3]))
+		return listObjects.stream()
+				.map(datos-> new CalendarioSalaDTO(
+						((BigDecimal) datos[0]).intValue(),
+						(Date) datos[1],
+						(Date) datos[2],
+						(Date) datos[3]))
 				.collect(Collectors.toList());
-
-		return dataDTOs;
 	}
 	
 }

@@ -30,6 +30,8 @@ public class ReservaService implements IReservaService{
 
 	private static final Logger logger = LoggerFactory.getLogger(ReservaService.class);
 	
+	private static final String FORMATO_FECHA = "dd-MM-yyyy";
+	
 	@Autowired
 	ReservaEMRepository reservasPorDiaRepository;
 	
@@ -48,7 +50,7 @@ public class ReservaService implements IReservaService{
 	@Override
 	public ResponseDTO consultarReservaXDiaPT(String fechaString) {
 		
-		SimpleDateFormat fechaFormat = new SimpleDateFormat("dd-MM-yyyy");
+		SimpleDateFormat fechaFormat = new SimpleDateFormat(FORMATO_FECHA);
 		
 		Date fecha;
 		try {
@@ -70,7 +72,7 @@ public class ReservaService implements IReservaService{
 	@Override
 	public ResponseDTO disponibilidadParqueaderoBicis(String fechaString) {
 
-		SimpleDateFormat fechaFormat = new SimpleDateFormat("dd-MM-yyyy");
+		SimpleDateFormat fechaFormat = new SimpleDateFormat(FORMATO_FECHA);
 		
 		Date fecha;
 		try {
@@ -101,7 +103,7 @@ public class ReservaService implements IReservaService{
 	@Override
 	public ResponseDTO consultaCalendarioSalas(Integer id, String fechaInicio, String fechaFin) {
 		
-		SimpleDateFormat fechaFormat = new SimpleDateFormat("dd-MM-yyyy");
+		SimpleDateFormat fechaFormat = new SimpleDateFormat(FORMATO_FECHA);
 		Date fechaIn;
 		Date fechaF;
 		try {
