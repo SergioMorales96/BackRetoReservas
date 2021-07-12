@@ -25,12 +25,14 @@ public class ReservasSDiaSPDTO {
 	
 	private String nombreSala;
 	
+	private String nombrePiso;
+	
 	private Integer numeroAsistentes;
 	
 	public ReservasSDiaSPDTO() {}
 
 	public ReservasSDiaSPDTO(Integer numeroReserva, Date dia, Date horaInicio, Date horaFin, String nombreUsuario,
-			String nombreSala, Integer numeroAsistentes) {
+			String nombreSala, String nombrePiso, Integer numeroAsistentes) {
 		
 		this.numeroReserva = numeroReserva;
 		this.dia = dia;
@@ -38,8 +40,11 @@ public class ReservasSDiaSPDTO {
 		this.horaFin = horaFin;
 		this.nombreUsuario = nombreUsuario;
 		this.nombreSala = nombreSala;
+		this.nombrePiso = nombrePiso;
 		this.numeroAsistentes = numeroAsistentes;
 	}
+
+	
 	
 	
 

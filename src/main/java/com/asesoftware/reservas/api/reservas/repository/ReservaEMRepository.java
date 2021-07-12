@@ -77,7 +77,7 @@ public class ReservaEMRepository {
 	
 	public List<ReservasSDiaSPDTO> getReservaSDia(Date fechaReservaS) {
 		
-		StoredProcedureQuery storedProcedureQuery = entityManager.createStoredProcedureQuery("SP_CONSULTA_RESERVAS_SALAS_DIA")
+		StoredProcedureQuery storedProcedureQuery = entityManager.createStoredProcedureQuery("PR_CON_RESERVAS_SALAS_DIA")
 				.registerStoredProcedureParameter("in_fecha", Date.class, ParameterMode.IN) //Dato de entrada
 				.setParameter("in_fecha", fechaReservaS)
 				.registerStoredProcedureParameter("resultados", ReservasSDiaSPDTO.class, ParameterMode.REF_CURSOR);
@@ -89,13 +89,14 @@ public class ReservaEMRepository {
 		//se pasa a dto
 		List<ReservasSDiaSPDTO> dataDTOs = listReservas.stream()
 				.map(datos -> new ReservasSDiaSPDTO(
-						((BigDecimal)datos[0]).intValueExact(), 
+						((BigDecimal)datos[0]).intValue(), 
 						(Date)datos[1], 
 						(Date)datos[2], 
 						(Date)datos[3], 
 						(String)datos[4], 
 						(String)datos[5], 
-						((BigDecimal)datos[6]).intValueExact())
+						(String)datos[6],
+						((BigDecimal)datos[7]).intValue())
 				)
 				.collect(Collectors.toList());
 		
