@@ -139,7 +139,7 @@ public class ReservaService implements IReservaService{
 			List<ReservasSDiaSPDTO> listaReservasXDia = reservasPorDiaRepository.getReservaSDia(fecha);
 			return new ResponseDTO(listaReservasXDia, true, OK, HttpStatus.OK);
 		} catch (ParseException e) {
-			return new ResponseDTO(null, false, OK, HttpStatus.INTERNAL_SERVER_ERROR);
+			return new ResponseDTO(null, false, ERROR_GENERICO, HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 	}
 
