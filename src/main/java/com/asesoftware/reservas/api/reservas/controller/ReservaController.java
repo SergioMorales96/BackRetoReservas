@@ -50,6 +50,19 @@ public class ReservaController {
 	}
 	
 	/**
+	* Controlador disponibilidadParqueaderoBicis para usar el SP PR_CON_PARQUEADEROS_CARRO
+	* @author kpinilla
+	* @version 0.1, 2021/07/08
+	*/
+	@GetMapping(path = "/disponibilidadParqueaderoCarro/{fecha}")
+	public ResponseDTO disponibilidadParqueaderoCarro(@PathVariable String fecha) {
+
+		logger.info("ingreso al metodo disponibilidadParqueaderoCarro {}", fecha);
+		
+		return reservaService.disponibilidadParqueaderoCarro(fecha);
+	}
+	
+	/**
 	* Controlador que gestiona la solicitud para consultar el calendario de una sala
 	* @author ajgutierrez
 	* @version 0.1, 2021/07/08
