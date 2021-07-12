@@ -129,7 +129,7 @@ public class ReservaService implements IReservaService{
 	@Override
 	public ResponseDTO consultarReservaXDiaS(String fechaString) {
 		
-		SimpleDateFormat fechaFormat = new SimpleDateFormat("dd-MM-yyyy");
+		SimpleDateFormat fechaFormat = new SimpleDateFormat(FORMATO_FECHA);
 		
 		Date fecha;
 		try {
