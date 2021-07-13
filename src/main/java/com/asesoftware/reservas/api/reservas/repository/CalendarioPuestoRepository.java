@@ -40,7 +40,7 @@ public class CalendarioPuestoRepository {
 		
 		logger.info("Ingreso al metodo getCalendarioPuesto() id {} fechaInicio {} fechaFin {}", id, fechaInicio, fechaFin);
 		
-		StoredProcedureQuery storedProcedureQuery = entityManager.createStoredProcedureQuery("SP_CONSULTA_CALENDARIO_PUESTOS")
+		StoredProcedureQuery storedProcedureQuery = entityManager.createStoredProcedureQuery("PR_CON_CALENDARIO_PUESTOS")
 				.registerStoredProcedureParameter("IN_FECHA", Date.class, ParameterMode.IN)
 				.setParameter("IN_FECHA", fechaInicio)
 				.registerStoredProcedureParameter("OUT_FECHA", Date.class, ParameterMode.IN)
@@ -52,11 +52,11 @@ public class CalendarioPuestoRepository {
 		List<Object[]> listObjects = storedProcedureQuery.getResultList();
 
 
-		List<CalendarioPuestoDTO> dataDTOs = listObjects.stream()
+		return listObjects.stream()
 				.map(datos-> new CalendarioPuestoDTO(((BigDecimal) datos[0]).intValue(), (Date) datos[1], (Date) datos[2], (Date) datos[3]))
 				.collect(Collectors.toList());
 
-		return dataDTOs;
+		
 	}
 
 }

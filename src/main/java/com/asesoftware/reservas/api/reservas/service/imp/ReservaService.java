@@ -138,8 +138,8 @@ public class ReservaService implements IReservaService{
 			fechaIn = fechaFormat.parse(fechaInicio);
 			fechaF = fechaFormat.parse(fechaFin);
 			logger.info("Ingreso al metodo consultaCalendarioPuestos()");
-			List<CalendarioPuestoDTO> answ = calendarioPuestoRepository.getCalendarioPuesto(id, fechaIn, fechaF);
-			return new ResponseDTO(answ, true, OK, HttpStatus.OK);
+			List<CalendarioPuestoDTO> listaCalendarioPuesto = calendarioPuestoRepository.getCalendarioPuesto(id, fechaIn, fechaF);
+			return new ResponseDTO(listaCalendarioPuesto, true, OK, HttpStatus.OK);
 			
 		} catch (Exception e) {
 
