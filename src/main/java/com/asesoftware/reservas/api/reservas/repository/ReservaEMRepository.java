@@ -88,16 +88,17 @@ public class ReservaEMRepository {
 			
 		//se pasa a dto
 		List<ReservasSDiaSPDTO> dataDTOs = listReservas.stream()
-				.map(datos -> new ReservasSDiaSPDTO(
-						((BigDecimal)datos[0]).intValue(), 
-						(Date)datos[1], 
-						(Date)datos[2], 
-						(Date)datos[3], 
-						(String)datos[4], 
-						(String)datos[5], 
-						(String)datos[6],
-						((BigDecimal)datos[7]).intValue())
-				)
+				.map(datos ->  ReservasSDiaSPDTO
+						.builder()
+						.numeroReserva(((BigDecimal)datos[0]).intValue())
+						.dia((Date)datos[1])
+						.horaInicio((Date)datos[2])
+						.horaFin((Date)datos[3])
+						.nombreUsuario((String)datos[4])
+						.nombreSala((String)datos[5])
+						.nombrePiso((String)datos[6])
+						.numeroAsistentes(((BigDecimal)datos[7]).intValue())
+						.build())
 				.collect(Collectors.toList());
 		
 		logger.info("Las reservas de salas para la fecha {} son {}", fechaReservaS, dataDTOs);

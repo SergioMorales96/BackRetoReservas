@@ -101,5 +101,13 @@ public class ReservaController {
 		return reservaService.consultarReservaXDiaS(fecha);
 	}
 	
+	@GetMapping(path = "reservas_aforo_dia/{fecha}/{idPiso}")
+	public ResponseDTO consultaAforo(@PathVariable String fecha, @PathVariable Integer idPiso) {
+		
+		logger.info("consultaAforo() {}", fecha);
+		
+		return reservaService.validarAforoDia(fecha, idPiso);
+	}
+	
 	
 }
