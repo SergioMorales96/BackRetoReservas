@@ -214,7 +214,7 @@ public class ReservaService implements IReservaService{
 			return new ResponseDTO(null, false, OK, HttpStatus.INTERNAL_SERVER_ERROR);
 		}	
 	}
-	}
+	
 	@Override
 	public ResponseDTO validarAforoDia(String fechaString, Integer idPiso) {
 		SimpleDateFormat formatoFecha = new SimpleDateFormat(FORMATO_FECHA);
