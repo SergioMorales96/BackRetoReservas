@@ -14,6 +14,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
+import com.asesoftware.reservas.api.reservas.dto.CalendarioPuestoDTO;
 import com.asesoftware.reservas.api.reservas.dto.CalendarioSalaDTO;
 import com.asesoftware.reservas.api.reservas.dto.ReservasPTDiaSPDTO;
 import com.asesoftware.reservas.api.reservas.dto.ReservasSDiaSPDTO;
@@ -21,10 +22,12 @@ import com.asesoftware.reservas.api.reservas.dto.ReservasUsuaSPDTO;
 import com.asesoftware.reservas.api.reservas.dto.ResponseDTO;
 import com.asesoftware.reservas.api.reservas.repository.AforoDiaRepository;
 import com.asesoftware.reservas.api.reservas.repository.CalendarioSalaRepository;
+import com.asesoftware.reservas.api.reservas.repository.CalendarioPuestoRepository;
 
 
 import com.asesoftware.reservas.api.reservas.repository.ParqueaderoBicicletaEMRepository;
 import com.asesoftware.reservas.api.reservas.repository.ParqueaderoCarroEMRepository;
+import com.asesoftware.reservas.api.reservas.repository.ParqueaderoMotoEMRepository;
 import com.asesoftware.reservas.api.reservas.repository.ReservaEMRepository;
 import com.asesoftware.reservas.api.reservas.service.IReservaService;
 
@@ -45,11 +48,17 @@ public class ReservaService implements IReservaService{
 	CalendarioSalaRepository calendarioSalaRepository;
 	
 	@Autowired
+	CalendarioPuestoRepository calendarioPuestoRepository; 
+	
+	@Autowired
 	private ParqueaderoBicicletaEMRepository parqueaderoBicicletaEMRepository;
 	
 	@Autowired
 	private ParqueaderoCarroEMRepository parqueaderoCarroEMRepository;
 	
+	@Autowired
+	private ParqueaderoMotoEMRepository parqueaderoMotoEMRepository;
+
 	@Autowired
 	private AforoDiaRepository aforoDiaRepository;
 	
@@ -133,6 +142,30 @@ public class ReservaService implements IReservaService{
 	}
 	
 	/**
+	* Servicio que consulta el calendario de un puesto de trabajo 
+	* @author acmoya
+	* @version 0.1, 12/07/2021
+	*/
+	@Override
+	public ResponseDTO consultaCalendarioPuestos(Integer id, String fechaInicio, String fechaFin) {
+		
+		SimpleDateFormat fechaFormat = new SimpleDateFormat("dd-MM-yyyy");
+		Date fechaIn;
+		Date fechaF;
+		try {
+			fechaIn = fechaFormat.parse(fechaInicio);
+			fechaF = fechaFormat.parse(fechaFin);
+			logger.info("Ingreso al metodo consultaCalendarioPuestos()");
+			List<CalendarioPuestoDTO> listaCalendarioPuesto = calendarioPuestoRepository.getCalendarioPuesto(id, fechaIn, fechaF);
+			return new ResponseDTO(listaCalendarioPuesto, true, OK, HttpStatus.OK);
+			
+		} catch (Exception e) {
+
+			return new ResponseDTO(null, false, ERROR_GENERICO, HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+	}
+		
+	/**
 	* Consulta las reservas de las salas mediante el correspondiente procedimiento almacenado
 	* @author wsierra
 	* @version 0.1, 2021/07/09
@@ -184,6 +217,37 @@ public class ReservaService implements IReservaService{
 		}
 	}
 
+	/**
+	* Servicio disponibilidadParqueaderoCarro para usar el SP PRO_CON_PARQUEADEROS_MOTO
+	* @author cfcruz
+	* @version 0.1, 2021/07/13
+	*/
+	@Override
+	public ResponseDTO disponibilidadParqueaderoMoto(String fechaString) {
+		
+		SimpleDateFormat fechaFormat = new SimpleDateFormat(FORMATO_FECHA);
+		
+		Date fecha;
+		
+		try {
+			fecha = fechaFormat.parse(fechaString);
+			logger.info("ingreso al metodo disponibilidadParqueaderoMoto de service {}", fecha);
+			
+			Integer parqueaderosDisponiblesMoto = parqueaderoMotoEMRepository.getDisponibilidadParqueaderoMoto(fecha);
+			
+			logger.info("salida del metodo disponibilidadParqueaderoMoto de service {}", parqueaderosDisponiblesMoto);
+			
+			if (parqueaderosDisponiblesMoto <= 0) {
+				return new ResponseDTO(null, false, OK, HttpStatus.INTERNAL_SERVER_ERROR);
+			} else {
+				return new ResponseDTO(parqueaderosDisponiblesMoto, true, OK, HttpStatus.OK);
+			}
+			
+		} catch (ParseException e) {
+			return new ResponseDTO(null, false, OK, HttpStatus.INTERNAL_SERVER_ERROR);
+		}	
+	}
+	
 	@Override
 	public ResponseDTO validarAforoDia(String fechaString, Integer idPiso) {
 		SimpleDateFormat formatoFecha = new SimpleDateFormat(FORMATO_FECHA);
@@ -206,6 +270,7 @@ public class ReservaService implements IReservaService{
 		} catch (ParseException e) {
 			return new ResponseDTO(null,false, OK, HttpStatus.INTERNAL_SERVER_ERROR);
 		}
+
 	}
 	
 	/**
