@@ -59,6 +59,7 @@ public class DominioService implements IDominioService {
 			
 			if(dominioRepository.findByDominioPKCodigoDominioAndDescripcion(dominioDTO.getCodigoDominio(), dominioDTO.getDescripcion()) == null) {
 				DominioEntity dominioEntity = mapperDominio.dtoToEntity(dominioDTO);
+				dominioEntity.getDominioPK().setCodigoDominio(dominioEntity.getDominioPK().getCodigoDominio().toUpperCase());
 				dominioRepository.save(dominioEntity);
 				return new ResponseDTO(mapperDominio.entityToDto(dominioEntity),true,OK,HttpStatus.OK);
 			}else {
@@ -81,7 +82,7 @@ public class DominioService implements IDominioService {
 			logger.info("updateDominio {} ", dominioDTO);
 					
 			if(dominioRepository.findByDominioPKCodigoDominioAndDescripcion(dominioDTO.getCodigoDominio(), dominioDTO.getDescripcion()) != null) {
-				
+				dominioDTO.setCodigoDominio(dominioDTO.getCodigoDominio().toUpperCase());
 				dominioRepository.queryDominioUpdate(dominioDTO.getValorDominio(),dominioDTO.getCodigoDominio(),dominioDTO.getDescripcion());
 				
 				return new ResponseDTO(null,true,OK,HttpStatus.OK);

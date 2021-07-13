@@ -6,8 +6,10 @@ public interface IReservaService {
 
 	public ResponseDTO consultarReservaXDiaPT(String fechaString);
 	public ResponseDTO consultaCalendarioSalas(Integer id, String fechaInicio, String fechaFin);
-	
 	public ResponseDTO consultaCalendarioPuestos(Integer id, String fechaInicio, String fechaFin);
-	
+	public ResponseDTO disponibilidadParqueaderoCarro(String fecha);
 	public ResponseDTO disponibilidadParqueaderoBicis(String fechaString);
+	public ResponseDTO disponibilidadParqueaderoMoto(String fechaString);
+	public ResponseDTO consultarReservaXDiaS(String fechaString);
+	public ResponseDTO validarAforoDia(String fecha, Integer idPiso);
 }

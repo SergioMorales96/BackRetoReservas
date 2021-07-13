@@ -37,7 +37,20 @@ public class ReservaController {
 	}
 	
 	/**
-	* Controlador disponibilidadParqueaderoBicis para usar el SP PR_DIS_PAR_BICICLETA
+	* Controlador disponibilidadParqueaderoMoto para usar el SP PRO_DIS_PAR_MOTO
+	* @author cfcruz
+	* @version 0.1, 2021/07/13
+	*/
+	@GetMapping(path = "/disponibilidadParqueaderoMoto/{fecha}")
+	public ResponseDTO disponibilidadParqueaderoMoto(@PathVariable String fecha) {
+
+		logger.info("ingreso al metodo disponibilidadParqueaderoMoto {}", fecha);
+		
+		return reservaService.disponibilidadParqueaderoMoto(fecha);
+	}
+	
+	/**
+	* Controlador disponibilidadParqueaderoMoto para usar el SP PR_DIS_PAR_BICICLETA
 	* @author jortizg
 	* @version 0.1, 2021/07/08
 	*/
@@ -47,6 +60,19 @@ public class ReservaController {
 		logger.info("ingreso al metodo disponibilidadParqueaderoBicis {}", fecha);
 		
 		return reservaService.disponibilidadParqueaderoBicis(fecha);
+	}
+	
+	/**
+	* Controlador disponibilidadParqueaderoBicis para usar el SP PR_CON_PARQUEADEROS_CARRO
+	* @author kpinilla
+	* @version 0.1, 2021/07/08
+	*/
+	@GetMapping(path = "/disponibilidadParqueaderoCarro/{fecha}")
+	public ResponseDTO disponibilidadParqueaderoCarro(@PathVariable String fecha) {
+
+		logger.info("ingreso al metodo disponibilidadParqueaderoCarro {}", fecha);
+		
+		return reservaService.disponibilidadParqueaderoCarro(fecha);
 	}
 	
 	/**
@@ -73,5 +99,25 @@ public class ReservaController {
 		logger.info("Ingreso al metodo consultaCalendarioPuestos() id: {} fecha inicio: {} fecha fin {}", id, fechaInicio, fechaFin);
 		
 		return reservaService.consultaCalendarioPuestos(id, fechaInicio, fechaFin);
+	}
+	/**
+	* Controlador que gestiona la solicitud para consultar las reservas por día de las salas
+	* @author wsierra
+	* @version 0.1, 2021/07/09
+	*/
+	@GetMapping(path = "/reservas_sala_dia/{fecha}")
+	public ResponseDTO consultaXDiaS(@PathVariable String fecha) {
+		
+		logger.info("consultaXDiaS() ");
+		
+		return reservaService.consultarReservaXDiaS(fecha);
+	}
+	
+	@GetMapping(path = "reservas_aforo_dia/{fecha}/{idPiso}")
+	public ResponseDTO consultaAforo(@PathVariable String fecha, @PathVariable Integer idPiso) {
+		
+		logger.info("consultaAforo() {}", fecha);
+		
+		return reservaService.validarAforoDia(fecha, idPiso);
 	}
 }
