@@ -14,11 +14,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
+import com.asesoftware.reservas.api.reservas.dto.CalendarioPuestoDTO;
 import com.asesoftware.reservas.api.reservas.dto.CalendarioSalaDTO;
 import com.asesoftware.reservas.api.reservas.dto.ReservasPTDiaSPDTO;
 import com.asesoftware.reservas.api.reservas.dto.ResponseDTO;
 
 import com.asesoftware.reservas.api.reservas.repository.CalendarioSalaRepository;
+import com.asesoftware.reservas.api.reservas.repository.CalendarioPuestoRepository;
 
 
 import com.asesoftware.reservas.api.reservas.repository.ParqueaderoBicicletaEMRepository;
@@ -35,6 +37,9 @@ public class ReservaService implements IReservaService{
 	
 	@Autowired
 	CalendarioSalaRepository calendarioSalaRepository;
+	
+	@Autowired
+	CalendarioPuestoRepository calendarioPuestoRepository; 
 	
 	@Autowired
 	private ParqueaderoBicicletaEMRepository parqueaderoBicicletaEMRepository;
@@ -109,6 +114,31 @@ public class ReservaService implements IReservaService{
 			fechaF = fechaFormat.parse(fechaFin);
 			logger.info("consultaCalendarioSalas()");
 			List<CalendarioSalaDTO> answ = calendarioSalaRepository.getCalendarioSala(id, fechaIn, fechaF);
+			return new ResponseDTO(answ, true, OK, HttpStatus.OK);
+			
+		} catch (Exception e) {
+
+			return new ResponseDTO(null, false, ERROR_GENERICO, HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+		
+	}
+	
+	/**
+	* 
+	* @author acmoya
+	* @version 0.1, 2021/07/08
+	*/
+	@Override
+	public ResponseDTO consultaCalendarioPuestos(Integer id, String fechaInicio, String fechaFin) {
+		
+		SimpleDateFormat fechaFormat = new SimpleDateFormat("dd-MM-yyyy");
+		Date fechaIn;
+		Date fechaF;
+		try {
+			fechaIn = fechaFormat.parse(fechaInicio);
+			fechaF = fechaFormat.parse(fechaFin);
+			logger.info("consultaCalendarioPuestos()");
+			List<CalendarioPuestoDTO> answ = calendarioPuestoRepository.getCalendarioPuesto(id, fechaIn, fechaF);
 			return new ResponseDTO(answ, true, OK, HttpStatus.OK);
 			
 		} catch (Exception e) {

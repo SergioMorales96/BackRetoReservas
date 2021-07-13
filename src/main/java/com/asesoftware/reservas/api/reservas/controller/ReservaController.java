@@ -62,5 +62,16 @@ public class ReservaController {
 		return reservaService.consultaCalendarioSalas(id, fechaInicio, fechaFin);
 	}
 	
-	
+	/**
+	* Controlador 
+	* @author acmoya
+	* @version 0.1, 2021/07/08
+	*/
+	@GetMapping(path = "/reservas_puesto/{id}/{fechaInicio}/{fechaFin}")
+	public ResponseDTO consultaCalendarioPuestos(@PathVariable Integer id, @PathVariable String fechaInicio, @PathVariable String fechaFin) {
+		
+		logger.info("consultaCalendarioPuestos() id: {} fecha inicio: {} fecha fin {}", id, fechaInicio, fechaFin);
+		
+		return reservaService.consultaCalendarioPuestos(id, fechaInicio, fechaFin);
+	}
 }
