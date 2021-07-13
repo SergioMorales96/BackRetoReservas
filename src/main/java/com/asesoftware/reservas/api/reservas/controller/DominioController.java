@@ -19,7 +19,7 @@ import com.asesoftware.reservas.api.reservas.service.IDominioService;
 
 @RestController
 @RequestMapping(path="/api/v1/dominio")
-@CrossOrigin(origins = "*")
+@CrossOrigin(origins ="*")
 public class DominioController {
 	
 	private static final Logger logger  = LoggerFactory.getLogger(DominioController.class);
