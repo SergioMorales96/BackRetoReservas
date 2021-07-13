@@ -20,10 +20,10 @@ public class CalendarioSalaDTO implements Serializable{
     @JsonFormat(shape = JsonFormat.Shape.STRING,pattern = "dd-MM-yyyy",timezone = "America/Bogota")
 	Date dia;
 	
-    @JsonFormat(shape = JsonFormat.Shape.STRING,pattern = "HH:mm",timezone = "America/Bogota")
+    @JsonFormat(shape = JsonFormat.Shape.STRING,pattern = "kk:mm",timezone = "America/Bogota")
 	Date horaInicio;
 	
-    @JsonFormat(shape = JsonFormat.Shape.STRING,pattern = "HH:mm",timezone = "America/Bogota")
+    @JsonFormat(shape = JsonFormat.Shape.STRING,pattern = "kk:mm",timezone = "America/Bogota")
 	Date horaFin;
 	
 	public CalendarioSalaDTO() {}
