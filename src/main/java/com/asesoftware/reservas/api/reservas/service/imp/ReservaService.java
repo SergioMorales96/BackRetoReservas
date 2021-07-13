@@ -24,6 +24,7 @@ import com.asesoftware.reservas.api.reservas.repository.CalendarioSalaRepository
 
 import com.asesoftware.reservas.api.reservas.repository.ParqueaderoBicicletaEMRepository;
 import com.asesoftware.reservas.api.reservas.repository.ParqueaderoCarroEMRepository;
+import com.asesoftware.reservas.api.reservas.repository.ParqueaderoMotoEMRepository;
 import com.asesoftware.reservas.api.reservas.repository.ReservaEMRepository;
 import com.asesoftware.reservas.api.reservas.service.IReservaService;
 
@@ -45,6 +46,9 @@ public class ReservaService implements IReservaService{
 	
 	@Autowired
 	private ParqueaderoCarroEMRepository parqueaderoCarroEMRepository;
+	
+	@Autowired
+	private ParqueaderoMotoEMRepository parqueaderoMotoEMRepository;
 	
 	/**
 	* Método Consultar reservas por día PT
@@ -177,4 +181,34 @@ public class ReservaService implements IReservaService{
 		}
 	}
 
-}
+	/**
+	* Servicio disponibilidadParqueaderoCarro para usar el SP PRO_CON_PARQUEADEROS_MOTO
+	* @author cfcruz
+	* @version 0.1, 2021/07/13
+	*/
+	@Override
+	public ResponseDTO disponibilidadParqueaderoMoto(String fechaString) {
+		
+		SimpleDateFormat fechaFormat = new SimpleDateFormat(FORMATO_FECHA);
+		
+		Date fecha;
+		
+		try {
+			fecha = fechaFormat.parse(fechaString);
+			logger.info("ingreso al metodo disponibilidadParqueaderoMoto de service {}", fecha);
+			
+			Integer parqueaderosDisponiblesMoto = parqueaderoMotoEMRepository.getDisponibilidadParqueaderoMoto(fecha);
+			
+			logger.info("salida del metodo disponibilidadParqueaderoMoto de service {}", parqueaderosDisponiblesMoto);
+			
+			if (parqueaderosDisponiblesMoto <= 0) {
+				return new ResponseDTO(null, false, OK, HttpStatus.INTERNAL_SERVER_ERROR);
+			} else {
+				return new ResponseDTO(parqueaderosDisponiblesMoto, true, OK, HttpStatus.OK);
+			}
+			
+		} catch (ParseException e) {
+			return new ResponseDTO(null, false, OK, HttpStatus.INTERNAL_SERVER_ERROR);
+		}	
+	}
+	}

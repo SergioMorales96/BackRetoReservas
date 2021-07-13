@@ -37,7 +37,20 @@ public class ReservaController {
 	}
 	
 	/**
-	* Controlador disponibilidadParqueaderoBicis para usar el SP PR_DIS_PAR_BICICLETA
+	* Controlador disponibilidadParqueaderoMoto para usar el SP PRO_DIS_PAR_MOTO
+	* @author cfcruz
+	* @version 0.1, 2021/07/13
+	*/
+	@GetMapping(path = "/disponibilidadParqueaderoMoto/{fecha}")
+	public ResponseDTO disponibilidadParqueaderoMoto(@PathVariable String fecha) {
+
+		logger.info("ingreso al metodo disponibilidadParqueaderoMoto {}", fecha);
+		
+		return reservaService.disponibilidadParqueaderoMoto(fecha);
+	}
+	
+	/**
+	* Controlador disponibilidadParqueaderoMoto para usar el SP PR_DIS_PAR_BICICLETA
 	* @author jortizg
 	* @version 0.1, 2021/07/08
 	*/
