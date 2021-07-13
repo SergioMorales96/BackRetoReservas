@@ -124,9 +124,9 @@ public class ReservaService implements IReservaService{
 	}
 	
 	/**
-	* 
+	* Servicio que consulta el calendario de un puesto de trabajo 
 	* @author acmoya
-	* @version 0.1, 2021/07/08
+	* @version 0.1, 12/07/2021
 	*/
 	@Override
 	public ResponseDTO consultaCalendarioPuestos(Integer id, String fechaInicio, String fechaFin) {

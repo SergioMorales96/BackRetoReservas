@@ -38,14 +38,14 @@ public class CalendarioPuestoRepository {
 	@SuppressWarnings("unchecked")
 	public List<CalendarioPuestoDTO> getCalendarioPuesto(Integer id, Date fechaInicio, Date fechaFin  ) {
 		
-		logger.info("getCalendarioPuesto() id {} fechaInicio {} fechaFin {}", id, fechaInicio, fechaFin);
+		logger.info("Ingreso al metodo getCalendarioPuesto() id {} fechaInicio {} fechaFin {}", id, fechaInicio, fechaFin);
 		
-		StoredProcedureQuery storedProcedureQuery = entityManager.createStoredProcedureQuery("PR_CON_CALENDARIO_PUESTOS")
+		StoredProcedureQuery storedProcedureQuery = entityManager.createStoredProcedureQuery("SP_CONSULTA_CALENDARIO_PUESTOS")
 				.registerStoredProcedureParameter("IN_FECHA", Date.class, ParameterMode.IN)
 				.setParameter("IN_FECHA", fechaInicio)
-				.registerStoredProcedureParameter("FN_FECHA", Date.class, ParameterMode.IN)
+				.registerStoredProcedureParameter("OUT_FECHA", Date.class, ParameterMode.IN)
 				.setParameter("OUT_FECHA", fechaFin)
-				.registerStoredProcedureParameter("IN_SALA", Integer.class, ParameterMode.IN)
+				.registerStoredProcedureParameter("IN_PUESTO", Integer.class, ParameterMode.IN)
 				.setParameter("IN_PUESTO", id)
 				.registerStoredProcedureParameter("RESULTADOS", CalendarioPuestoDTO.class, ParameterMode.REF_CURSOR);
 

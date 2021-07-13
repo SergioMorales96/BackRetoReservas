@@ -63,14 +63,14 @@ public class ReservaController {
 	}
 	
 	/**
-	* Controlador 
+	* Controlador consultaCalendarioPuestos para usar el procedimiento almacenado 
 	* @author acmoya
-	* @version 0.1, 2021/07/08
+	* @version 0.1, 12/07/2021
 	*/
 	@GetMapping(path = "/reservas_puesto/{id}/{fechaInicio}/{fechaFin}")
 	public ResponseDTO consultaCalendarioPuestos(@PathVariable Integer id, @PathVariable String fechaInicio, @PathVariable String fechaFin) {
 		
-		logger.info("consultaCalendarioPuestos() id: {} fecha inicio: {} fecha fin {}", id, fechaInicio, fechaFin);
+		logger.info("Ingreso al metodo consultaCalendarioPuestos() id: {} fecha inicio: {} fecha fin {}", id, fechaInicio, fechaFin);
 		
 		return reservaService.consultaCalendarioPuestos(id, fechaInicio, fechaFin);
 	}
