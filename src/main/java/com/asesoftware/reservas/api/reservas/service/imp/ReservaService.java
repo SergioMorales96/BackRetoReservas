@@ -17,6 +17,7 @@ import org.springframework.stereotype.Service;
 import com.asesoftware.reservas.api.reservas.dto.CalendarioSalaDTO;
 import com.asesoftware.reservas.api.reservas.dto.ReservasPTDiaSPDTO;
 import com.asesoftware.reservas.api.reservas.dto.ReservasSDiaSPDTO;
+import com.asesoftware.reservas.api.reservas.dto.ReservasUsuaSPDTO;
 import com.asesoftware.reservas.api.reservas.dto.ResponseDTO;
 import com.asesoftware.reservas.api.reservas.repository.AforoDiaRepository;
 import com.asesoftware.reservas.api.reservas.repository.CalendarioSalaRepository;
@@ -36,6 +37,9 @@ public class ReservaService implements IReservaService{
 	
 	@Autowired
 	ReservaEMRepository reservasPorDiaRepository;
+	
+	@Autowired
+	ReservaEMRepository reservasUsuario;
 	
 	@Autowired
 	CalendarioSalaRepository calendarioSalaRepository;
@@ -203,5 +207,31 @@ public class ReservaService implements IReservaService{
 			return new ResponseDTO(null,false, OK, HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 	}
+	
+	/**
+	* Servicio consultar reservas de usuario, para usar el SP PR_CON_PARQUEADEROS_CARRO 
+	* @author abarrios
+	* @version 0.1, 2021/07/13
+	*/
+	
+	@Override
+	public ResponseDTO consultaReservaUsuario(String fechaInicio, String fechaFin, String correo) {
+		SimpleDateFormat fechaFormat = new SimpleDateFormat(FORMATO_FECHA);
+		Date fechaInici;
+		Date fechaFi;
+		try {
+			fechaInici = fechaFormat.parse(fechaInicio);
+			fechaFi = fechaFormat.parse(fechaFin);
+			logger.info("consultaReservasUsuario()");
+			List<ReservasUsuaSPDTO> answ = reservasUsuario.getReservaUsua(fechaInici, fechaFi, correo);
+			return new ResponseDTO(answ, true, OK, HttpStatus.OK);
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+			return new ResponseDTO(null, false, ERROR_GENERICO, HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+		
+	}
+
 
 }

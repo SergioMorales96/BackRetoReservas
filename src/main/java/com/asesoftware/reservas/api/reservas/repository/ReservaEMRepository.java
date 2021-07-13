@@ -16,6 +16,7 @@ import org.springframework.stereotype.Repository;
 
 import com.asesoftware.reservas.api.reservas.dto.ReservasPTDiaSPDTO;
 import com.asesoftware.reservas.api.reservas.dto.ReservasSDiaSPDTO;
+import com.asesoftware.reservas.api.reservas.dto.ReservasUsuaSPDTO;
 
 /**
  * Clase ReservasPorDiaRepository para usar el SP PR_RESERVAS_DIA_PT
@@ -103,6 +104,54 @@ public class ReservaEMRepository {
 		
 		logger.info("Las reservas de salas para la fecha {} son {}", fechaReservaS, dataDTOs);
 		
+		return dataDTOs;
+	}
+	
+	/**
+	* Método para usar el procedimiento almacenado PR_CON_RESERVA_USUARIO
+	* @author abarrios
+	* @version 0.1, 2021/07/13
+	*/
+	
+	public List<ReservasUsuaSPDTO> getReservaUsua(Date fechaInicio, Date fechaFin, String correo) {
+
+		StoredProcedureQuery storedProcedureQuery = entityManager.createStoredProcedureQuery("PR_CON_RESERVA_USUARIO")
+				.registerStoredProcedureParameter("IN_FECHA", Date.class, ParameterMode.IN) //Dato de entrada
+				.registerStoredProcedureParameter("IN_FECHAFIN", Date.class, ParameterMode.IN) //Dato de entrada
+				.registerStoredProcedureParameter("IN_CORREO", String.class, ParameterMode.IN) //Dato de entrada
+				.setParameter("IN_FECHA", fechaInicio)
+				.setParameter("IN_FECHAFIN", fechaFin)
+				.setParameter("IN_CORREO", correo)
+				.registerStoredProcedureParameter("OUT_INFO_RESERVAS", ReservasUsuaSPDTO.class, ParameterMode.REF_CURSOR);
+
+		//Ejecuta el metodo que retorna una lista de objetos
+		@SuppressWarnings("unchecked")
+		List<Object[]> listReservas = storedProcedureQuery.getResultList(); 
+
+		//se pasa a dto
+		List<ReservasUsuaSPDTO> dataDTOs = listReservas.stream()
+				.map(datos -> ReservasUsuaSPDTO
+						.builder()
+						.numeroReserva(((BigDecimal)datos[0]).intValue())
+						.dia((Date)datos[1])
+						.horaInicio((Date)datos[2])
+						.horaFin((Date)datos[3])
+						.totalHoras(((BigDecimal)datos[4]).intValue())
+						.dominioEstado((String)datos[5])
+						.dominioTipoVehiculo((String)datos[6])
+						.parqueadero(((Character)datos[7]).toString())
+						.placa((String)datos[8])
+						.nombreUsuario((String)datos[9])
+						.proyecto((String)datos[10])
+						.idPuestoTrabajo(datos[11] != null ? ((BigDecimal)datos[11]).intValue():null)
+						.idSala(datos[12]!= null ? ((BigDecimal)datos[12]).intValue():null)
+						.nombreSala((String)datos[13])
+						.nombrePuesTrabajo((String)datos[14])
+						.build())
+				.collect(Collectors.toList());
+
+		logger.info("de la fecha inicio {} a la fecha {} del usuario {}", fechaInicio,fechaFin,correo, dataDTOs);
+
 		return dataDTOs;
 	}
 }

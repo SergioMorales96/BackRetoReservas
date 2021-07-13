@@ -96,5 +96,19 @@ public class ReservaController {
 		return reservaService.validarAforoDia(fecha, idPiso);
 	}
 	
+	/**
+	* Controlador que gestiona la solicitud para consultar las reservas de un usuario
+	* @author abarrios
+	* @version 0.1, 2021/07/13
+	*/
+	@GetMapping(path = "/reservas_usuario/{fechaInicio}/{fechaFin}/{correo}")
+	public ResponseDTO consultaReservaUsuario(@PathVariable String fechaInicio, @PathVariable String fechaFin, @PathVariable String correo) {
+		
+		logger.info("consultaReservaUsuario fechaInicio: {} fechaFin: {} correo {}", fechaInicio,fechaFin, correo );
+		
+		return reservaService.consultaReservaUsuario(fechaInicio,fechaFin, correo);
+	}
+	
+	
 	
 }
