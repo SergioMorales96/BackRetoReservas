@@ -18,7 +18,7 @@ import com.asesoftware.reservas.api.reservas.dto.CalendarioSalaDTO;
 import com.asesoftware.reservas.api.reservas.dto.ReservasPTDiaSPDTO;
 import com.asesoftware.reservas.api.reservas.dto.ReservasSDiaSPDTO;
 import com.asesoftware.reservas.api.reservas.dto.ResponseDTO;
-
+import com.asesoftware.reservas.api.reservas.repository.AforoDiaRepository;
 import com.asesoftware.reservas.api.reservas.repository.CalendarioSalaRepository;
 
 
@@ -45,6 +45,9 @@ public class ReservaService implements IReservaService{
 	
 	@Autowired
 	private ParqueaderoCarroEMRepository parqueaderoCarroEMRepository;
+	
+	@Autowired
+	private AforoDiaRepository aforoDiaRepository;
 	
 	/**
 	* Método Consultar reservas por día PT
@@ -174,6 +177,30 @@ public class ReservaService implements IReservaService{
 			
 		} catch (ParseException e) {
 			return new ResponseDTO(null, false, OK, HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+	}
+
+	@Override
+	public ResponseDTO validarAforoDia(String fechaString, Integer idPiso) {
+		SimpleDateFormat formatoFecha = new SimpleDateFormat(FORMATO_FECHA);
+		
+		Date fechaDate;
+		try {
+			fechaDate = formatoFecha.parse(fechaString);
+			
+			logger.info("ingreso a método validarAforoDia en el Reserva Service {}", fechaString);
+			
+			Integer aforoDia = aforoDiaRepository.getAforoDia(fechaDate, idPiso);
+			
+			logger.info("salida de método validarAforoDia en el service {}", fechaString);
+			
+			if (aforoDia <= 0 ) {
+				return new ResponseDTO(null, false, OK, HttpStatus.INTERNAL_SERVER_ERROR);
+			} else {
+				return new ResponseDTO(aforoDia, true, OK, HttpStatus.OK);
+			}
+		} catch (ParseException e) {
+			return new ResponseDTO(null,false, OK, HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 	}
 
