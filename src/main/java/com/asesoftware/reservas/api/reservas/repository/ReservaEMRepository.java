@@ -14,12 +14,13 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.asesoftware.reservas.api.reservas.dto.ReservaAddDTO;
 import com.asesoftware.reservas.api.reservas.dto.ReservasPTDiaSPDTO;
 import com.asesoftware.reservas.api.reservas.dto.ReservasSDiaSPDTO;
 import com.asesoftware.reservas.api.reservas.dto.ReservasUsuaSPDTO;
 
 /**
- * Clase ReservasPorDiaRepository para usar el SP PR_RESERVAS_DIA_PT
+ * Clase ReservasPorDiaRepository para usar procedimientos almacenados
  * @author jcanizales
  * @version 0.1, 2021/07/06
  */
@@ -75,7 +76,6 @@ public class ReservaEMRepository {
 	* @author wsierra
 	* @version 0.1, 2021/07/09
 	*/
-	
 	public List<ReservasSDiaSPDTO> getReservaSDia(Date fechaReservaS) {
 		
 		StoredProcedureQuery storedProcedureQuery = entityManager.createStoredProcedureQuery("PR_CON_RESERVAS_SALAS_DIA")
@@ -153,5 +153,15 @@ public class ReservaEMRepository {
 		logger.info("de la fecha inicio {} a la fecha {} del usuario {}", fechaInicio,fechaFin,correo, dataDTOs);
 
 		return dataDTOs;
+	}
+
+	/**
+	* Método para usar el procedimiento almacenado SP_CREAR_RESERVA
+	* @author jrondon
+	* @version 0.1, 2021/07/12
+	*/
+	public List<ReservaAddDTO> addNewReserva(ReservaAddDTO reservaAddDTO) {
+		
+		return null;
 	}
 }

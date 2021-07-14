@@ -6,9 +6,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.asesoftware.reservas.api.reservas.dto.ReservaAddDTO;
 import com.asesoftware.reservas.api.reservas.dto.ResponseDTO;
 import com.asesoftware.reservas.api.reservas.service.IReservaService;
 
@@ -60,6 +63,17 @@ public class ReservaController {
 		logger.info("ingreso al metodo disponibilidadParqueaderoBicis {}", fecha);
 		
 		return reservaService.disponibilidadParqueaderoBicis(fecha);
+	}
+	
+	/**
+	* Controlador para usar el SP PR_CREAR_RESERVA
+	* @author jrondon
+	* @version 0.1, 2021/07/12
+	*/
+	@PostMapping(path = "/crearreserva", consumes = "application/json", produces = "application/json")
+	public ResponseDTO crearReserva(@RequestBody ReservaAddDTO reservaAddDto) {
+		logger.info("ingreso al metodo crearReserva");
+		return reservaService.crearReserva(reservaAddDto);
 	}
 	
 	/**

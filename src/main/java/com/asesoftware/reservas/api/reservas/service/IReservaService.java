@@ -1,5 +1,6 @@
 package com.asesoftware.reservas.api.reservas.service;
 
+import com.asesoftware.reservas.api.reservas.dto.ReservaAddDTO;
 import com.asesoftware.reservas.api.reservas.dto.ResponseDTO;
 
 public interface IReservaService {
@@ -13,4 +14,5 @@ public interface IReservaService {
 	public ResponseDTO disponibilidadParqueaderoMoto(String fechaString);
 	public ResponseDTO consultarReservaXDiaS(String fechaString);
 	public ResponseDTO validarAforoDia(String fecha, Integer idPiso);
+	public ResponseDTO crearReserva(ReservaAddDTO reservaDto);
 }

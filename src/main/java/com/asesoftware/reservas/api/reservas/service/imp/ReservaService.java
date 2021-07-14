@@ -16,6 +16,7 @@ import org.springframework.stereotype.Service;
 
 import com.asesoftware.reservas.api.reservas.dto.CalendarioPuestoDTO;
 import com.asesoftware.reservas.api.reservas.dto.CalendarioSalaDTO;
+import com.asesoftware.reservas.api.reservas.dto.ReservaAddDTO;
 import com.asesoftware.reservas.api.reservas.dto.ReservasPTDiaSPDTO;
 import com.asesoftware.reservas.api.reservas.dto.ReservasSDiaSPDTO;
 import com.asesoftware.reservas.api.reservas.dto.ReservasUsuaSPDTO;
@@ -215,6 +216,15 @@ public class ReservaService implements IReservaService{
 		} catch (ParseException e) {
 			return new ResponseDTO(null, false, OK, HttpStatus.INTERNAL_SERVER_ERROR);
 		}
+	}
+	
+	/**
+	* Servicio para usar el procedimiento almacenado PR_CREAR_RESERVA 
+	* @author jrondon
+	* @version 0.1, 2021/07/08
+	*/
+	public ResponseDTO crearReserva(ReservaAddDTO reservaDto) {
+		return null;
 	}
 
 	/**
