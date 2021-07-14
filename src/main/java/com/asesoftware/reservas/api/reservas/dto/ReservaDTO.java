@@ -10,21 +10,25 @@ import lombok.Data;
 
 @Data
 @Builder
-public class ReservaAddDTO implements Serializable {
+public class ReservaDTO implements Serializable {
 	
 	private static final long serialVersionUID = 1L;
-		
-	@JsonFormat(shape = JsonFormat.Shape.STRING,pattern = "dd-MM-yyyy",timezone = "America/New_York")
+	
+	private Integer numeroReserva;
+	private Integer idPuestoTrabajo;
+	private Integer totalHoras;
+	private Integer idSala;
+	@JsonFormat(shape = JsonFormat.Shape.STRING,pattern = "yyyy-MM-dd",timezone = "America/New_York")
 	private Date dia;
 	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "HH:mm", timezone = "America/New_York")
 	private Date horaInicio;
 	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "HH:mm", timezone = "America/New_York")
 	private Date horaFin;
-	private Integer totalHoras;
+	private String dominioEstado;
 	private String dominioTipoVehiculo;
-	private String placa;
 	private String emailUsuario;
+	private String parqueadero;
 	private String proyecto;
-	private Integer idRelacion;
-	private String tipoReserva;	
+	private String placa;
+	
 }

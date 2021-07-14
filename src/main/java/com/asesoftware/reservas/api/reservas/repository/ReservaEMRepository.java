@@ -18,6 +18,7 @@ import com.asesoftware.reservas.api.reservas.dto.ReservaAddDTO;
 import com.asesoftware.reservas.api.reservas.dto.ReservasPTDiaSPDTO;
 import com.asesoftware.reservas.api.reservas.dto.ReservasSDiaSPDTO;
 import com.asesoftware.reservas.api.reservas.dto.ReservasUsuaSPDTO;
+import com.asesoftware.reservas.api.reservas.entity.ReservaEntity;
 
 /**
  * Clase ReservasPorDiaRepository para usar procedimientos almacenados
@@ -160,8 +161,40 @@ public class ReservaEMRepository {
 	* @author jrondon
 	* @version 0.1, 2021/07/12
 	*/
-	public List<ReservaAddDTO> addNewReserva(ReservaAddDTO reservaAddDTO) {
+	public ReservaEntity addNewReserva(ReservaAddDTO reservaAddDTO) {
+		logger.info("Ingreso al repositorio de addNewReserva");
+		StoredProcedureQuery storedProcedureQuery = entityManager.createStoredProcedureQuery("PR_CREAR_RESERVA")
+				.registerStoredProcedureParameter("indDia", Date.class, ParameterMode.IN)
+				.registerStoredProcedureParameter("inHoraInicio", Date.class, ParameterMode.IN)
+				.registerStoredProcedureParameter("inHoraFin", Date.class, ParameterMode.IN)
+				.registerStoredProcedureParameter("inTotalHoras", Integer.class, ParameterMode.IN)
+				.registerStoredProcedureParameter("inDominioTipoVehiculo", String.class, ParameterMode.IN)
+				.registerStoredProcedureParameter("inPlaca", String.class, ParameterMode.IN)
+				.registerStoredProcedureParameter("inEmailUsuario", String.class, ParameterMode.IN)
+				.registerStoredProcedureParameter("inProyecto", String.class, ParameterMode.IN)
+				.registerStoredProcedureParameter("inIdRelacion", Integer.class, ParameterMode.IN)
+				.registerStoredProcedureParameter("inTipoReserva", String.class, ParameterMode.IN)
+				.setParameter("indDia", reservaAddDTO.getDia())
+				.setParameter("inHoraInicio", reservaAddDTO.getHoraInicio())
+				.setParameter("inHoraFin", reservaAddDTO.getHoraFin())
+				.setParameter("inTotalHoras", reservaAddDTO.getTotalHoras())
+				.setParameter("inDominioTipoVehiculo", reservaAddDTO.getDominioTipoVehiculo())
+				.setParameter("inPlaca", reservaAddDTO.getPlaca())
+				.setParameter("inEmailUsuario", reservaAddDTO.getEmailUsuario())
+				.setParameter("inProyecto", reservaAddDTO.getProyecto())
+				.setParameter("inIdRelacion", reservaAddDTO.getIdRelacion())
+				.setParameter("inTipoReserva", reservaAddDTO.getTipoReserva())
+				.registerStoredProcedureParameter("outResultado", ReservasUsuaSPDTO.class, ParameterMode.REF_CURSOR);
+		logger.info("Se enviaron los datos al procedimiento almacenado");
 		
-		return null;
+		//Ejecuta el metodo que retorna el objeto creado
+		Object reservaCreada = storedProcedureQuery.getSingleResult();
+		logger.info("Se creo la reserva y se retornan el registro en forma de objeto");
+		
+		//ReservaDTO dataDTO = (ReservaDTO) reservaCreada;
+		ReservaEntity reservaEntity = (ReservaEntity) reservaCreada;
+		logger.info("El objeto con el registro ahora es una entidad");
+		
+		return reservaEntity;
 	}
 }
