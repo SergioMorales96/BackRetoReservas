@@ -17,12 +17,11 @@ import org.springframework.stereotype.Service;
 import com.asesoftware.reservas.api.reservas.dto.CalendarioPuestoDTO;
 import com.asesoftware.reservas.api.reservas.dto.CalendarioSalaDTO;
 import com.asesoftware.reservas.api.reservas.dto.ReservaAddDTO;
+import com.asesoftware.reservas.api.reservas.dto.ReservaAddedDTO;
 import com.asesoftware.reservas.api.reservas.dto.ReservasPTDiaSPDTO;
 import com.asesoftware.reservas.api.reservas.dto.ReservasSDiaSPDTO;
 import com.asesoftware.reservas.api.reservas.dto.ReservasUsuaSPDTO;
 import com.asesoftware.reservas.api.reservas.dto.ResponseDTO;
-import com.asesoftware.reservas.api.reservas.entity.ReservaEntity;
-import com.asesoftware.reservas.api.reservas.mapper.IReservaMapper;
 import com.asesoftware.reservas.api.reservas.repository.AforoDiaRepository;
 import com.asesoftware.reservas.api.reservas.repository.CalendarioPuestoRepository;
 import com.asesoftware.reservas.api.reservas.repository.CalendarioSalaRepository;
@@ -66,9 +65,6 @@ public class ReservaService implements IReservaService {
 	@Autowired
 	private ReservaEMRepository reservaEMRepository;
 	
-	@Autowired
-	private IReservaMapper reservaMapper;
-
 	/**
 	 * Método Consultar reservas por día PT
 	 * 
@@ -242,9 +238,9 @@ public class ReservaService implements IReservaService {
 	public ResponseDTO crearReserva(ReservaAddDTO reservaAddDto) {
 		logger.info("Ingresó al método del servicio crearReserva");
 		try {
-			ReservaEntity reservaEntity = reservaEMRepository.addNewReserva(reservaAddDto);
+			List<ReservaAddedDTO> reservaAdderDTO = reservaEMRepository.addNewReserva(reservaAddDto);
 			logger.info("Se creó la nueva reserva");
-			return new ResponseDTO(reservaMapper.entityToDto(reservaEntity), true, OK, HttpStatus.OK);
+			return new ResponseDTO(reservaAdderDTO, true, OK, HttpStatus.OK);
 		} catch (Exception e) {
 			logger.error("Error {}.  No se creo la reserva en el procedimiento almacenado", e.getMessage());
 			return new ResponseDTO(null, false, ERROR_GENERICO, HttpStatus.INTERNAL_SERVER_ERROR);

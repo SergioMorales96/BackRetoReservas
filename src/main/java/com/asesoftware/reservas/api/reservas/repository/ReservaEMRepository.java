@@ -15,10 +15,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.asesoftware.reservas.api.reservas.dto.ReservaAddDTO;
+import com.asesoftware.reservas.api.reservas.dto.ReservaAddedDTO;
 import com.asesoftware.reservas.api.reservas.dto.ReservasPTDiaSPDTO;
 import com.asesoftware.reservas.api.reservas.dto.ReservasSDiaSPDTO;
 import com.asesoftware.reservas.api.reservas.dto.ReservasUsuaSPDTO;
-import com.asesoftware.reservas.api.reservas.entity.ReservaEntity;
 
 /**
  * Clase ReservasPorDiaRepository para usar procedimientos almacenados
@@ -161,7 +161,7 @@ public class ReservaEMRepository {
 	* @author jrondon
 	* @version 0.1, 2021/07/12
 	*/
-	public ReservaEntity addNewReserva(ReservaAddDTO reservaAddDTO) {
+	public List<ReservaAddedDTO> addNewReserva(ReservaAddDTO reservaAddDTO) {
 		logger.info("Ingreso al repositorio de addNewReserva");
 		StoredProcedureQuery storedProcedureQuery = entityManager.createStoredProcedureQuery("PR_CREAR_RESERVA")
 				.registerStoredProcedureParameter("indDia", Date.class, ParameterMode.IN)
@@ -188,13 +188,31 @@ public class ReservaEMRepository {
 		logger.info("Se enviaron los datos al procedimiento almacenado");
 		
 		//Ejecuta el metodo que retorna el objeto creado
-		Object reservaCreada = storedProcedureQuery.getSingleResult();
-		logger.info("Se creo la reserva y se retornan el registro en forma de objeto");
+		@SuppressWarnings("unchecked")
+		List<Object[]> reservaCreada = storedProcedureQuery.getResultList();
+		logger.info("Se creo la reserva y se retornan el registro en forma de objeto en una lista");
 		
-		//ReservaDTO dataDTO = (ReservaDTO) reservaCreada;
-		ReservaEntity reservaEntity = (ReservaEntity) reservaCreada;
-		logger.info("El objeto con el registro ahora es una entidad");
+		//se pasa a dto
+		List<ReservaAddedDTO> dataDTOs = reservaCreada.stream()
+				.map(datos -> ReservaAddedDTO
+						.builder()
+						.numeroReserva(((BigDecimal)datos[0]).intValue())
+						.dia((Date)datos[1])
+						.horaInicio((Date)datos[2])
+						.horaFin((Date)datos[3])
+						.totalHoras(((BigDecimal)datos[4]).intValue())
+						.dominioEstado((String)datos[5])
+						.dominioTipoVehiculo((String)datos[6])
+						.parqueadero(((Character)datos[7]).toString())
+						.placa((String)datos[8])
+						.emailUsuario((String)datos[9])
+						.proyecto((String)datos[10])
+						.idPuestoTrabajo(datos[11] != null ? ((BigDecimal)datos[11]).intValue():null)
+						.idSala(datos[12]!= null ? ((BigDecimal)datos[12]).intValue():null)
+						.build())
+				.collect(Collectors.toList());
+		logger.info("El objeto con el registro ahora es un dto");
 		
-		return reservaEntity;
+		return dataDTOs;
 	}
 }
