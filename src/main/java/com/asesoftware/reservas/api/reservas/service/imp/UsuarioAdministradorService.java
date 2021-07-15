@@ -75,16 +75,22 @@ public class UsuarioAdministradorService implements IUsuarioAdministradorService
 	*/
 	@Override
 	public ResponseDTO crearUsuario(UsuarioAdministradorDTO userAdmin) {
-		
-		try {
-		UsuarioAdministradorEntity usuarioAdministardor = administradorRepository.save(usuarioAdminMapper.dtoToEntity(userAdmin));
-		logger.info("crear usuario: {}", usuarioAdministardor);
-		return new ResponseDTO(usuarioAdminMapper.entityToDto(usuarioAdministardor), true, OK, HttpStatus.OK);
-		}
-		catch(Exception e) {
-			logger.error("No se ha podido crear el administrador");
+
+		if(!consultarUsuarioAdminEmailDTO(userAdmin.getEmail()).isEmpty()) {
 			return new ResponseDTO(null, false, ERROR_GENERICO, HttpStatus.INTERNAL_SERVER_ERROR);
+		} else {
+			try {
+				UsuarioAdministradorEntity usuarioAdministardor = administradorRepository.save(usuarioAdminMapper.dtoToEntity(userAdmin));
+				logger.info("crear usuario: {}", usuarioAdministardor);
+				return new ResponseDTO(usuarioAdminMapper.entityToDto(usuarioAdministardor), true, OK, HttpStatus.OK);
+			}
+			catch(Exception e) {
+				logger.error("No se ha podido crear el administrador");
+				return new ResponseDTO(null, false, ERROR_GENERICO, HttpStatus.INTERNAL_SERVER_ERROR);
+			}
 		}
+
+
 	}
 
 	/**
@@ -129,13 +135,13 @@ public class UsuarioAdministradorService implements IUsuarioAdministradorService
 	* @version 0.1, 2021/07/01
 	*/
 	@Override
-	public ResponseDTO usuarioAdministradorPorEmail(String email) {
+	public ResponseDTO usuarioAdministradorPorEmail(String email) {		
 		
-		List<UsuarioAdministradorDTO> listUsuarioAdminDtos = usuarioAdminMapper.entitysToDtos(administradorRepository.queryUsuarioAdminPorEmail(email));
+		return new ResponseDTO(consultarUsuarioAdminEmailDTO(email), true, OK, HttpStatus.OK);
 		
-		
-		return new ResponseDTO(listUsuarioAdminDtos, true, OK, HttpStatus.OK);
 	}
+	
+	
 	
 	/**
 	* Método encargado de consultar los usuarios administradores por sucursal
@@ -150,6 +156,12 @@ public class UsuarioAdministradorService implements IUsuarioAdministradorService
 			
 		return new ResponseDTO(listUsuarioAdministradorSucursal, true, OK, HttpStatus.OK);
 			
+	}
+
+	@Override
+	public List<UsuarioAdministradorDTO> consultarUsuarioAdminEmailDTO(String email) {
+		
+		return usuarioAdminMapper.entitysToDtos(administradorRepository.queryUsuarioAdminPorEmail(email));
 	}
 
 }
