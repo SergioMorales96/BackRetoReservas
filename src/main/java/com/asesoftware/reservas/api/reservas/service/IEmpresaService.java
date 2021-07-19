@@ -9,5 +9,5 @@ public interface IEmpresaService {
 	public ResponseDTO consultarTodas();
 	public ResponseDTO actualizarEmpresa(EmpresaDTO empresaDTO);
 	public ResponseDTO crearEmpresa(EmpresaDTO empresaDTO);
-	
+	public ResponseDTO eliminarEmpresa(String nit);
 }

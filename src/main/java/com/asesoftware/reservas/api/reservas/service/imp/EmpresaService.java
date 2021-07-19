@@ -97,4 +97,21 @@ public class EmpresaService implements IEmpresaService{
 		}
 	}
 
+	@Override
+	public ResponseDTO eliminarEmpresa(String nit) {
+		
+		logger.info("eliminarEmpresa {}",nit);
+		try {
+
+			empresaRepositorio.deleteById(nit);	
+			return new ResponseDTO(null, true, OK, HttpStatus.OK);
+			
+		}catch (Exception e) {	
+
+			logger.error(e.getMessage());
+			return new ResponseDTO(null, false, ERROR_GENERICO, HttpStatus.INTERNAL_SERVER_ERROR);
+
+		}
+	}
+
 }

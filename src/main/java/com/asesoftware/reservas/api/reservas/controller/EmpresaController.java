@@ -25,6 +25,11 @@ public class EmpresaController {
 	@Autowired
 	private IEmpresaService empresaService;
 	
+	/**
+	* Consultar por id
+	* @author spinilla
+	* @version 0.1, 2021/07/13
+	*/
 	@GetMapping(path = "/{nit}")
 	public ResponseDTO empresaPorId(@PathVariable String nit) {
 		
@@ -33,23 +38,49 @@ public class EmpresaController {
 		return empresaService.empresaPorId(nit);
 	}
 	
-	
+	/**
+	* Consultar todas
+	* @author spinilla
+	* @version 0.1, 2021/07/13
+	*/
 	@GetMapping(path = "/todas")
 	public ResponseDTO consultarTodas() {
 		logger.info("consultarTodas()");
 		return empresaService.consultarTodas();
 	}
 	
+	/**
+	* Actualizar empresa
+	* @author spinilla
+	* @version 0.1, 2021/07/13
+	*/
 	@PostMapping(path = "/actualizar" , consumes = "application/json",produces = "application/json" )
 	public ResponseDTO actualizarEmpresa(@RequestBody EmpresaDTO empresaDTO){
 		logger.info("actualizar {}",empresaDTO);
 		return empresaService.actualizarEmpresa(empresaDTO);
 	}
 	
+	/**
+	* Crear empresa
+	* @author spinilla
+	* @version 0.1, 2021/07/13
+	*/
 	@PostMapping(path = "/crear" , consumes = "application/json",produces = "application/json" )
 	public ResponseDTO crearEmpresa(@RequestBody EmpresaDTO empresaDTO){
 		logger.info("crearEmpresa {}",empresaDTO);
 		return empresaService.actualizarEmpresa(empresaDTO);
 	}
+	
+	/**
+	* Eliminar empresa
+	* @author spinilla
+	* @version 0.1, 2021/07/13
+	*/
+	@GetMapping(path = "/eliminar/{nit}")
+	public ResponseDTO eliminarEmpresa(@PathVariable String nit) {
+		logger.info("consultarTodas() {}",nit);
+		return empresaService.eliminarEmpresa(nit);
+	}
+	
 
 }

@@ -52,7 +52,7 @@ public class SucursalService implements ISucursalService{
 
 		if (optional.isPresent()) {
 			logger.info("La sucursal {} fue encontrada",id);
-			return new ResponseDTO(optional.get(), true, OK, HttpStatus.OK);
+			return new ResponseDTO(mapperSucursal.entityToDto(optional.get()), true, OK, HttpStatus.OK);
 		}else {
 			logger.info("La sucursal {} no fue encontrada",id);
 			return  new ResponseDTO(null, false, ERROR_GENERICO, HttpStatus.INTERNAL_SERVER_ERROR);

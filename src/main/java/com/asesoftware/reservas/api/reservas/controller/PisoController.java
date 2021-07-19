@@ -24,44 +24,70 @@ public class PisoController {
 	
 	@Autowired
 	private IPisoService pisoService;
-
+	
+	/**
+	* Implemantacion de metodo Consultar todos los pisos
+	* @author lhernandez 
+	* @version 0.1, 2021/06/29
+	*/
 	@GetMapping(path = "/todos")
 	public ResponseDTO consultarTodos() {
 		logger.info("consultar Todos()");
 		return pisoService.consultarTodos();
 	}
-	@PostMapping(path = "/crear", consumes = "application/json",produces = "application/json")
-	public ResponseDTO crearPiso(@RequestBody PisoDTO dto) {
-		logger.info("crear piso {}", dto);
-		return pisoService.crearPiso(dto);
-		
-	}
-	@PostMapping(path = "/actualizar" , consumes = "application/json" , produces = "application/json")
-	public ResponseDTO actualizarPiso(@RequestBody PisoDTO dto) {
-		logger.info("actualizar piso {}",dto);
-		return pisoService.actualizarPiso(dto);
-	}
-	@GetMapping(path = "/eliminar/{idPiso}")
-	public ResponseDTO eliminarPiso(@PathVariable Integer idPiso) {
-		logger.info("piso a eliminar {}", idPiso);
-		return pisoService.eliminarPiso(idPiso);
-	}
 	
+	/**
+	* Implemantacion de metodo Consultar piso por id
+	* @author lhernandez 
+	* @version 0.1, 2021/06/29
+	*/
 	@GetMapping(path = "/consultar/{idPiso}")
 	public ResponseDTO pisoPorId(@PathVariable Integer idPiso) {
 		logger.info("consultar piso dto{}", idPiso);
 		return pisoService.pisoPorId(idPiso);
 	}
 	
+	/**
+	* Implemantacion de metodo Consultar piso por numero de piso
+	* @author cfcruz 
+	* @version 0.1, 2021/07/01
+	*/
 	@GetMapping(path = "/numero/{numPiso}")
 	public ResponseDTO numeroDePiso(@PathVariable Integer numPiso) {
 		logger.info("consultar piso por numero {}", numPiso);
-		return pisoService.pisoPorNumeroPiso(numPiso);	
-	}
-
-	@GetMapping(path = "sucursal/{id}")
-	public ResponseDTO pisoporIdSucursal(@PathVariable Integer id){
+		return pisoService.pisoPorNumeroPiso(numPiso);
 		
-		return pisoService.pisoPorIdSucursal(id);
+	}
+	
+	/**
+	* Implemantacion de metodo crear piso
+	* @author lhernandez 
+	* @version 0.1, 2021/06/29
+	*/
+	@PostMapping(path = "/crear", consumes = "application/json",produces = "application/json")
+	public ResponseDTO crearPiso(@RequestBody PisoDTO dto) {
+		logger.info("crear piso {}", dto);
+		return pisoService.crearPiso(dto);		
+	}
+	
+	/**
+	* Implemantacion de metodo actualizar piso
+	* @author cfcruz 
+	* @version 0.1, 2021/07/01
+	*/
+	@PostMapping(path = "/actualizar" , consumes = "application/json" , produces = "application/json")
+	public ResponseDTO actualizarPiso(@RequestBody PisoDTO dto) {
+		logger.info("actualizar piso {}",dto);
+		return pisoService.actualizarPiso(dto);
+	}
+	/**
+	* Implemantacion de metodo Eliminar piso
+	* @author lhernandez 
+	* @version 0.1, 2021/06/29
+	*/
+	@GetMapping(path = "/eliminar/{idPiso}")
+	public ResponseDTO eliminarPiso(@PathVariable Integer idPiso) {
+		logger.info("piso a eliminar {}", idPiso);
+		return pisoService.eliminarPiso(idPiso);
 	}
 }

@@ -3,6 +3,7 @@ package com.asesoftware.reservas.api.reservas.controller;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -16,6 +17,7 @@ import com.asesoftware.reservas.api.reservas.service.IHorarioPuestoTrabajoServic
 
 @RestController
 @RequestMapping(path = "/api/v1/HorarioPuestoTrabajo")
+@CrossOrigin(origins = "*")
 public class HorarioPuestoTrabajoController {
 
 	private static final Logger logger = LoggerFactory.getLogger(HorarioPuestoTrabajoController.class);
@@ -109,7 +111,7 @@ public class HorarioPuestoTrabajoController {
 	
 	/**
 	* Metodo para obtener todos los horarios en una sucursal
-	* @author jortizg
+	* @author fpena
 	* @version 0.1, 2021/07/06
 	*/
 	@GetMapping(path = "/sucursal/{idSucursal}")
