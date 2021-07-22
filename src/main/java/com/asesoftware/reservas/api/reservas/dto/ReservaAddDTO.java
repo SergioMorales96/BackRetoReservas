@@ -25,4 +25,5 @@ public class ReservaAddDTO implements Serializable {
 	private String proyecto;
 	private Integer idRelacion;
 	private String tipoReserva;	
+	private String emailsAsistentes;
 }

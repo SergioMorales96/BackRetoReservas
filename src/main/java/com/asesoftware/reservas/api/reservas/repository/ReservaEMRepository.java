@@ -174,6 +174,7 @@ public class ReservaEMRepository {
 				.registerStoredProcedureParameter("inProyecto", String.class, ParameterMode.IN)
 				.registerStoredProcedureParameter("inIdRelacion", Integer.class, ParameterMode.IN)
 				.registerStoredProcedureParameter("inTipoReserva", String.class, ParameterMode.IN)
+				.registerStoredProcedureParameter("inEmailAsistentes", String.class, ParameterMode.IN)
 				.setParameter("indDia", reservaAddDTO.getDia())
 				.setParameter("inHoraInicio", reservaAddDTO.getHoraInicio())
 				.setParameter("inHoraFin", reservaAddDTO.getHoraFin())
@@ -184,6 +185,7 @@ public class ReservaEMRepository {
 				.setParameter("inProyecto", reservaAddDTO.getProyecto())
 				.setParameter("inIdRelacion", reservaAddDTO.getIdRelacion())
 				.setParameter("inTipoReserva", reservaAddDTO.getTipoReserva())
+				.setParameter("inEmailAsistentes", reservaAddDTO.getEmailsAsistentes())
 				.registerStoredProcedureParameter("outResultado", Integer.class, ParameterMode.OUT);
 		logger.info("Se enviaron los datos al procedimiento almacenado");
 		
