@@ -24,6 +24,7 @@ import com.asesoftware.reservas.api.reservas.dto.ResponseDTO;
 import com.asesoftware.reservas.api.reservas.repository.AforoDiaRepository;
 import com.asesoftware.reservas.api.reservas.repository.CalendarioPuestoRepository;
 import com.asesoftware.reservas.api.reservas.repository.CalendarioSalaRepository;
+import com.asesoftware.reservas.api.reservas.repository.IReservasRepository;
 import com.asesoftware.reservas.api.reservas.repository.ParqueaderoBicicletaEMRepository;
 import com.asesoftware.reservas.api.reservas.repository.ParqueaderoCarroEMRepository;
 import com.asesoftware.reservas.api.reservas.repository.ParqueaderoMotoEMRepository;
@@ -63,6 +64,10 @@ public class ReservaService implements IReservaService {
 	
 	@Autowired
 	private ReservaEMRepository reservaEMRepository;
+	
+	@Autowired
+	private IReservasRepository reservaRepository;
+	
 	
 	/**
 	 * Método Consultar reservas por día PT
@@ -242,6 +247,24 @@ public class ReservaService implements IReservaService {
 			return new ResponseDTO(reservaAdderInt, true, OK, HttpStatus.OK);
 		} catch (Exception e) {
 			logger.error("Error {}.  No se creo la reserva en el procedimiento almacenado", e.getMessage());
+			return new ResponseDTO(null, false, ERROR_GENERICO, HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+	}
+	
+	/**
+	 * Servicio para usar cancelar una reserva
+	 * 
+	 * @author jrondon
+	 * @version 0.1, 2021/07/16
+	 */
+	@Override
+	public ResponseDTO cancelarReserva(Integer id) {
+		logger.info("Ingresó al método del servicio cancelarReserva");
+		try {
+			reservaRepository.cancelarReserva(id);
+			return new ResponseDTO(null, true, OK, HttpStatus.OK);
+		} catch (Exception e) {
+			logger.error("Error {}.  No se pudo gestionar la cancelacion de la reserva", e.getMessage());
 			return new ResponseDTO(null, false, ERROR_GENERICO, HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 	}
