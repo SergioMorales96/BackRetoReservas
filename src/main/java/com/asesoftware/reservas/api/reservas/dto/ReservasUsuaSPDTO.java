@@ -44,5 +44,7 @@ public class ReservasUsuaSPDTO {
 	
 	private String nombrePuesTrabajo;
 	
+	private Integer idPiso;
+	
 	private Integer numeroAsistentes;
 }

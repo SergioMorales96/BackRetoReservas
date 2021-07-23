@@ -147,7 +147,8 @@ public class ReservaEMRepository {
 						.idSala(datos[12]!= null ? ((BigDecimal)datos[12]).intValue():null)
 						.nombreSala((String)datos[13])
 						.nombrePuesTrabajo((String)datos[14])
-						.numeroAsistentes(datos[15]!= null ? ((BigDecimal)datos[15]).intValue():null)
+						.idPiso(((BigDecimal)datos[15]).intValue())
+						.numeroAsistentes(datos[16]!= null ? ((BigDecimal)datos[16]).intValue():null)
 						.build())
 				.collect(Collectors.toList());
 
