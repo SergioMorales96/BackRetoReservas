@@ -77,6 +77,17 @@ public class ReservaController {
 	}
 	
 	/**
+	* Controlador para cancelar una reserva
+	* @author jrondon
+	* @version 0.1, 2021/07/15
+	*/
+	@GetMapping(path = "/cancelarreserva/{id}")
+	public ResponseDTO cancelarReserva(@PathVariable Integer id) {
+		logger.info("ingreso al metodo cancelarReserva");
+		return reservaService.cancelarReserva(id);
+	}
+	
+	/**
 	* Controlador disponibilidadParqueaderoBicis para usar el SP PR_CON_PARQUEADEROS_CARRO
 	* @author kpinilla
 	* @version 0.1, 2021/07/08

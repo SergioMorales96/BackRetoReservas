@@ -15,4 +15,5 @@ public interface IReservaService {
 	public ResponseDTO consultarReservaXDiaS(String fechaString);
 	public ResponseDTO validarAforoDia(String fecha, Integer idPiso);
 	public ResponseDTO crearReserva(ReservaAddDTO reservaDto);
+	public ResponseDTO cancelarReserva(Integer id);
 }
