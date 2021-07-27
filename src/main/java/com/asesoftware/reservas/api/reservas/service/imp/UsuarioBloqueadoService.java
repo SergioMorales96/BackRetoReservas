@@ -1,5 +1,9 @@
 package com.asesoftware.reservas.api.reservas.service.imp;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 import org.slf4j.Logger;
@@ -78,9 +82,14 @@ public class UsuarioBloqueadoService implements IUsuarioBloqueadoService{
 	public ResponseDTO crearUsuarioBloqueado(UsuarioBloqueadoDTO dto) {
 		logger.info("crearUsuarioBloqueado()");
 		try {
+			
+			dto.setBloqueadoHasta( calculeFechaLimiteBloqueo( ) );
 			UsuarioBloqueadoEntity answ = this.usuarioBloqueadoRepository.save(this.usuarioBloqueadoMapper.dtoToEntity(dto));
 			logger.info("Usuario Creado");
+			
 			return new ResponseDTO(this.usuarioBloqueadoMapper.entityToDto(answ), true, "Ok", HttpStatus.OK);
+			//return null;
+			
 		} catch (Exception e) {
 			logger.info("Usuario no creado");
 			return new ResponseDTO(null, false, "Usuario no creado", HttpStatus.INTERNAL_SERVER_ERROR);
@@ -146,6 +155,20 @@ public class UsuarioBloqueadoService implements IUsuarioBloqueadoService{
 		}
 		
 		
+	}
+	
+	
+	/** Calcula la fecha hasta la un usuario debe ser bloqueado* Calcula la fecha de desbloqueo de un usuario desde la fecha actual* 
+	 * @author ajgutierrez / Empresa* 
+	 * @version 0.1, 2021/07/27
+	 */
+	private Date calculeFechaLimiteBloqueo( ) {
+		
+		Calendar calendar = Calendar.getInstance();
+		calendar.setTime( new Date() );
+		calendar.add(Calendar.DAY_OF_YEAR, 15);
+		
+		return calendar.getTime();
 	}
 
 

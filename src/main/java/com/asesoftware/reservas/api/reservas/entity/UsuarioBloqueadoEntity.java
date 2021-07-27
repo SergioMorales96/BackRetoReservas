@@ -1,6 +1,8 @@
 package com.asesoftware.reservas.api.reservas.entity;
 
 import java.io.Serializable;
+import java.util.Date;
+
 import javax.persistence.*;
 
 import lombok.Data;
@@ -24,10 +26,13 @@ public class UsuarioBloqueadoEntity implements Serializable {
 
 	@Column(name="EMAIL")
 	private String email;
-
+	
 	@ManyToOne
     @JoinColumn(name = "ID_SUCURSAL")
     private SucursalEntity sucursalEntity;
+	
+	@Column(name="BLOQUEADO_HASTA")
+	private Date bloqueadoHasta; 
 
 	
 
