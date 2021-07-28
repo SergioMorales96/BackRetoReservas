@@ -84,6 +84,7 @@ public class ReservaController {
 	@PostMapping(path = "/cancelarreserva/{id}")
 	public ResponseDTO cancelarReserva(@PathVariable Integer id) {
 		logger.info("ingreso al metodo cancelarReserva");
+		
 		return reservaService.cancelarReserva(id);
 	}
 	
