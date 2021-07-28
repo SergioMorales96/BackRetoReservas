@@ -81,7 +81,7 @@ public class ReservaController {
 	* @author jrondon
 	* @version 0.1, 2021/07/15
 	*/
-	@PostMapping(path = "/cancelarreserva/{id}")
+	@GetMapping(path = "/cancelarreserva/{id}")
 	public ResponseDTO cancelarReserva(@PathVariable Integer id) {
 		logger.info("ingreso al metodo cancelarReserva");
 		
